@@ -31,7 +31,8 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         exit();
     }
     $data = "SELECT * FROM users WHERE pass= '$password'";
-    $query = mysqli_query($conn,$data)
+    $query = mysqli_query($conn,$data);
+
     if ($data==$password) {
         if (isset($_POST["submit_password"])) {
             $usernamenew = $_POST["username"];
