@@ -21,7 +21,8 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         $sql = "UPDATE users SET username= '$usernamenew' WHERE id=$userID";
 
         $query = mysqli_query($conn, $sql);
-        header("Location: exit.php")
+        header("Location: exit.php");
+        exit();
     }
     
 
