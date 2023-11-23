@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         exit();
     }
     if (isset($_POST["submit_email"])) {
-        $usernamenew = $_POST["username"];
+        $usernamenew = $_POST["email"];
         $sql = "UPDATE users SET email= '$emailnew' WHERE id=$userID";
         $query = mysqli_query($conn, $sql);
         header("Location: exit.php");
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
     if ($data==$password) {
         if (isset($_POST["submit_password"])) {
-            $usernamenew = $_POST["username"];
+            $usernamenew = $_POST["password"];
             $sql = "UPDATE users SET pass= '$passwordnew' WHERE id=$userID";
             $query = mysqli_query($conn, $sql);
             header("Location: exit.php");
