@@ -30,10 +30,10 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         header("Location: exit.php");
         exit();
     }
-    $data = "SELECT * FROM users WHERE pass= '$password'";
+    $data = "SELECT * FROM users WHERE pass='$password'";
     $query = mysqli_query($conn,$data);
 
-    if ($data==$password) {
+    if ($data) {
         if (isset($_POST["submit_password"])) {
             $usernamenew = $_POST["password"];
             $sql = "UPDATE users SET pass= '$passwordnew' WHERE id=$userID";
