@@ -14,16 +14,34 @@ $userID = $_SESSION["id"];
 $usernamenew = $passwordnew = $emailnew = $password = "";
 
 if ($_SERVER["REQUEST_METHOD"]=="POST") {
+    $password = md5($_POST["password"]);
+
     if (isset($_POST["submit_username"])) {
-
         $usernamenew = $_POST["username"];
-
         $sql = "UPDATE users SET username= '$usernamenew' WHERE id=$userID";
-
         $query = mysqli_query($conn, $sql);
         header("Location: exit.php");
         exit();
     }
+    if (isset($_POST["submit_email"])) {
+        $usernamenew = $_POST["username"];
+        $sql = "UPDATE users SET email= '$emailnew' WHERE id=$userID";
+        $query = mysqli_query($conn, $sql);
+        header("Location: exit.php");
+        exit();
+    }
+    $data = "SELECT * FROM users WHERE pass= '$password'";
+    $query = mysqli_query($conn,$data)
+    if ($data==$password) {
+        if (isset($_POST["submit_password"])) {
+            $usernamenew = $_POST["username"];
+            $sql = "UPDATE users SET pass= '$passwordnew' WHERE id=$userID";
+            $query = mysqli_query($conn, $sql);
+            header("Location: exit.php");
+            exit();
+        }
+    }
+    
     
 
     $conn->close();
@@ -105,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         </div>
         <div class="comp">
             <label for="">Password Change</label>
-            <span><input type="text" name="password" style="width: 60%;" placeholder="Enter New Password"><label for=""
+            <span><input type="text" name="passwordnew" style="width: 60%;" placeholder="Enter New Password"><label for=""
                     style="margin-left: 10px;"></label></span>
             <input type="submit" name="submit_password" value="Uptade" class="btn">
         </div>
