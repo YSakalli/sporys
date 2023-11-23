@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
     
 
         if (isset($_POST["submit_password"])) {
-            if ($data==$password) {
+            if ($data) {
             $usernamenew = $_POST["password"];
             $sql = "UPDATE users SET pass= '$passwordnew' WHERE id=$userID";
             $query = mysqli_query($conn, $sql);
