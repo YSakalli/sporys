@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $user = $_SESSION['username']
+    $user = $_SESSION["username"]
     ?>
 
 <!DOCTYPE html>
@@ -31,13 +31,13 @@
         </nav>
         <!-- Profile -->
         <div class="profile">
-            <h3 style='color: aliceblue; margin-right: 10px;'><?php echo $user?></h3>
+            <h3 style='color: aliceblue; margin-right: 10px;'><?php echo $user ?></h3>
             <img src="img/profileicon.png" alt="">
             <div class="profileactive">
                 <h3>Profile <i class="fa-solid fa-chevron-down"></i></h3>
 
                 <div class="downmenu">
-                    <a href="">Profile</a>
+                    <a href="profileuser.php">Profile</a>
                     <a href="">Blog</a>
                     <a href="exit.php">Logout</a>
                 </div>

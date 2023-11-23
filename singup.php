@@ -40,7 +40,7 @@ if (isset($_POST["submit"])) {
 }
 
     if (!empty($username)&&!empty($email)&&!empty($pass)&&!empty($pass)&&$pass==$passtry&&mysqli_num_rows($result) == 0) {
-    $add = "INSERT INTO user (userName,email,pass) VALUES('$user','$email','$pass')";
+    $add = "INSERT INTO users (username,email,pass) VALUES('$user','$email','$pass')";
     $work = mysqli_query($conn,$add);
     sleep(3);
     header("Location: login.php");

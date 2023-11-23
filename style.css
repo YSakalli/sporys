@@ -13,6 +13,8 @@ body {
     height: 200vh;
 }
 
+body {}
+
 .header {
     position: fixed;
     padding: 20px 100px;

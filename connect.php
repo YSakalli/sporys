@@ -4,7 +4,7 @@ $servername = "localhost";
 // 
 $username = "dbtecnoc_yusuf";
 // 
-$password = "6NY?]He4V#K3"; 
+$password = "6NY?]He4V#K3";
 // 
 $dbname = "dbtecnoc_sporys";
 

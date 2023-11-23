@@ -25,8 +25,9 @@ if (isset($_POST["submit"])) {
         
         if ($pass == $hash) {
             session_start();
-            $_SESSION["username"] = $userdoc['userName'];
-            $_SESSION["email"] = $userdoc['email'];
+            $_SESSION["username"] = $userdoc["username"];
+            $_SESSION["email"] = $userdoc["email"];
+            $_SESSION["id"] = $userdoc["id"]; 
             header("Location:profile.php");
             exit();
         } else {
