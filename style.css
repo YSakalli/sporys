@@ -15,8 +15,6 @@ body {
     height: 200vh;
 }
 
-body {}
-
 .header {
     position: fixed;
     padding: 20px 100px;
@@ -84,7 +82,7 @@ body {}
     height: 100vh;
     background-size: cover;
     display: flex;
-    justify-content: center;
+    background-position: center;
     align-items: center;
 }
 
@@ -395,7 +393,11 @@ footer .footercolm .socialmadia {
     flex-direction: column;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 925px) {
+    .banner .content {
+        width: 70%;
+    }
+
     .container {
         display: flex;
         flex-direction: column;
@@ -417,7 +419,54 @@ footer .footercolm .socialmadia {
         width: 350px;
     }
 
-    header .logo {
-        padding: 0;
+    .header {
+        padding: 10px 20px;
+    }
+
+    .header .logo {
+        margin-left: 10px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        margin-top: 20px;
+    }
+
+    footer .footercolm {
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .buttonlog {
+        margin: 0px;
+        margin-left: 10px;
+        width: 60px;
+        height: 25px;
+    }
+
+    .header nav a {
+        font-size: 12px;
+    }
+
+    .header nav {
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 550px) {
+    .header {
+        padding: 5px 10px;
+    }
+
+    .banner .content {
+        width: 90%;
+    }
+}
+
+@media (max-width: 525px) {
+    .header nav {
+        text-align: center;
     }
 }
