@@ -9,6 +9,8 @@
     text-decoration: none;
 }
 
+
+
 body {
     height: 200vh;
 }
@@ -152,10 +154,9 @@ body {}
     background-color: transparent;
     position: relative;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 75px;
     height: 350px;
+    margin-top: 10 0px;
 }
 
 .container .card {
@@ -172,7 +173,7 @@ body {}
 
 }
 
-.container .card:hover {
+.container .card.active {
     height: 350px;
 
 }
@@ -218,7 +219,7 @@ body {}
     transition: 0.3s ease-in-out;
 }
 
-.container .card:hover .content {
+.container .card.active .content {
     visibility: visible;
     opacity: 1;
     top: -40px;
@@ -392,4 +393,31 @@ footer .footercolm a:hover {
 footer .footercolm .socialmadia {
     display: flex;
     flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 1100px;
+        margin-top: 30px;
+    }
+
+    .container .card {
+        width: 350px;
+    }
+
+    .infocards {
+        flex-direction: column;
+        height: 1100px;
+    }
+
+    .infocards .card {
+        width: 350px;
+    }
+
+    header .logo {
+        padding: 0;
+    }
 }
