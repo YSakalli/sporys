@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body {
+    font-family: "Bebas Neue";
+    box-sizing: border-box;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 0;
+}
+
+section {
+    position: relative;
+    height: 80vh;
+    width: 50%;
+    display: flex;
+}
+
+section:hover .leftside,
+section:hover .rightside {
+    filter: grayscale(1);
+}
+
+
+section .leftside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url(https://ironjunkies.com/wp-content/uploads/2018/11/BCAA-bodybuilding.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px 0px 0px 10px;
+    height: 100%;
+    width: 50%;
+    background-color: black;
+    transition: .5s ease-in-out;
+}
+
+section .leftside:hover {
+    width: 100%;
+    filter: grayscale(0);
+
+}
+
+section h4 {
+    position: absolute;
+    left: -40px;
+    top: 10px;
+    transition: .5s ease-in-out;
+}
+
+section h4:hover {
+    z-index: 100;
+    left: -70px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+
+}
+
+section h4 a {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 10px;
+    font-size: 20px;
+}
+
+
+
+section .rightside {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: url(https://i.ytimg.com/vi/uiexMzfTi9k/maxresdefault.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0px 10px 10px 0px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 50%;
+    background-color: aquamarine;
+    transition: .5s ease-in-out;
+}
+
+section .rightside:hover {
+    width: 100%;
+    filter: grayscale(0) brightness(1.25);
+
+}
+
+section .leftside h3,
+section .rightside h3 {
+    position: absolute;
+    bottom: -70px;
+    transition: 0.3s ease-in-out;
+    opacity: 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+section .leftside:hover h3,
+section .rightside:hover h3 {
+    opacity: 1;
+    position: absolute;
+    bottom: 20px;
+    transition-delay: .4s;
+}
+
+section .leftside h3 a,
+section .rightside h3 a {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 10px;
+}
