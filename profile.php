@@ -1,7 +1,12 @@
-<?php 
-    session_start();
-    $user = $_SESSION["username"]
-    ?>
+<?php
+session_start();
+$user = $_SESSION["username"];
+
+if (!isset($_SESSION['id'])) {
+    header('Location: index.html');
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,13 +30,14 @@
         </div>
         <nav class="navbar">
             <a href="profile.php">Ana Sayfa</a>
-            <a href="blog.html">Blog</a>
+            <a href="blog.php">Blog</a>
             <a href="antrenman.html">Antrenman</a>
-            <a href="hakkimizda.html">Hakkımızda</a>
         </nav>
         <!-- Profile -->
         <div class="profile">
-            <h3 style='color: aliceblue; margin-right: 10px;'><?php echo $user ?></h3>
+            <h3 style='color: aliceblue; margin-right: 10px;'>
+                <?php echo $user ?>
+            </h3>
             <img src="img/profileicon.png" alt="">
             <div class="profileactive">
                 <h3>Profile <i class="fa-solid fa-chevron-down"></i></h3>
@@ -95,8 +101,8 @@
         </div>
 
     </section>
-     <!-- Info Cards -->
-     <div class="infocards">
+    <!-- Info Cards -->
+    <div class="infocards">
         <div class="card">
             <img src="img/dogrulanmis.png" alt="" style="width: 100px;">
             <h3>Blog Yazilarimiz hepsi bilimsel makalerler ile desteklidir</h3>
@@ -153,8 +159,8 @@
             <a href="">Kariyer</a>
             <a href="">basin</a>
         </div>
-    </footer>   
-    
+    </footer>
+
 
     <script src="app.js"></script>
 </body>

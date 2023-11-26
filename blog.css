@@ -1,0 +1,93 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-top: 4px black solid;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 8%;
+    width: 100%;
+}
+
+header .logo {
+    margin-left: 50px;
+
+}
+
+header .logo a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 32px;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+
+}
+
+header .nav a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    padding: 10px 20px;
+    text-align: right;
+}
+
+header .nav {
+    margin-right: 50px;
+}
+
+.blogs {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.blogs .blog {
+    height: 500px;
+    width: 350px;
+    background-color: #f8f8f8;
+    margin: 50px;
+    border-radius: 20px;
+}
+
+.blogs .blog .img {
+    display: flex;
+    justify-content: center;
+}
+
+.blogs .blog .img img {
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+
+}
+
+
+.blogs .blog .content {
+    text-align: center;
+    padding: 10px;
+}
+
+.blogekle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blogekle form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blogekle form input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
