@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -23,15 +23,20 @@ if (!isset($_SESSION['id'])) {
 </head>
 
 <body>
+    <div id="loading">
+
+        <h1>loading</h1>
+
+    </div>
     <!-- NavBar -->
     <header class="header">
         <div>
             <a href="profile.php" class="logo">Logo</a>
         </div>
         <nav class="navbar">
-            <a href="profile.php">Ana Sayfa</a>
+            <a href="page/profile.php">Ana Sayfa</a>
             <a href="blog.php">Blog</a>
-            <a href="antrenman.html">Antrenman</a>
+            <a href="antrenman.php">Antrenman</a>
         </nav>
         <!-- Profile -->
         <div class="profile">
@@ -45,7 +50,7 @@ if (!isset($_SESSION['id'])) {
                 <div class="downmenu">
                     <a href="profileuser.php">Profile</a>
                     <a href="">Blog</a>
-                    <a href="exit.php">Logout</a>
+                    <a href="backend/exit.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -74,7 +79,7 @@ if (!isset($_SESSION['id'])) {
             <div class="content">
                 <h3 class="head">Calori'ni Hesapla</h3>
                 <p class="lead">Günlük tüketmen gereken Protein, Yağ ve Karbonhidratı hesapla</p>
-                <a href="calori.php" class="btn">Hesapla</a>
+                <a href="page/calori.php" class="btn">Hesapla</a>
             </div>
         </div>
         <div class="card">
@@ -85,7 +90,7 @@ if (!isset($_SESSION['id'])) {
             <div class="content">
                 <h3 class="head">Blog Yazılarını Oku</h3>
                 <p class="lead">Spor, Sağlık, supplementler içerikler hakkında bilimsel bloglar okuyabilirsiniz.</p>
-                <a href="blog.html" class="btn">Hesapla</a>
+                <a href="blog.php" class="btn">Oku</a>
             </div>
         </div>
         <div class="card">
@@ -96,7 +101,7 @@ if (!isset($_SESSION['id'])) {
             <div class="content">
                 <h3 class="head">Örnek Anrenmanlar</h3>
                 <p class="lead">Kendinize uygun örnek antrenman programları incelıyebılırsınız</p>
-                <a href="antrenman.html">Hesapla</a>
+                <a href="antrenman.php">Oku</a>
             </div>
         </div>
 
@@ -162,7 +167,7 @@ if (!isset($_SESSION['id'])) {
     </footer>
 
 
-    <script src="app.js"></script>
+    <script src="jsc/app.js"></script>
 </body>
 
 </html>

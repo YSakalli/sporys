@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("backend/connect.php");
 $emailErr = $passErr = $loginErr = "";
 $email = $pass = "";
 
@@ -272,6 +272,7 @@ if (isset($_POST["submit"])) {
             </form>
         </div>
     </section>
+    <script src="jsc/app.js"></script>
 </body>
 
 </html>

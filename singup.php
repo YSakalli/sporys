@@ -1,55 +1,55 @@
 <?php
-include("connect.php");
+include("backend/connect.php");
 
-$user = $email = $pass = $passtry ="";
+$user = $email = $pass = $passtry = "";
 $nameErr = $emailErr = $passErr = $passtryErr = $usersame = "";
 
 if (isset($_POST["submit"])) {
 
     if (empty($_POST["username"])) {
         $nameErr = "Name is required";
-      }else {
+    } else {
         $user = $_POST["username"];
-      }     
+    }
 
     if (empty($_POST["email"])) {
-    $emailErr = "Email is required";
-        }else {
-        $email =$_POST["email"];
-        }
+        $emailErr = "Email is required";
+    } else {
+        $email = $_POST["email"];
+    }
 
     if (empty($_POST["password"])) {
-    $passErr = "Password is required";
-        } else {
+        $passErr = "Password is required";
+    } else {
         $pass = md5($_POST["password"]);
-        }
+    }
 
     if (empty($_POST["passwordtry"])) {
         $passtryErr = "Password is required";
-        } else { 
+    } else {
         $passtry = md5($_POST["passwordtry"]);
-        }
-    if ($pass!=$passtry) {
+    }
+    if ($pass != $passtry) {
         $passtryErr = "Password must be the same";
     }
     $query = "SELECT * FROM users WHERE email = '$email'";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
         $usersame = "Zaten boyle bir hesap ";
-}
+    }
 }
 
-    if (!empty($username)&&!empty($email)&&!empty($pass)&&!empty($pass)&&$pass==$passtry&&mysqli_num_rows($result) == 0) {
-      echo "<script> showAlert() </script>";
-       $add = "INSERT INTO users (username,email,pass) VALUES('$user','$email','$pass')";
-        $work = mysqli_query($conn,$add);
-        sleep(3);
-        header("Location: login.php");
-        exit();
+if (!empty($username) && !empty($email) && !empty($pass) && !empty($pass) && $pass == $passtry && mysqli_num_rows($result) == 0) {
+    echo "<script> showAlert() </script>";
+    $add = "INSERT INTO users (username,email,pass) VALUES('$user','$email','$pass')";
+    $work = mysqli_query($conn, $add);
+    sleep(3);
+    header("Location: login.php");
+    exit();
 }
- if (isset( $_POST["submit"])) {
-    
- }
+if (isset($_POST["submit"])) {
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,13 +58,13 @@ if (isset($_POST["submit"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="stylesingup.css">
+    <link rel="stylesheet" href="style/stylesingup.css">
 </head>
 
 <body>
     <section>
 
-        <div class="alert" id="alert"> 
+        <div class="alert" id="alert">
             <h3>Singup Process Successful</h3>
         </div>
 
@@ -80,27 +80,27 @@ if (isset($_POST["submit"])) {
                 <label for="">Username</label>
                 <input type="text" name="username" placeholder="Username">
                 <p class="erortext">
-                <?php echo $nameErr?>
+                    <?php echo $nameErr ?>
                 </p>
                 <label for="">E-mail</label>
                 <input type="email" name="email" placeholder="E-mail">
                 <p class="erortext">
-                <?php echo $emailErr?>
+                    <?php echo $emailErr ?>
                 </p>
                 <label for="">Password</label>
                 <input type="password" name="password" placeholder="Password">
                 <p class="erortext">
-                <?php echo $passErr?>
+                    <?php echo $passErr ?>
                 </p>
                 <label for="">Password Try</label>
                 <input type="password" name="passwordtry" placeholder="Password Try">
                 <p class="erortext">
-                <?php echo $passtryErr?>
+                    <?php echo $passtryErr ?>
                 </p>
                 <div class="chb">
-                    
+
                     <p style="font-size: 12px;">Do you already have an account?</p>
-                    
+
                     <a href="login.php" style="position: relative; right:30px;">Login</a>
 
                 </div>
@@ -109,24 +109,24 @@ if (isset($_POST["submit"])) {
                     <input type="submit" name="submit" value="Sing up" onclick="showAlert()">
                 </div>
                 <p class="erortext center">
-                <?php echo $usersame;?>
+                    <?php echo $usersame; ?>
                 </p>
 
             </form>
         </div>
     </section>
-    <script>    
-       function showAlert() {
-           var alert = document.getElementById('alert');
-           alert.style.display = 'block';
-           alert.classList.add('active');
-       }
-       setTimeout(function(){
+    <script>
+        function showAlert() {
+            var alert = document.getElementById('alert');
+            alert.style.display = 'block';
+            alert.classList.add('active');
+        }
+        setTimeout(function () {
             alert.style.display = 'none';
             alert.classList.remove('active');
-           }, 2000);
+        }, 2000);
 
-   </script>";
+    </script>";
 </body>
 
 </html>

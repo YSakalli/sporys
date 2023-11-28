@@ -1,5 +1,5 @@
 <?php
-include("connect.php");
+include("backend/connect.php");
 $link = @$_GET["link"];
 $query = "SELECT * FROM blogs WHERE baslik = '$link'";
 $result = mysqli_query($conn, $query);
@@ -13,7 +13,7 @@ $blog = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="style/blog.css">
     <title>Document</title>
 </head>
 

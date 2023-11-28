@@ -1,14 +1,10 @@
-<?php
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="bodybuild.css">
+    <link rel="stylesheet" href="/style/bodybuild.css">
 
     <title>Document</title>
 </head>
@@ -17,7 +13,7 @@
     <!-- Header Navbar -->
     <header>
         <div class="nav">
-            <a href="profile.php">Anasayfa</a>
+            <a href="../profile.php">Anasayfa</a>
             <a href="bodybuild.php">Programlar</a>
             <a href="SSS.html">SSS</a>
         </div>
@@ -45,7 +41,8 @@
     <section>
         <div class="container">
             <?php
-            include("connect.php");
+            include("../backend/connect.php");
+
             $ant = "SELECT * FROM antrenman ORDER BY id DESC";
             $query = mysqli_query($conn, $ant);
             $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
@@ -55,7 +52,7 @@
                     echo '
                 <div class="card">
                     <span>' . $row['turu'] . '</span>
-                    <img src="img/antrenman.jpg" alt="">
+                    <img src="' . $row['resim'] . '" alt="">
                     <h1>' . $row['baslik'] . '</h1>
                     <p>' . $row['yazi'] . '</p>
                     <a href="yazibb.php?link=' . $row["baslik"] . '" target="_blank"">Devamini oku</a>

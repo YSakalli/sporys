@@ -4,7 +4,7 @@ session_start();
 $role = $_SESSION["role"];
 
 if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
+    header('Location:/login.php');
     exit();
 }
 if ($role !== 'admin') {
@@ -20,7 +20,7 @@ if ($role !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="/style/blog.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -31,7 +31,7 @@ if ($role !== 'admin') {
     <!-- Header Navbar -->
     <header>
         <div class="logo">
-            <a href="profile.php">Logo</a>
+            <a href="../profile.php">Logo</a>
         </div>
         <div class="nav">
             <a href="blogyonet.php">Blog yonet</a>
@@ -50,7 +50,7 @@ if ($role !== 'admin') {
             </tr>
         </thead>
         <?php
-        include("connect.php");
+        include("../backend/connect.php");
 
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sil_id"])) {
             $id = $_POST["sil_id"];

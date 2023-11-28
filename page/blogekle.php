@@ -4,7 +4,7 @@ session_start();
 $role = $_SESSION["role"];
 
 if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
+    header('Location:/login.php');
     exit();
 }
 if ($role !== 'admin') {
@@ -18,7 +18,7 @@ if ($role !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="/style/blog.css">
     <title>Document</title>
 </head>
 
@@ -26,7 +26,7 @@ if ($role !== 'admin') {
     <!-- Header Navbar -->
     <header>
         <div class="logo">
-            <a href="profile.php">Logo</a>
+            <a href="../profile.php">Logo</a>
         </div>
         <div class="nav">
             <a href="blogyonet.php">Blog yonet</a>
@@ -44,7 +44,7 @@ if ($role !== 'admin') {
     <section class="blogekle">
 
         <?php
-        include 'connect.php';
+        include("../backend/connect.php");
         $tarih = date('Y-m-d H:i:s');
         if ($_POST) {
             $baslik = htmlspecialchars($_POST['baslik']);

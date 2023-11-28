@@ -1,12 +1,12 @@
 <?php
 // 
 $servername = "localhost";
-// 
-$username = "dbtecnoc_yusuf";
-// 
-$password = "6NY?]He4V#K3";
-// 
-$dbname = "dbtecnoc_sporys";
+// dbtecnoc_yusuf
+$username = "root";
+// 6NY?]He4V#K3
+$password = "";
+// dbtecnoc_sporys
+$dbname = "users";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);

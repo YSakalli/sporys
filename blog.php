@@ -18,7 +18,7 @@ function kisalt($metin, $uzunluk = 200, $noktaSonra = true)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="style/blog.css">
     <title>Document</title>
 </head>
 
@@ -29,8 +29,8 @@ function kisalt($metin, $uzunluk = 200, $noktaSonra = true)
             <a href="profile.php">Logo</a>
         </div>
         <div class="nav">
-            <a href="blogyonet.php">Blog yonet</a>
-            <a href="blogekle.php">Blog ekle</a>
+            <a href="page/blogyonet.php">Blog yonet</a>
+            <a href="page/blogekle.php">Blog ekle</a>
             <a href="blog.php">Bloglar</a>
         </div>
     </header>
@@ -43,7 +43,7 @@ function kisalt($metin, $uzunluk = 200, $noktaSonra = true)
     <!-- Blogs -->
     <section class="blogs">
         <?php
-        include("connect.php");
+        include("backend/connect.php");
 
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sil_id"])) {
             $id = $_POST["sil_id"];
@@ -71,7 +71,7 @@ function kisalt($metin, $uzunluk = 200, $noktaSonra = true)
         ?>
     </section>
 
-
+    <script src="jsc/app.js"></script>
 </body>
 
 </html>
