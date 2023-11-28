@@ -2,11 +2,11 @@
 // 
 $servername = "localhost";
 // dbtecnoc_yusuf
-$username = "root";
+$username = "dbtecnoc_yusuf";
 // 6NY?]He4V#K3
-$password = "";
-// dbtecnoc_sporys
-$dbname = "users";
+$password = "6NY?]He4V#K3";
+// 
+$dbname = "dbtecnoc_sporys";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
