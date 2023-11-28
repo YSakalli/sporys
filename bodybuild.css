@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 200vh;
+    font-family: "Poppins";
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f8f8f8;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+header h1 {
+    margin-right: 80px;
+}
+
+header .login a {
+    margin-right: 20px;
+    color: rgb(237, 237, 237);
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: rgb(35, 35, 35);
+    text-decoration: none;
+}
+
+header .login:hover a {
+    background-color: black;
+    color: white;
+
+}
+
+
+header .nav a {
+    text-decoration: none;
+    color: black;
+    margin-left: 20px;
+    padding: 10px;
+}
+
+.filtre {
+    width: 100%;
+    margin-top: 60px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.filtre select {
+    outline: none;
+    border-radius: 20px;
+    width: 150px;
+    height: 30px;
+}
+
+.filtre select:hover {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.filtre form input {
+    margin-left: 15px;
+    padding: 6px 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+.filtre form input:hover {
+    background-color: #cfcfcf;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+section .container {
+    position: relative;
+    width: 75%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+section .container .card {
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 430px;
+    max-height: 430px;
+
+    position: relative;
+    background-color: #f8f8f8;
+    width: 25%;
+    text-align: center;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+section .container .card:hover {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+
+}
+
+section .container .card img {
+    border-radius: 10px 10px 0px 0px;
+    width: 300px;
+}
+
+section .container .card h1 {
+    font-size: 24px;
+    margin: 0;
+    margin-top: 30px;
+}
+
+section .container .card p {
+    margin: 10px;
+    font-size: 13px;
+
+}
+
+section .container .card a {
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px red solid;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+section .container .card span {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.3);
+    border-radius: 10px;
+    top: 210px;
+    left: 10px;
+    padding: 1px 10px;
+    font-size: 13px;
+}

@@ -15,6 +15,19 @@ body {
     height: 200vh;
 }
 
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    z-index: 99999;
+}
+
 .header {
     position: fixed;
     padding: 20px 100px;
@@ -35,7 +48,8 @@ body {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-.header.active a {
+.header.active a,
+.header.active .sing button {
     color: black;
 
 }
@@ -121,27 +135,44 @@ body {
     cursor: pointer;
 }
 
-
-.buttonlog {
-    border: none;
-    text-decoration: none;
+header .sign button a {
     color: white;
-    background-color: tomato;
-    border-radius: 20px;
-    margin: 10px;
-    width: 100px;
-    height: 35px;
+    font-size: 16px;
+    transition: color .5s ease;
 }
 
-.buttonlog:hover {
+header .sign button {
     position: relative;
-    border: white 1px solid;
-    bottom: 3px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    color: white;
+    text-align: center;
+    border: rgb(209, 56, 56) 2px solid;
+    background-color: transparent;
+    margin: 10px;
+    padding: 1px 20px;
+    transition: 0.4s ease-in-out;
+    cursor: pointer;
 }
 
-.buttonlog a {
-    color: white;
+header .sign button:hover a {
+    color: black;
+    font-size: 16px;
+
+}
+
+header .sign button span {
+    background: red;
+    height: 100%;
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    transition: 0.8s;
+}
+
+header .sign button:hover span {
+    width: 100%;
+
 }
 
 .banner:hover {
