@@ -48,7 +48,7 @@ if (!isset($_SESSION['id'])) {
                 <h3>Profile <i class="fa-solid fa-chevron-down"></i></h3>
 
                 <div class="downmenu">
-                    <a href="profileuser.php">Profile</a>
+                    <a href="page/profileuser.php">Profile</a>
                     <a href="">Blog</a>
                     <a href="backend/exit.php">Logout</a>
                 </div>

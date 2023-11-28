@@ -15,6 +15,7 @@
     <div id="loading">
         <h1>loading</h1>
     </div>
+
     <h1>SECIMI YAP</h1>
 
     <section>
