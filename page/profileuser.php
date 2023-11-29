@@ -57,49 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/profile.css">
+    <link rel="stylesheet" href="../style/styleprofileuser.css">
     <title>Document</title>
-    <style>
-        body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
 
-        form {
-            width: 900px;
-            margin-left: 100px;
-        }
-
-        form .comp {
-            display: flex;
-            flex-direction: column;
-            align-items: left;
-        }
-
-        form .comp .btn {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            width: 10%;
-        }
-
-        form .comp label {
-            margin-bottom: 5px;
-        }
-
-        .alert {
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 8%;
-            background-color: #f8f8f8;
-        }
-    </style>
 </head>
 
 <body>
