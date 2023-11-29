@@ -62,6 +62,10 @@ if (isset($_POST["submit"])) {
 </head>
 
 <body>
+    <div id="loading">
+        <h1>loading</h1>
+    </div>
+
     <section>
 
         <div class="alert" id="alert">
@@ -115,6 +119,8 @@ if (isset($_POST["submit"])) {
             </form>
         </div>
     </section>
+    <script src="jsc/app.js"></script>
+
     <script>
         function showAlert() {
             var alert = document.getElementById('alert');

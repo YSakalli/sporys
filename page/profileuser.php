@@ -104,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="alert"></div>
+
     <form action="profileuser.php" method="POST">
         <div class="comp">
             <label for="">User Name Change </label>

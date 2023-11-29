@@ -26,6 +26,10 @@ function kisalt($metin, $uzunluk = 120, $noktaSonra = true)
 </head>
 
 <body>
+    <div id="loading">
+        <h1>loading</h1>
+    </div>
+
     <!-- Header Navbar -->
     <header>
         <div class="banner"></div>
