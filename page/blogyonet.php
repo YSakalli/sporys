@@ -23,7 +23,9 @@ if ($role !== 'admin') {
     <link rel="stylesheet" href="/style/blog.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
 
@@ -34,9 +36,9 @@ if ($role !== 'admin') {
             <a href="../profile.php">Logo</a>
         </div>
         <div class="nav">
-            <a href="blogyonet.php">Blog yonet</a>
-            <a href="blogekle.php">Blog ekle</a>
-            <a href="blog.php">Bloglar</a>
+            <a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
+            <a href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
+            <a href="../blog.php">Bloglar</a>
         </div>
     </header>
     <!-- Blogs Control -->

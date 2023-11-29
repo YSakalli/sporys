@@ -1,5 +1,5 @@
 <?php
-include("backend/connect.php");
+include("../backend/connect.php");
 $link = @$_GET["link"];
 $query = "SELECT * FROM blogs WHERE baslik = '$link'";
 $result = mysqli_query($conn, $query);
@@ -13,7 +13,10 @@ $blog = mysqli_fetch_assoc($result);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/blog.css">
+    <link rel="stylesheet" href="../style/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
 </head>
 
@@ -21,12 +24,12 @@ $blog = mysqli_fetch_assoc($result);
     <!-- Header Navbar -->
     <header>
         <div class="logo">
-            <a href="profile.php">Logo</a>
+            <a href="../profile.php">Logo</a>
         </div>
         <div class="nav">
-            <a href="blogyonet.php">Blog yonet</a>
-            <a href="blogekle.php">Blog ekle</a>
-            <a href="blog.php">Bloglar</a>
+            <a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
+            <a href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
+            <a href="../blog.php">Bloglar</a>
         </div>
     </header>
     <!-- Header -->
