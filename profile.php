@@ -66,7 +66,7 @@ if (!isset($_SESSION['id'])) {
                 anrenmanlar ile
                 <br>hemen şimdi forma gir
             </p>
-            <button type="button" class="btn">Şimdi Forma Gir</button>
+            <a href="antrenman.php"><button type="button" class="btn">Şimdi Forma Gir</button></a>
         </div>
     </section>
     <!-- Cards -->

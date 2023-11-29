@@ -76,6 +76,8 @@ if (isset($_POST["submit"])) {
             <img src="/img/loginimg.jpg">
         </div>
         <div class="content">
+            <a class="mainpage" href="profile.php">Ana Sayfa</a>
+
             <div>
                 <h3>Sing up</h3>
             </div>

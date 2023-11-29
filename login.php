@@ -283,6 +283,18 @@ if (isset($_POST["submit"])) {
             section .chb {
                 justify-content: center;
             }
+
+
+        }
+
+        section .content .mainpage {
+            position: absolute;
+            top: 20px;
+            transform: translateX(-50%);
+            left: 50%;
+            font-size: 24px;
+            text-decoration: none;
+            color: #cccc;
         }
     </style>
 </head>
@@ -297,7 +309,10 @@ if (isset($_POST["submit"])) {
         <div class="imgbox">
             <img src="/img/loginimg.jpg">
         </div>
+
         <div class="content">
+            <a class="mainpage" href="profile.php">Ana Sayfa</a>
+
             <div>
                 <h3>Login</h3>
             </div>
