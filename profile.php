@@ -34,7 +34,7 @@ if (!isset($_SESSION['id'])) {
             <a href="profile.php" class="logo">Logo</a>
         </div>
         <nav class="navbar">
-            <a href="page/profile.php">Ana Sayfa</a>
+            <a href="profile.php">Ana Sayfa</a>
             <a href="blog.php">Blog</a>
             <a href="antrenman.php">Antrenman</a>
         </nav>
