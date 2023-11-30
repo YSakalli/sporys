@@ -2,7 +2,7 @@
 ## Projemin amaci
 Projemin amacı, sporcular için daha fazla ve güvenilir içerik üretmektir.
 
-Projemi Yorumlayin `[sporys.web.tr](https://www.sporys.web.tr/)`
+Projemi Yorumlayin [sporys.web.tr](https://www.sporys.web.tr/)
    
 ### Proje Tamamlandıgında
 Projem, blog ve antrenman içeriklerimizi paylaşabileceğimiz, kullanıcıların yorum yapabileceği bir platform olacak.
