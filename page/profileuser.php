@@ -17,9 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = md5($_POST["password"]);
 
     if (isset($_POST["submit_username"])) {
-        $usernamenew = $_POST["username"];
-        $sql = "UPDATE users SET username= '$usernamenew' WHERE id=$userID";
-        $query = mysqli_query($conn, $sql);
+        $usernamenew = filter_var($_POST["username"], FILTER_SANITIZE_STRING);
+
+        $stmt = $conn->prepare("UPDATE users SET username = ? WHERE id = ?");
+        $stmt->bind_param("si", $usernamenew, $userID);
+        $stmt->execute();
+        $stmt->close();
+
         header("Location: exit.php");
         exit();
     }
