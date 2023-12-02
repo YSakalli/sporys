@@ -20,4 +20,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         local-dir: ./
-        server-dir: /yusufsakalli/
+        server-dir: /sporys/
