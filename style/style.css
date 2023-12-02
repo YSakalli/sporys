@@ -88,7 +88,7 @@ body {
 }
 
 .header.active a,
-.header.active .sing button {
+.header.active .sign button {
     color: black;
 
 }
@@ -223,99 +223,114 @@ header .sign button:hover span {
     position: relative;
     display: flex;
     justify-content: space-around;
-    height: 350px;
-    margin-top: 100px;
+    height: 300px;
+    margin-top: 50px;
 }
 
-.container .card {
+.container .cards {
+    width: 100%;
+    width: 100%;
+    background-color: transparent;
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    position: relative;
-    height: 215px;
-    border-radius: 10px;
+
+}
+
+.container .cards .card {
+    border-radius: 30px 0 30px 0px;
     width: 25%;
+    height: 100%;
     background-color: #f8f9fa;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-    transition: 0.3s ease-in-out;
-
-}
-
-.container .card.active {
-    height: 350px;
-
-}
-
-.container .card .imgbox {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    z-index: 10;
-}
-
-.container .card .imgbox h3 {
-    position: absolute;
-    font-size: 16px;
-    top: -40px;
-    left: 45px;
-    padding: 5px;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 3);
-    border-radius: 20px;
-    z-index: 11;
-    color: white;
-
-}
-
-
-.container .card .imgbox img {
-    position: relative;
-    top: -50px;
-    border-radius: 10px;
-    width: 100%;
-}
-
-.container .card .content {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    position: relative;
-    width: 100%;
-    padding: 16px;
-    top: -200px;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s ease-in-out;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.5s;
 }
 
-.container .card.active .content {
-    visibility: visible;
-    opacity: 1;
-    top: -40px;
-    transition-delay: 0.3s;
+.container .cards .card:hover {
+    background-color: black;
 }
 
-.container .card .content .head {
-    text-align: center;
-    color: black;
-}
 
-.container .card .content .lead {
-    text-align: center;
-    color: black;
 
-}
-
-.container .card .content a {
-    position: relative;
-    top: -90px;
-    background-color: blueviolet;
-    border-radius: 20px;
-    border: none;
+.container .cards .card:hover h1 {
     color: white;
-    margin: 100px;
-    padding: 10px 20px;
-    cursor: pointer;
 }
+
+.container .cards .card:hover p {
+    color: white;
+    font-weight: 100;
+}
+
+.container .cards .card:hover p span {
+    color: white;
+
+}
+
+.container .cards .card:hover a {
+    color: white;
+}
+
+
+.container .cards .card i {
+    color: red;
+
+    transform: scale(4);
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+
+}
+
+.container .cards .card h1 {
+    font-size: 32px;
+    font-weight: 700;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+    margin-top: 20px;
+
+}
+
+.container .cards .card p {
+    text-align: center;
+    margin: 20px;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.15);
+
+}
+
+.container .cards .card a {
+    position: relative;
+    text-decoration: none;
+    color: red;
+    font-size: 16px;
+    transition: 0.5s;
+    margin: 0;
+}
+
+.container .cards .card a:hover {
+    color: red;
+}
+
+.container .cards .card a i {
+    opacity: 0;
+    transform: scale(1);
+    margin: 0;
+    transition: 0.5s;
+    position: absolute;
+    right: -15px;
+    top: 5px;
+}
+
+.container .cards .card a:hover i {
+    opacity: 1;
+}
+
+
+
+
+
+
 
 header .profile {
     display: flex;
@@ -393,42 +408,99 @@ header.active .profile .profileactive h3 {
 }
 
 .infocards {
-    margin-top: 60px;
-    position: relative;
+    margin-top: 100px;
+    background-color: black;
     width: 100%;
+    height: 400px;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 200px;
-    background-color: #f8f9fa;
 }
 
-.infocards .card {
+.infocards .lead {
     position: relative;
-    bottom: 0;
-    height: 260px;
-    width: 20%;
+    padding: 30px;
+    width: 70%;
+}
+
+.infocards .lead h1 {
+    color: white;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: -20px;
+    background-color: red;
+    font-size: 27px;
+    border-radius: 10px 0px 10px 0px;
+    padding: 5px;
+}
+
+.infocards .lead p {
     text-align: center;
+    color: white;
+    margin-top: 20px;
+    text-shadow: 3px 3px 10px rgb(255, 255, 255, 0.5);
+    font-size: 18px;
+    font-weight: 100;
+
+}
+
+.infocards .lead a {
+    text-decoration: none;
+    color: white;
+    border: 2px red solid;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.infocards .lead a:hover {
+    background-color: rgb(220, 0, 0);
+
+}
+
+
+
+
+.infocards .imgbox {
+    width: 30%;
+    display: flex;
+    justify-content: right;
+}
+
+.infocards .imgbox img {
+    width: 400px;
+}
+
+.infocards .lead .info {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.infocards .lead .info .infoitem {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f8f9fa;
-    border-radius: 20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    transition: 0.5s ease-in-out;
+    width: 150px;
+    text-align: center;
+    border-left: 2px rgba(73, 73, 73, 0.499) solid;
 }
 
-.infocards .card:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    position: relative;
-    bottom: 30px;
-    transition: 0.5s ease-in-out;
-
+.infocards .lead .info .infoitem:nth-child(1) {
+    border: none;
 }
 
-.infocards .card h3 {
-    padding: 10px;
+.infocards .lead .info .infoitem i {
+    transform: scale(2);
+    margin-bottom: 20px;
+    color: red;
+}
+
+.infocards .lead .info .infoitem p {
+    color: white;
 }
 
 footer {

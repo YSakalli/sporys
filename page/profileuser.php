@@ -23,34 +23,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("si", $usernamenew, $userID);
         $stmt->execute();
         $stmt->close();
-
         header("Location: exit.php");
         exit();
     }
     if (isset($_POST["submit_email"])) {
-        $usernamenew = $_POST["email"];
-        $sql = "UPDATE users SET email= '$emailnew' WHERE id=$userID";
-        $query = mysqli_query($conn, $sql);
+        $emailnew = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
+
+        $stmt = $conn->prepare("UPDATE users SET email = ? WHERE id = ?");
+        $stmt->bind_param("si", $emailnew, $userID);
+        $stmt->execute();
+        $stmt->close();
         header("Location: exit.php");
         exit();
     }
+
     $data = "SELECT * FROM users WHERE pass='$password'";
     $query = mysqli_query($conn, $data);
 
 
 
     if (isset($_POST["submit_password"])) {
-        if ($data) {
-            $usernamenew = $_POST["password"];
-            $sql = "UPDATE users SET pass= '$passwordnew' WHERE id=$userID";
-            $query = mysqli_query($conn, $sql);
-            if ($query) {
-                header("Location: exit.php");
-                exit();
-            }
+
+        $passwordnew = filter_var($_POST["pass"], FILTER_SANITIZE_STRING);
+        $stmt = $conn->prepare("UPDATE users SET pass = ? WHERE id = ?");
+        $stmt->bind_param("si", $passwordnew, $userID);
+        if ($stmt->execute()) {
+            $stmt->close();
+
+            header("Location: exit.php");
+            exit();
+        } else {
 
         }
     }
+
     $conn->close();
 }
 ?>
