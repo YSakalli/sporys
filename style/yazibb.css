@@ -18,14 +18,16 @@ section {
 }
 
 section .img {
-    background-image: url(img/antrenman.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    width: 100%;
+}
+
+section .img img {
+    object-fit: cover;
     position: relative;
     width: 100%;
     top: 0;
     height: 300px;
+    z-index: -1;
 }
 
 section .img a {
@@ -37,7 +39,8 @@ section .img a {
     font-size: 20px;
     background-color: white;
     top: -35px;
-    left: 44%;
+    transform: translateX(-50%);
+    left: 50%;
     color: black;
     text-decoration: none;
     padding: 10px;

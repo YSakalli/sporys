@@ -9,83 +9,7 @@
     text-decoration: none;
 }
 
-header {
-    position: fixed;
-    padding: 20px 100px;
-    background-color: #f8f9fa;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    z-index: 10000;
-    justify-content: space-between;
-    transition: 0.6s;
-    height: 12%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.logo {
-    color: black;
-    font-size: 32px;
-    font-weight: 700px;
-    pointer-events: visible;
-}
-
-.navbar a {
-    position: relative;
-    color: black;
-    margin-right: 20px;
-}
-
-.navbar a:hover {
-    color: tomato;
-    border-radius: 20px;
-}
-
-.navbar a::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    height: 2px;
-    width: 100%;
-    background-color: tomato;
-    transform: scaleX(0);
-    transition: transform 0.5s ease-in-out;
-    transform-origin: right;
-}
-
-.navbar a:hover:before {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-.buttonlog {
-    border: none;
-    text-decoration: none;
-    color: white;
-    background-color: tomato;
-    border-radius: 20px;
-    margin: 10px;
-    width: 100px;
-    height: 35px;
-}
-
-.buttonlog:hover {
-    position: relative;
-    border: white 1px solid;
-    bottom: 3px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}
-
-.buttonlog a {
-    color: white;
-}
-
-.banner:hover {
-    background-color: antiquewhite;
-}
-
 section {
-
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -101,6 +25,28 @@ section {
     background-color: #f8f9fa;
     width: 500px;
     height: 500px;
+}
+
+section .container form .info .vki {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+}
+
+section .container form .info .vki span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section .container form .info .vki span h1 {
+    color: yellowgreen;
+    font-size: 16px;
+    margin: 0;
+    margin-right: 10px;
 }
 
 section .container form .info span {
@@ -129,7 +75,6 @@ section .container form .info .btn {
 section .container form .info .vki {
     color: green;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -139,12 +84,4 @@ section .container form .info .vki {
 header .profile h3 {
     color: black;
     margin-right: 10px;
-}
-
-header .profile .profileactive h3 {
-    color: black;
-}
-
-header .profile .profileactive h3 i {
-    color: black;
 }

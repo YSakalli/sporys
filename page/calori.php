@@ -1,9 +1,6 @@
 <?php
-session_start();
-$user = $_SESSION['username']
-    ?>
-<?php
-$weight = $size = $age = $vki = $format_vki = "";
+
+$weight = $size = $age = $vki = $format_vki = $durum = "";
 $text = "";
 if (isset($_POST['submit'])) {
     $weight = $_POST['weight'];
@@ -18,6 +15,20 @@ if (isset($_POST['submit'])) {
     } else {
         $vki = "<p>Lütfen geçerli bir ağırlık ve boy girin.</p>";
     }
+
+    if ($vki <= 18.4) {
+        $durum = "Zayif";
+    } else if ($vki > 18.5 && $vki < 24.9) {
+        $durum = "Normal";
+
+    } else if ($vki > 25 && $vki < 29.9) {
+        $durum = "Kilolu";
+
+    } else if ($vki > 30 && $vki < 34.9) {
+        $durum = "Obese";
+    } else if ($vki > 35) {
+        $durum = "Extrema obese";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -31,71 +42,40 @@ if (isset($_POST['submit'])) {
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Document</title>
-    <link rel="stylesheet" href="stylecalori.css">
 </head>
 
 <body>
-    <!-- <header class="">
-        <div style="align-items: center;">
-            <a href="index.html" class="logo">Logo</a>
-        </div>
-        <nav class="navbar">
-            <a href="../profile.php">Home</a>
-            <a href="../blog.php">Blog</a>
-            <a href="../antrenman.php">Antrenmanlar</a>
-        </nav>
-        <div class="profile">
-            <h3>
-                <?php echo $user ?>
-            </h3>
-            <img src="img/profileicon.png" alt="">
-            <div class="profileactive">
-                <h3>Profile <i class="fa-solid fa-chevron-down"></i></h3>
 
-                <div class="downmenu">
-                    <a href="">Profile</a>
-                    <a href="">Blog</a>
-                    <a href="exit.php">Logout</a>
-                </div>
-            </div>
-        </div>
-    </header> -->
 
     <section>
         <div class="container">
             <form action="calori.php" method='POST'>
-                <!-- Gender -->
-                <!-- <p>Select Gender</p> -->
-
-                <!-- <div class="radiogender">
-                    <input type="radio" value="radio_group" name="Man">
-                    <label for="man">Man</label><br>
-                    <input type="radio" value="radio_group" name="Women">
-                    <label for="women">Women</label><br>
-                </div> -->
-
-                <!-- weith and size -->
                 <div class="info">
 
                     <span><i class="fa-solid fa-weight-scale"></i><label for="weight">Weight</label></span><br>
                     <input name="weight" type="number" class="kilo" required="required" placeholder="Weight(kg)">
 
-                    <span><i class="fa-solid fa-ruler"></i><label for="size">Size</label></span>
-                    <input name="size" type="text" placeholder="Size(cm)">
+                    <span><i class="fa-solid fa-ruler"></i><label for="size">Height</label></span>
+                    <input name="size" type="text" placeholder="Height (cm)">
 
                     <span><i class="fa-solid fa-calendar-days"></i><label for="age">Age</label></span>
                     <input name="age" type="text" placeholder="Age">
 
                     <input class="btn" type="submit" name='submit' value="Hesapla">
-
                     <div class="vki">
-                        <?php echo $text ?>
-                        <div>
+                        <span>
+                            <h1>Vki's: </h1>
                             <?php echo $vki ?>
-                        </div>
+                        </span>
+                        <span>
+                            <h1>Weight's:</h1>
+                            <?php echo $durum ?>
+                        </span>
                     </div>
+
                 </div>
-            </form>
+        </div>
+        </form>
         </div>
     </section>
 </body>

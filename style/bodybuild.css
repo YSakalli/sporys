@@ -14,7 +14,7 @@ header {
     width: 100%;
     height: 60px;
     background-color: #f8f8f8;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.09);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,30 +22,27 @@ header {
 }
 
 header h1 {
-    margin-right: 80px;
+    position: absolute;
+    right: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    transition: .4s;
 }
 
-header .login a {
-    margin-right: 20px;
-    color: rgb(237, 237, 237);
-    padding: 10px 20px;
-    border-radius: 20px;
-    background-color: rgb(35, 35, 35);
-    text-decoration: none;
+header h1:hover {
+    color: red;
 }
-
-header .login:hover a {
-    background-color: black;
-    color: white;
-
-}
-
 
 header .nav a {
     text-decoration: none;
     color: black;
     margin-left: 20px;
     padding: 10px;
+    transition: .4s;
+}
+
+header .nav a:hover {
+    color: red;
 }
 
 .filtre {
@@ -122,7 +119,10 @@ section .container .card:hover {
 
 section .container .card img {
     border-radius: 10px 10px 0px 0px;
-    width: 300px;
+    width: 100%;
+    max-height: 200px;
+    min-height: 200px;
+    object-fit: cover;
 }
 
 section .container .card h1 {
