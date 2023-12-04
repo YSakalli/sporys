@@ -53,11 +53,11 @@ if ($role !== 'admin') {
             $baslik = htmlspecialchars($_POST['baslik']);
             $yazi = nl2br(htmlspecialchars($_POST['yazi']));
             $resim = htmlspecialchars($_POST['resim']);
-
+            $turu = htmlspecialchars($_POST['turu']);
             if (empty($baslik) && empty($yazi) && empty($resim)) {
                 echo "<p> Lutfen Bos Gecmeyin</p>";
             } else {
-                $veriekle = "INSERT INTO blogs (baslik,yazi,tarih,resim) VALUES ('$baslik','$yazi','$tarih','$resim')";
+                $veriekle = "INSERT INTO blogs (baslik,yazi,tarih,resim,turu) VALUES ('$baslik','$yazi','$tarih','$resim','$turu')";
                 $query = mysqli_query($conn, $veriekle);
             }
         }
@@ -69,6 +69,13 @@ if ($role !== 'admin') {
             <textarea style="white-space: pre-wrap;" name="yazi" id="" cols="30" rows="10"></textarea>
             <label for="">Resim Link Ekle:</label>
             <input type="text" name="resim">
+            <input list="turler" id="renkSecimi" name="turu" autocomplete="off">
+            <datalist id="turler">
+                <option value="saglik">
+                <option value="beslenme">
+                <option value="antrenman">
+                <option value="supplement">
+            </datalist>
             <input type="submit" name="submit" value="Gonder">
 
         </form>

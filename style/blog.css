@@ -6,6 +6,7 @@ body {
     padding: 0;
     border-top: 4px black solid;
     font-family: 'Poppins';
+    height: 300vh;
 }
 
 #loading {
@@ -124,68 +125,228 @@ header .nav {
     margin-right: 50px;
 }
 
-.blogs {
-    width: 100%;
-    height: auto;
+.container {
     display: flex;
-    flex-wrap: wrap;
+}
+
+aside {
+    background-color: #f8f8f8;
+    width: 25%;
+    margin-top: 100px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 1000px;
+}
+
+aside .search {
+    margin-top: 50px;
+}
+
+aside .search input {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+aside .categorys {
+    position: relative;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    width: 100%;
+}
+
+aside .categorys .category {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    justify-content: center;
+}
+
+aside .categorys .category i {}
+
+aside .categorys .category h5 {
+    margin-left: 5px;
+}
+
+aside .categorys .category h5:hover {
+    color: red;
+}
+
+aside .categorys .category p {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    background-color: rgba(255, 0, 0, 0.434);
+    border-radius: 50%;
+    text-align: center;
+
+}
+
+aside .recent {
+    margin-top: 10px;
+    position: relative;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+}
+
+aside .recent:hover {
+    position: relative;
+    left: -15px;
+
+}
+
+aside .recent img {
+    width: 30%;
+}
+
+aside .recent span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 0;
+    text-decoration: none;
+}
+
+aside .recent h1 {
+    color: black;
+    font-size: 16px;
+    margin-top: 5px;
+    color: inherit;
+    text-decoration: red;
+}
+
+aside .recent p {
+    color: black;
+    margin: 0;
+}
+
+aside .recent a {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+}
+
+
+
+
+
+
+.blogphoto {
+    position: relative;
+    background-image: url(/img/blogfoto.jpeg);
+    filter: grayscale(1);
+    background-position: 25% 80%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 250px;
+
+}
+
+.blogphoto h1 {
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.blogs {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
 .blogs .blog {
-    position: relative;
-    height: 500px;
-    width: 350px;
-    background-color: #f8f8f8;
-    margin: 50px;
-    border-radius: 20px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-    border-bottom: 3px red solid;
-    transition: .4s ease-in-out;
-    top: 0;
+    margin-top: 50px;
+    width: 75%;
+    height: 700px;
+
 }
 
 .blogs .blog:hover {
-    border-bottom: 5px red solid;
-    box-shadow: 0 0 10px rgb(152, 152, 152);
-    position: relative;
-    top: -10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 
-}
-
-.blogs .blog a {
-    bottom: 20px;
-    transform: translateX(-50%);
-    position: absolute;
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    transition: .4s;
-}
-
-.blogs .blog a:hover {
-    color: red;
 }
 
 .blogs .blog .img {
-    display: flex;
-    justify-content: center;
+    position: relative;
+}
+
+.blogs .blog .img p {
+    position: absolute;
+    bottom: -40px;
+    left: 10px;
+    color: rgba(150, 150, 150, 0.5);
 }
 
 .blogs .blog .img img {
     width: 100%;
-    max-height: 250px;
-    border-radius: 20px 20px 0px 0px;
-
 }
 
 
 .blogs .blog .content {
+    position: relative;
+    margin-top: 30px;
     text-align: center;
-    word-wrap: break-word;
-    margin: 10px;
 }
+
+.blogs .blog .content p {
+    overflow: hidden;
+    margin: 20px;
+}
+
+
+.blogs .blog a {
+    position: relative;
+    text-decoration: none;
+    color: black;
+    padding: 5px 20px;
+    border: 2px red solid;
+    z-index: 1;
+}
+
+.blogs .blog a::before {
+    content: '';
+    background-color: red;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    transition: .4s;
+    z-index: -1;
+
+}
+
+.blogs .blog a:hover:before {
+    width: 100%;
+}
+
+.blogs .blog a:hover {}
 
 .blogekle {
     display: flex;
