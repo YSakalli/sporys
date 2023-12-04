@@ -171,7 +171,6 @@ aside .categorys .category {
     justify-content: center;
 }
 
-aside .categorys .category i {}
 
 aside .categorys .category h5 {
     margin-left: 5px;
@@ -241,9 +240,6 @@ aside .recent a {
     right: 10px;
     color: red;
 }
-
-
-
 
 
 
@@ -346,7 +342,6 @@ aside .recent a {
     width: 100%;
 }
 
-.blogs .blog a:hover {}
 
 .blogekle {
     display: flex;
