@@ -5,52 +5,57 @@ $user = $email = $pass = $passtry = "";
 $nameErr = $emailErr = $passErr = $passtryErr = $usersame = "";
 
 if (isset($_POST["submit"])) {
-
-    if (empty($_POST["username"])) {
+    if (empty($_POST['username'])) {
         $nameErr = "Name is required";
     } else {
-        $user = $_POST["username"];
+        $user = htmlspecialchars($_POST["username"]);
     }
 
-    if (empty($_POST["email"])) {
+    if (empty($_POST['email'])) {
         $emailErr = "Email is required";
     } else {
-        $email = $_POST["email"];
+        $email = htmlspecialchars($_POST["email"]);
     }
 
-    if (empty($_POST["password"])) {
+    if (empty($_POST['password'])) {
         $passErr = "Password is required";
     } else {
-        $pass = md5($_POST["password"]);
+        $pass = $_POST["password"];
+        $passtry = $_POST["passwordtry"];
     }
 
-    if (empty($_POST["passwordtry"])) {
+    if (empty($_POST['passwordtry'])) {
         $passtryErr = "Password is required";
-    } else {
-        $passtry = md5($_POST["passwordtry"]);
-    }
-    if ($pass != $passtry) {
+    } elseif ($pass != $passtry) {
         $passtryErr = "Password must be the same";
     }
-    $query = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
-    if (mysqli_num_rows($result) > 0) {
-        $usersame = "Zaten boyle bir hesap ";
+
+    $query = "SELECT * FROM users WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $usersame = "Zaten böyle bir hesap var";
+    }
+
+    if (!empty($user) && !empty($email) && !empty($pass) && !empty($passtry) && ($pass == $passtry) && ($result->num_rows == 0)) {
+        echo "<script> showAlert() </script>";
+        $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
+        $add = "INSERT INTO users (username, email, pass) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($add);
+        $stmt->bind_param("sss", $user, $email, $hashedPassword);
+        $stmt->execute();
+        $stmt->close();
+        sleep(2);
+        header("Location: login.php");
+        exit();
     }
 }
-
-if (!empty($username) && !empty($email) && !empty($pass) && !empty($pass) && $pass == $passtry && mysqli_num_rows($result) == 0) {
-    echo "<script> showAlert() </script>";
-    $add = "INSERT INTO users (username,email,pass) VALUES('$user','$email','$pass')";
-    $work = mysqli_query($conn, $add);
-    sleep(3);
-    header("Location: login.php");
-    exit();
-}
-if (isset($_POST["submit"])) {
-
-}
+$conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

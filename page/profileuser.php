@@ -1,20 +1,19 @@
 <?php
 include("../backend/connect.php");
-?>
-<?php
+
 session_start();
 if (!isset($_SESSION["id"])) {
     header("Location: giris.php");
     exit();
 }
 $username = $_SESSION["username"];
-$email = $_SESSION["email"];
 $userID = $_SESSION["id"];
+$email = $_SESSION["email"];
+$usernamenew = $passwordnew = $emailnew = $password = $pass = "";
 
-$usernamenew = $passwordnew = $emailnew = $password = "";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $password = md5($_POST["password"]);
 
     if (isset($_POST["submit_username"])) {
         $usernamenew = filter_var($_POST["username"], FILTER_SANITIZE_STRING);
@@ -23,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("si", $usernamenew, $userID);
         $stmt->execute();
         $stmt->close();
-        header("Location: exit.php");
+        header("Location: ../backend/exit.php");
         exit();
     }
     if (isset($_POST["submit_email"])) {
@@ -33,24 +32,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("si", $emailnew, $userID);
         $stmt->execute();
         $stmt->close();
-        header("Location: exit.php");
+        header("Location: ../backend/exit.php");
         exit();
     }
+    $userInputPassword = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
-    $data = "SELECT * FROM users WHERE pass='$password'";
-    $query = mysqli_query($conn, $data);
+    $hashedPassword = password_hash($userInputPassword, PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("INSERT INTO users (username, pass) VALUES (?, ?)");
+    $stmt->bind_param("ss", $username, $hashedPasswordFromDatabase);
+    $stmt->execute();
+    $stmt->close();
 
 
-
-    if (isset($_POST["submit_password"])) {
-
-        $passwordnew = filter_var($_POST["pass"], FILTER_SANITIZE_STRING);
+    if (isset($_POST["submit_password"]) && password_verify($userInputPassword, $hashedPasswordFromDatabase)) {
+        $passwordnew = filter_var(md5($_POST["passwordnew"]), FILTER_SANITIZE_STRING);
         $stmt = $conn->prepare("UPDATE users SET pass = ? WHERE id = ?");
         $stmt->bind_param("si", $passwordnew, $userID);
         if ($stmt->execute()) {
             $stmt->close();
-
-            header("Location: exit.php");
+            header("Location: ../backend/exit.php");
             exit();
         } else {
 
@@ -73,12 +74,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="alert"></div>
+    <div class="alert">
+        <h1>
+            <?php echo $password ?>
+        </h1>
+        <h1>
+            <?php echo $pass ?>
+        </h1>
+    </div>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <label for="file">Choose a profile picture:</label>
+        <input type="file" name="file" id="file">
+        <input type="submit" name="submit" value="Upload">
+    </form>
 
     <form action="profileuser.php" method="POST">
         <div class="comp">
             <label for="">User Name Change </label>
-            <span><input type="text" name="username" style="width: 60%;" placeholder="Enter New Username"><label for=""
+            <span><input type="text" name="username" placeholder="Enter New Username"><label for=""
                     style="margin-left: 10px;">User Name:
                     <?php echo $username ?>
                 </label></span>
@@ -87,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="comp">
             <label for="">E-mail Change</label>
-            <span><input type="text" name="email" style="width: 60%;" placeholder="Enter New E-mail"><label for=""
+            <span><input type="text" name="email" placeholder="Enter New E-mail"><label for=""
                     style="margin-left: 10px;">E-mail:
                     <?php echo $email ?>
                 </label></span>
@@ -96,13 +109,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div class="comp">
             <label for="">Password</label>
-            <span><input type="text" name="password" style="width: 60%;" placeholder="Enter Password"><label for=""
+            <span><input type="text" name="password" placeholder="Enter Password"><label for=""
                     style="margin-left: 10px;"></label></span>
         </div>
         <div class="comp">
             <label for="">Password Change</label>
-            <span><input type="text" name="passwordnew" style="width: 60%;" placeholder="Enter New Password"><label
-                    for="" style="margin-left: 10px;"></label></span>
+            <span><input type="text" name="passwordnew" placeholder="Enter New Password"><label for=""
+                    style="margin-left: 10px;"></label></span>
             <input type="submit" name="submit_password" value="Uptade" class="btn">
         </div>
 

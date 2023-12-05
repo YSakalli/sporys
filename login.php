@@ -1,46 +1,54 @@
 <?php
+session_start();
 include("backend/connect.php");
-$emailErr = $passErr = $loginErr = "";
-$email = $pass = "";
 
-if (isset($_POST["submit"])) {
+$emailErr = $passErr = $loginErr = "";
+$email = $password = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($_POST["email"])) {
-        $emailErr = "E-posta adresi gereklidir";
+        $emailErr = "Email is required";
     } else {
-        $email = $_POST["email"];
+        $email = htmlspecialchars($_POST["email"]);
     }
+
     if (empty($_POST["password"])) {
-        $passErr = "Şifre gereklidir";
+        $passErr = "Password is required";
     } else {
-        $pass = md5($_POST["password"]);
+        $password = $_POST["password"];
     }
 
-    $query = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
+    if (empty($emailErr) && empty($passErr)) {
+        $query = "SELECT id, username, email, pass FROM users WHERE email=?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $userdoc = mysqli_fetch_assoc($result);
-        $hash = $userdoc['pass'];
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
 
-        if ($pass == $hash) {
-            session_start();
-            $_SESSION["username"] = $userdoc["username"];
-            $_SESSION["email"] = $userdoc["email"];
-            $_SESSION["id"] = $userdoc["id"];
-            $_SESSION["role"] = $userdoc["role"];
-            header("Location:profile.php");
-            exit();
+            if (password_verify($password, $row['pass'])) {
+                $_SESSION["id"] = $row['id'];
+                $_SESSION["username"] = $row['username'];
+                $_SESSION["email"] = $row['email'];
+                $_SESSION["role"] = $row['role'];
+                header("Location: profile.php");
+                exit();
+            } else {
+                $loginErr = $row['pass'];
+                $passErr = $password;
+
+            }
         } else {
-            $loginErr = "Yanlış şifre";
+            $loginErr = "Email not found";
         }
-    } else {
-        $loginErr = "Yanlış e-posta";
     }
-
-    mysqli_close($conn);
 }
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -318,15 +326,16 @@ if (isset($_POST["submit"])) {
             </div>
 
             <form action="login.php" method="POST" id="myform">
+
                 <label for="">E-mail</label>
                 <input type="email" name="email" placeholder="E-mail">
                 <p class="erortext">
-                    <?php echo $emailErr; ?>
+                    <?php echo $emailErr ?>
                 </p>
                 <label for="">Password</label>
                 <input type="password" name="password" placeholder="Password">
                 <p class="erortext">
-                    <?php echo $passErr; ?>
+                    <?php echo $passErr ?>
                 </p>
                 <div class="chb">
                     <span style="display: flex;"><input type="checkbox"><label for="">Remember me</label></span>
@@ -335,10 +344,10 @@ if (isset($_POST["submit"])) {
                 </div>
 
                 <div class="btn">
-                    <input type="submit" name="submit" value="Sing up">
+                    <input type="submit" name="login" value="Sing up">
                 </div>
                 <p class="erortext center">
-                    <?php echo $loginErr; ?>
+                    <?php echo $loginErr ?>
                 </p>
             </form>
         </div>

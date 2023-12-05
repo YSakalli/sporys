@@ -1,4 +1,7 @@
 <?php
+session_start();
+$role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
+
 include("../backend/connect.php");
 $link = @$_GET["link"];
 $query = "SELECT * FROM blogs WHERE baslik = '$link'";
@@ -27,9 +30,15 @@ $blog = mysqli_fetch_assoc($result);
             <a href="../profile.php">Logo</a>
         </div>
         <div class="nav">
-            <a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
-            <a href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
+            <?php
+            if ($role == 'admin') {
+                echo '  <a href="page/blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
+            <a href="page/blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>';
+            }
+            ?>
+            <a href="../profile.php">Anasayfa</a>
             <a href="../blog.php">Bloglar</a>
+
         </div>
     </header>
     <!-- Header -->
@@ -46,8 +55,36 @@ $blog = mysqli_fetch_assoc($result);
             </p>
         </div>
     </div>
-    <!-- Blogs -->
 
+
+
+
+
+
+    <!-- Comments -->
+    <div class='comments'>
+        <h1 class='head'>Comments</h1>
+
+        <form action="" method="post">
+            <input class="text" type="text" name="text" placeholder="Yorum Ekle">
+            <input class="btn" type="submit" name="submit">
+        </form>
+
+        <div class='comment'>
+            <div class="profile">
+                <div class='imgbox'>
+                    <img src="../img/banner.jpg" alt="">
+                </div>
+                <span>
+                    <h1 class='username'>Yusuf Sakalli</h1>
+                    <p class='tarih'>2023-12-12</p>
+                </span>
+            </div>
+            <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim, at! Aperiam, repudiandae?
+                Laudantium commodi, sunt non illo, quasi.</p>
+        </div>
+
+    </div>
 
 </body>
 
