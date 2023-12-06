@@ -4,29 +4,29 @@ include("backend/connect.php");
 $user = $email = $pass = $passtry = "";
 $nameErr = $emailErr = $passErr = $passtryErr = $usersame = "";
 
-if (isset($_POST["submit"])) {
-    if (empty($_POST['username'])) {
+if(isset($_POST["submit"])) {
+    if(empty($_POST['username'])) {
         $nameErr = "Name is required";
     } else {
         $user = htmlspecialchars($_POST["username"]);
     }
 
-    if (empty($_POST['email'])) {
+    if(empty($_POST['email'])) {
         $emailErr = "Email is required";
     } else {
         $email = htmlspecialchars($_POST["email"]);
     }
 
-    if (empty($_POST['password'])) {
+    if(empty($_POST['password'])) {
         $passErr = "Password is required";
     } else {
         $pass = $_POST["password"];
         $passtry = $_POST["passwordtry"];
     }
 
-    if (empty($_POST['passwordtry'])) {
+    if(empty($_POST['passwordtry'])) {
         $passtryErr = "Password is required";
-    } elseif ($pass != $passtry) {
+    } elseif($pass != $passtry) {
         $passtryErr = "Password must be the same";
     }
 
@@ -36,12 +36,11 @@ if (isset($_POST["submit"])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
+    if($result->num_rows > 0) {
         $usersame = "Zaten böyle bir hesap var";
     }
 
-    if (!empty($user) && !empty($email) && !empty($pass) && !empty($passtry) && ($pass == $passtry) && ($result->num_rows == 0)) {
-        echo "<script> showAlert() </script>";
+    if(!empty($user) && !empty($email) && !empty($pass) && !empty($passtry) && ($pass == $passtry) && ($result->num_rows == 0)) {
         $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
         $add = "INSERT INTO users (username, email, pass) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($add);

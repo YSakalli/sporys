@@ -20,28 +20,25 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if(empty($emailErr) && empty($passErr)) {
-        $query = "SELECT id, username, email, pass FROM users WHERE email=?";
+        $query = "SELECT id, username, email, pass, role, pp FROM users WHERE email=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $email);
         $stmt->execute();
-        $result = $stmt->get_result();
 
-        if($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
+        $stmt->bind_result($id, $username, $email, $hashed_password, $role, $pp);
 
-            if(password_verify($password, $row['pass'])) {
-                $_SESSION["id"] = $row['id'];
-                $_SESSION["username"] = $row['username'];
-                $_SESSION["email"] = $row['email'];
-                $_SESSION["role"] = $row['role'];
-                $_SESSION["pp"] = $row['pp'];
+        if($stmt->fetch()) {
+
+            if(password_verify($password, $hashed_password)) {
+                $_SESSION["id"] = $id;
+                $_SESSION["username"] = $username;
+                $_SESSION["email"] = $email;
+                $_SESSION["role"] = $role;
 
                 header("Location: profile.php");
                 exit();
             } else {
-                $loginErr = $row['pass'];
-                $passErr = $password;
-
+                $loginErr = "Invalid password";
             }
         } else {
             $loginErr = "Email not found";
