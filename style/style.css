@@ -337,24 +337,26 @@ header .sign button:hover span {
 }
 
 
-
-
-
-
-
 header .profile {
     display: flex;
     align-items: center;
 }
 
+header .profile .imgbox {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
 header .profile img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
     background-color: white;
-    width: 40px;
-    border: red 2px solid;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 60%;
-    margin-right: 6px;
+    border-radius: 50%;
+    border: 2px red solid;
+
 }
 
 header .profile .profileactive h3 {

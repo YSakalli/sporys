@@ -1,7 +1,6 @@
 <?php
 session_start();
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
-
 include("../backend/connect.php");
 $link = @$_GET["link"];
 $query = "SELECT * FROM blogs WHERE baslik = '$link'";
@@ -31,16 +30,16 @@ $blog = mysqli_fetch_assoc($result);
         </div>
         <div class="nav">
             <?php
-            if ($role == 'admin') {
-                echo '  <a href="page/blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
-            <a href="page/blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>';
+            if($role == 'admin') {
+                echo '<a href="page/blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yönet</a>
+                      <a href="page/blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle';
             }
             ?>
             <a href="../profile.php">Anasayfa</a>
             <a href="../blog.php">Bloglar</a>
-
         </div>
     </header>
+
     <!-- Header -->
     <div>
         <div style="display:flex; align-items: center; flex-direction: column; ">
@@ -56,33 +55,59 @@ $blog = mysqli_fetch_assoc($result);
         </div>
     </div>
 
-
-
-
-
-
     <!-- Comments -->
     <div class='comments'>
         <h1 class='head'>Comments</h1>
-
         <form action="" method="post">
             <input class="text" type="text" name="text" placeholder="Yorum Ekle">
             <input class="btn" type="submit" name="submit">
         </form>
+        <?php
+        // Yorum ekleme kısmı
+        if(isset($_POST['submit']) && !empty($_POST['text'])) {
+            $userID = $_SESSION['id'];
+            $add = "INSERT INTO blog_comments (blogid, userid, text) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($add);
+            $stmt->bind_param("iis", $blog['id'], $userID, $_POST['text']);
+            $stmt->execute();
+            $stmt->close();
+        }
 
-        <div class='comment'>
-            <div class="profile">
-                <div class='imgbox'>
-                    <img src="../img/banner.jpg" alt="">
-                </div>
-                <span>
-                    <h1 class='username'>Yusuf Sakalli</h1>
-                    <p class='tarih'>2023-12-12</p>
-                </span>
-            </div>
-            <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim, at! Aperiam, repudiandae?
-                Laudantium commodi, sunt non illo, quasi.</p>
-        </div>
+        // Yorumları çekme kısmı
+        $query = "SELECT bc.*, u.pp, u.username FROM blog_comments bc
+                  INNER JOIN users u ON bc.userid = u.id
+                  WHERE bc.blogid = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $blog['id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while($row = $result->fetch_assoc()) {
+            $pp = "../uploadprofile/".$row['userid'].'/'.$row['pp'];
+
+            if($row['pp'] == null) {
+                $pp = "../img/profileicon.png";
+            }
+
+            $text = $row["text"];
+            $tarih = $row["tarih"];
+            $username = $row["username"];
+
+            // Yorumları ekrana yazdırma
+            echo '<div class="comment">
+                    <div class="profile">
+                        <div class="imgbox">
+                            <img src="'.$pp.'" alt="">
+                        </div>
+                        <span>
+                            <h1 class="username">'.$username.'</h1>
+                            <p class="tarih">'.$tarih.'</p>
+                        </span>
+                    </div>
+                    <p class="text">'.$text.'</p>
+                </div>';
+        }
+        ?>
 
     </div>
 

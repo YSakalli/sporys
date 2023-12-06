@@ -5,35 +5,37 @@ include("backend/connect.php");
 $emailErr = $passErr = $loginErr = "";
 $email = $password = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if (empty($_POST["email"])) {
+    if(empty($_POST["email"])) {
         $emailErr = "Email is required";
     } else {
         $email = htmlspecialchars($_POST["email"]);
     }
 
-    if (empty($_POST["password"])) {
+    if(empty($_POST["password"])) {
         $passErr = "Password is required";
     } else {
         $password = $_POST["password"];
     }
 
-    if (empty($emailErr) && empty($passErr)) {
+    if(empty($emailErr) && empty($passErr)) {
         $query = "SELECT id, username, email, pass FROM users WHERE email=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if ($result->num_rows == 1) {
+        if($result->num_rows == 1) {
             $row = $result->fetch_assoc();
 
-            if (password_verify($password, $row['pass'])) {
+            if(password_verify($password, $row['pass'])) {
                 $_SESSION["id"] = $row['id'];
                 $_SESSION["username"] = $row['username'];
                 $_SESSION["email"] = $row['email'];
                 $_SESSION["role"] = $row['role'];
+                $_SESSION["pp"] = $row['pp'];
+
                 header("Location: profile.php");
                 exit();
             } else {

@@ -1,10 +1,25 @@
 <?php
 session_start();
 $user = $_SESSION["username"];
+$userID = $_SESSION['id'];
 
-if (!isset($_SESSION['id'])) {
+if(!isset($_SESSION['id'])) {
     header('Location: index.html');
     exit();
+}
+include('backend/connect.php');
+$pp = "SELECT pp FROM users WHERE id=?";
+$stmt = $conn->prepare($pp);
+$stmt->bind_param("i", $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$pp = $row["pp"];
+if($row['pp'] == null) {
+    $pp = 'img/profileicon.png';
+
+} else {
+    $pp = "uploadprofile/$userID/$pp";
 }
 ?>
 
@@ -43,7 +58,9 @@ if (!isset($_SESSION['id'])) {
             <h3 style='color: aliceblue; margin-right: 10px;'>
                 <?php echo $user ?>
             </h3>
-            <img src="img/profileicon.png" alt="">
+            <div class='imgbox'>
+                <img src="<?php echo $pp ?>" alt="">
+            </div>
             <div class="profileactive">
                 <h3>Profile <i class="fa-solid fa-chevron-down"></i></h3>
 

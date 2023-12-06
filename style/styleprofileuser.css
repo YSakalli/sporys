@@ -10,47 +10,143 @@ body {
     height: 100vh;
     font-family: 'Poppins';
     overflow: hidden;
+    gap: 50px;
 }
 
-form {
-    width: 900px;
+a {
+    color: black;
+    position: absolute;
+    top: 20px;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 100;
+    transition: .4s;
 }
 
-form .comp {
+a:hover {
+    font-size: 27px;
+    color: red;
+
+}
+
+.file {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: left;
-}
-
-form .comp .btn {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 10%;
-}
-
-form .comp label {
-    margin-bottom: 5px;
-}
-
-form .comp label input {
-    outline: none;
-    border: none;
-    border-bottom: 2px solid black;
-}
-
-/* .alert {
-    display: flex;
-    justify-content: center;
     align-items: center;
-
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 8%;
-    background-color: rgba(0, 255, 0, 0.5);
+    justify-content: center;
+    height: 300px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 10px;
 }
 
-.alert h1 {
-    color: white;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-} */
+.file h5 {
+    position: absolute;
+    top: -30px;
+    background-color: #fe9a9a;
+    border-radius: 10px 0px 10px 0px;
+    padding: 2px 5px;
+}
+
+.file p {
+    position: absolute;
+    bottom: 10px;
+}
+
+.file .imgbox {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 2px red solid;
+    overflow: hidden;
+}
+
+.file .imgbox img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+}
+
+.file form {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.file form label {
+    font-weight: bold;
+}
+
+.file form input {
+    border: none;
+    outline: none;
+    height: 20px;
+    width: 200px;
+    margin-top: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.information {
+    position: relative;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.information form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+    align-items: center;
+    margin: 10px;
+    width: 100%;
+}
+
+.information form .comp {
+    position: relative;
+}
+
+.information form .comp label {
+    font-weight: bold;
+}
+
+.information form .comp input {
+    background-color: #f8f8f8;
+    width: 400px;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-bottom: 2px rgb(196, 196, 196) solid;
+}
+
+.information form .comp p {
+    font-size: 13px;
+    color: #94949489;
+    position: absolute;
+    right: 120px;
+    bottom: -5px;
+    transform: translateX(50%);
+}
+
+.information form .btn {
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 8px 20px;
+    cursor: pointer;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.information form .btn:hover {
+    background-color: #dedede;
+}
