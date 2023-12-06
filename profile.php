@@ -12,14 +12,14 @@ $pp = "SELECT pp FROM users WHERE id=?";
 $stmt = $conn->prepare($pp);
 $stmt->bind_param("i", $userID);
 $stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$pp = $row["pp"];
-if($row['pp'] == null) {
-    $pp = 'img/profileicon.png';
+$stmt->bind_result($pp_result);
+$stmt->fetch();
+$stmt->close();
 
+if($pp_result == null) {
+    $pp = 'img/profileicon.png';
 } else {
-    $pp = "uploadprofile/$userID/$pp";
+    $pp = "uploadprofile/$userID/$pp_result";
 }
 ?>
 
