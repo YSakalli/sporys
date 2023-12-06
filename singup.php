@@ -34,13 +34,14 @@ if(isset($_POST["submit"])) {
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->store_result();
+    $result = $stmt->num_rows;
 
-    if($result->num_rows > 0) {
+    if($result > 0) {
         $usersame = "Zaten böyle bir hesap var";
     }
 
-    if(!empty($user) && !empty($email) && !empty($pass) && !empty($passtry) && ($pass == $passtry) && ($result->num_rows == 0)) {
+    if(!empty($user) && !empty($email) && !empty($pass) && !empty($passtry) && ($pass == $passtry) && ($result == 0)) {
         $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
         $add = "INSERT INTO users (username, email, pass) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($add);
@@ -54,6 +55,7 @@ if(isset($_POST["submit"])) {
 }
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
