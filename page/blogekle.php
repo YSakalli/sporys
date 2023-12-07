@@ -32,8 +32,13 @@ if ($role !== 'admin') {
             <a href="../profile.php">Logo</a>
         </div>
         <div class="nav">
-            <a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
+            <?php
+            if ($role == 'admin') {
+                echo '<a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
             <a href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
+            <a href="yorumlar.php"><i class="fa-solid fa-comment"></i> Yorumlar</a>';
+            }
+            ?>
             <a href="../blog.php">Bloglar</a>
         </div>
     </header>

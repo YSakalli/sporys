@@ -5,21 +5,21 @@ include("backend/connect.php");
 $emailErr = $passErr = $loginErr = "";
 $email = $password = "";
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if(empty($_POST["email"])) {
+    if (empty($_POST["email"])) {
         $emailErr = "Email is required";
     } else {
         $email = htmlspecialchars($_POST["email"]);
     }
 
-    if(empty($_POST["password"])) {
+    if (empty($_POST["password"])) {
         $passErr = "Password is required";
     } else {
         $password = $_POST["password"];
     }
 
-    if(empty($emailErr) && empty($passErr)) {
+    if (empty($emailErr) && empty($passErr)) {
         $query = "SELECT id, username, email, pass, role, pp FROM users WHERE email=?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $email);
@@ -27,9 +27,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt->bind_result($id, $username, $email, $hashed_password, $role, $pp);
 
-        if($stmt->fetch()) {
+        if ($stmt->fetch()) {
 
-            if(password_verify($password, $hashed_password)) {
+            if (password_verify($password, $hashed_password)) {
                 $_SESSION["id"] = $id;
                 $_SESSION["username"] = $username;
                 $_SESSION["email"] = $email;

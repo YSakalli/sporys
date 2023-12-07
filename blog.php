@@ -1,6 +1,6 @@
 <?php
-include("backend/connect.php");
 session_start();
+include("backend/connect.php");
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
 function kisalt($metin, $uzunluk = 120, $noktaSonra = true)
 {
@@ -75,13 +75,16 @@ if ($count_result) {
             <a href="blog.php">Bloglar</a>
             <?php
             if ($role == 'admin') {
-                echo '  <a href="page/blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
-            <a href="page/blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>';
+                echo '<a href="page/blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
+            <a href="page/blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
+            <a href="page/yorumlar.php"><i class="fa-solid fa-comment"></i> Yorumlar</a>';
             }
             ?>
         </div>
         <div class="logo">
-            <a href="profile.php">Logo</a>
+            <a href="profile.php">
+                <?php echo $role ?>
+            </a>
         </div>
     </header>
     <!-- Header -->

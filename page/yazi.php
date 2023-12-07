@@ -30,9 +30,10 @@ $blog = mysqli_fetch_assoc($result);
         </div>
         <div class="nav">
             <?php
-            if($role == 'admin') {
-                echo '<a href="page/blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yönet</a>
-                      <a href="page/blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle';
+            if ($role == 'admin') {
+                echo '<a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
+            <a href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
+            <a href="yorumlar.php"><i class="fa-solid fa-comment"></i> Yorumlar</a>';
             }
             ?>
             <a href="../profile.php">Anasayfa</a>
@@ -64,16 +65,16 @@ $blog = mysqli_fetch_assoc($result);
         </form>
         <?php
         // Yorum ekleme kısmı
-        if(isset($_POST['submit']) && !empty($_POST['text'])) {
+        if (isset($_POST['submit']) && !empty($_POST['text'])) {
+            $tarih = date('Y-m-d H:i:s');
             $userID = $_SESSION['id'];
-            $add = "INSERT INTO blog_comments (blogid, userid, text) VALUES (?, ?, ?)";
+            $add = "INSERT INTO blog_comments (blogid, userid, text,tarih) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($add);
-            $stmt->bind_param("iis", $blog['id'], $userID, $_POST['text']);
+            $stmt->bind_param("iiss", $blog['id'], $userID, $_POST['text'], $tarih);
             $stmt->execute();
             $stmt->close();
         }
 
-        // Yorumları çekme kısmı
         $query = "SELECT bc.*, u.pp, u.username FROM blog_comments bc
                   INNER JOIN users u ON bc.userid = u.id
                   WHERE bc.blogid = ?";
@@ -82,31 +83,32 @@ $blog = mysqli_fetch_assoc($result);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        while($row = $result->fetch_assoc()) {
-            $pp = "../uploadprofile/".$row['userid'].'/'.$row['pp'];
+        while ($row = $result->fetch_assoc()) {
+            $pp = "../uploadprofile/" . $row['userid'] . '/' . $row['pp'];
 
-            if($row['pp'] == null) {
+            if ($row['pp'] == null) {
                 $pp = "../img/profileicon.png";
             }
 
             $text = $row["text"];
             $tarih = $row["tarih"];
             $username = $row["username"];
-
-            // Yorumları ekrana yazdırma
-            echo '<div class="comment">
+            if ($row['aktif'] == '1') {
+                echo '<div class="comment">
                     <div class="profile">
                         <div class="imgbox">
-                            <img src="'.$pp.'" alt="">
+                            <img src="' . $pp . '" alt="">
                         </div>
                         <span>
-                            <h1 class="username">'.$username.'</h1>
-                            <p class="tarih">'.$tarih.'</p>
+                            <h1 class="username">' . $username . '</h1>
+                            <p class="tarih">' . $tarih . '</p>
                         </span>
                     </div>
-                    <p class="text">'.$text.'</p>
+                    <p class="text">' . $text . '</p>
                 </div>';
+            }
         }
+
         ?>
 
     </div>
