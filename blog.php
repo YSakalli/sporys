@@ -83,7 +83,7 @@ if ($count_result) {
         </div>
         <div class="logo">
             <a href="profile.php">
-                <?php echo $role ?>
+                Logo
             </a>
         </div>
     </header>

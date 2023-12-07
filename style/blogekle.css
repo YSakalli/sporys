@@ -1,0 +1,84 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+h6 {
+    color: black;
+    position: absolute;
+    font-size: 24px;
+    margin: 0;
+    top: 25px;
+    left: 40px;
+    transition: .4s;
+}
+
+h6:hover {
+    color: red;
+    font-size: 27px;
+
+}
+
+section form {
+    text-align: center;
+
+}
+
+section form input {
+    outline: none;
+    border: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 20px;
+    border-bottom: 2px solid rgb(167, 167, 167);
+    width: 300px;
+}
+
+section form .btn {
+    border: none;
+    height: 30px;
+    margin: 0;
+    border-radius: 10px;
+}
+
+#alert {
+    position: absolute;
+    top: 0;
+    height: 2%;
+    width: 100%;
+    background-color: rgba(0, 255, 0, 0.5);
+    z-index: 1001;
+    transition: 0.5s ease;
+    text-align: center;
+    opacity: 0;
+
+}
+
+#alert h1 {
+    font-size: 24px;
+    position: absolute;
+    left: 40%;
+    top: -40px;
+    color: white;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    transition: 0.5s ease;
+    opacity: 0;
+}
+
+#alert.active {
+    height: 8%;
+    opacity: 1;
+}
+
+#alert.active h1 {
+    transition-delay: 0.3s;
+    top: 0px;
+    opacity: 1;
+}
+
+.inaktif-nesne {
+    pointer-events: none;
+    opacity: 0.5;
+}

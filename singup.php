@@ -4,29 +4,29 @@ include("backend/connect.php");
 $user = $email = $pass = $passtry = "";
 $nameErr = $emailErr = $passErr = $passtryErr = $usersame = "";
 
-if(isset($_POST["submit"])) {
-    if(empty($_POST['username'])) {
+if (isset($_POST["submit"])) {
+    if (empty($_POST['username'])) {
         $nameErr = "Name is required";
     } else {
         $user = htmlspecialchars($_POST["username"]);
     }
 
-    if(empty($_POST['email'])) {
+    if (empty($_POST['email'])) {
         $emailErr = "Email is required";
     } else {
         $email = htmlspecialchars($_POST["email"]);
     }
 
-    if(empty($_POST['password'])) {
+    if (empty($_POST['password'])) {
         $passErr = "Password is required";
     } else {
         $pass = $_POST["password"];
         $passtry = $_POST["passwordtry"];
     }
 
-    if(empty($_POST['passwordtry'])) {
+    if (empty($_POST['passwordtry'])) {
         $passtryErr = "Password is required";
-    } elseif($pass != $passtry) {
+    } elseif ($pass != $passtry) {
         $passtryErr = "Password must be the same";
     }
 
@@ -37,11 +37,11 @@ if(isset($_POST["submit"])) {
     $stmt->store_result();
     $result = $stmt->num_rows;
 
-    if($result > 0) {
+    if ($result > 0) {
         $usersame = "Zaten böyle bir hesap var";
     }
 
-    if(!empty($user) && !empty($email) && !empty($pass) && !empty($passtry) && ($pass == $passtry) && ($result == 0)) {
+    if (!empty($user) && !empty($email) && !empty($pass) && !empty($passtry) && ($pass == $passtry) && ($result == 0)) {
         $hashedPassword = password_hash($pass, PASSWORD_DEFAULT);
         $add = "INSERT INTO users (username, email, pass) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($add);
@@ -134,12 +134,12 @@ $conn->close();
             var alert = document.getElementById('alert');
             alert.style.display = 'block';
             alert.classList.add('active');
-        }
-        setTimeout(function () {
-            alert.style.display = 'none';
-            alert.classList.remove('active');
-        }, 2000);
 
+            setTimeout(function () {
+                alert.style.display = 'none';
+                alert.classList.remove('active');
+            }, 2000);
+        }
     </script>";
 </body>
 

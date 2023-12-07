@@ -2,7 +2,7 @@
 $role = "";
 session_start();
 $role = $_SESSION["role"];
-
+$alert = "";
 if (!isset($_SESSION['id'])) {
     header('Location:/login.php');
     exit();
@@ -10,90 +10,129 @@ if (!isset($_SESSION['id'])) {
 if ($role !== 'admin') {
     die('<h1>Bu sayfaya erişim izniniz yok.</h1>');
 }
+include("../backend/connect.php");
 
+
+$tarih = date('Y-m-d H:i:s');
+
+if ($_POST) {
+    $baslik = htmlspecialchars($_POST['baslik']);
+    $yazi = nl2br(htmlspecialchars_decode($_POST['yazi']));
+    $resim = htmlspecialchars($_POST['resim']);
+    $turu = htmlspecialchars($_POST['turu']);
+
+    if (empty($baslik) || empty($yazi) || empty($resim) || empty($turu)) {
+        echo "<p>Lütfen tüm alanları doldurun.</p>";
+
+    } else {
+        $veriekle = "INSERT INTO blogs (baslik,yazi,tarih,resim,turu) VALUES ('$baslik','$yazi','$tarih','$resim','$turu')";
+        $query = mysqli_query($conn, $veriekle);
+
+        if ($query) {
+            $alert = "<p>Blog başarıyla eklendi.</p>";
+        } else {
+            $alert = "<p>Bir hata oluştu, lütfen tekrar deneyin.</p>";
+        }
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style/blogekle.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/style/blog.css">
     <title>Document</title>
 </head>
 
 <body>
-    <!-- Header Navbar -->
-    <header>
-        <div class="logo">
-            <a href="../profile.php">Logo</a>
-        </div>
-        <div class="nav">
-            <?php
-            if ($role == 'admin') {
-                echo '<a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
-            <a href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
-            <a href="yorumlar.php"><i class="fa-solid fa-comment"></i> Yorumlar</a>';
-            }
-            ?>
-            <a href="../blog.php">Bloglar</a>
-        </div>
-    </header>
-    <!-- Header -->
-    <div style="text-align: center;">
-        <strong>
-            <h1>Bloglar</h1>
-        </strong>
+    <a href="../blog.php">
+        <h6>Bloglar</h6>
+    </a>
+    <div id="alert">
+        <h1>
+            Blog başarıyla eklendi.
+        </h1>
     </div>
-    <!-- Blogs Ekle-->
-    <section class="blogekle">
+    <section>
+        <form action="" id="form" method="POST">
 
-        <?php
-        include("../backend/connect.php");
-        $tarih = date('Y-m-d H:i:s');
-        if ($_POST) {
-            $baslik = htmlspecialchars($_POST['baslik']);
-            $yazi = nl2br(htmlspecialchars($_POST['yazi']));
-            $resim = htmlspecialchars($_POST['resim']);
-            $turu = htmlspecialchars($_POST['turu']);
-            if (empty($baslik) && empty($yazi) && empty($resim)) {
-                echo "<p> Lutfen Bos Gecmeyin</p>";
-            } else {
-                $veriekle = "INSERT INTO blogs (baslik,yazi,tarih,resim,turu) VALUES ('$baslik','$yazi','$tarih','$resim','$turu')";
-                $query = mysqli_query($conn, $veriekle);
-            }
-        }
-        ?>
-        <form action="" method="POST">
+            <input type="text" placeholder="Başlık" name="baslik" required>
 
-            <label for="">baslik</label>
-            <input type="text" placeholder="Baslik" name="baslik">
-            <textarea style="white-space: pre-wrap;" name="yazi" id="" cols="30" rows="10"></textarea>
-            <label for="">Resim Link Ekle:</label>
-            <input type="text" name="resim">
-            <input list="turler" id="renkSecimi" name="turu" autocomplete="off">
-            <datalist id="turler">
-                <option value="saglik">
-                <option value="beslenme">
-                <option value="antrenman">
-                <option value="supplement">
-            </datalist>
-            <input type="submit" name="submit" value="Gonder">
+            <input type="hidden" id="quillContent" name="yazi" class="editor">
 
+            <div id="editor" style='width:100%; height:400px;'></div>
+
+            <div>
+                <input type="text" name="resim" placeholder="Resim Link Ekle" required>
+
+
+                <select name="turu">
+                    <option value="saglik"> Sağlık</option>
+                    <option value="supplement">Supplement</option>
+                    <option value="antrenman">Anterenman</option>
+                    <option value="beslenme"> Beslenme</option>
+
+                </select>
+            </div>
+            <input type="submit" name="submit" value="Gönder" class="btn" id="submit">
         </form>
-
     </section>
 
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script>
-        document.addEventListener('input', function (e) {
-            if (e.target.tagName.toLowerCase() === 'textarea') {
-                e.target.style.height = 'auto';
-                e.target.style.height = (e.target.scrollHeight) + 'px';
-            }
+        var quill = new Quill('#editor', {
+            theme: 'snow'
         });
+
+        document.getElementById('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            document.getElementById('quillContent').value = quill.root.innerHTML;
+
+            sendForm();
+        });
+
+        function sendForm() {
+            var form = document.getElementById('form');
+            var formData = new FormData(form);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '', true);
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    showAlert();
+                    inactive();
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+                }
+            };
+            xhr.send(formData);
+        }
+
+        function showAlert() {
+            var alert = document.getElementById('alert');
+            alert.classList.add('active');
+
+            setTimeout(function () {
+                alert.classList.remove('active');
+            }, 2000);
+        }
+
+        function inactive() {
+            var btn = document.getElementById('submit');
+            btn.classList.add('inaktif-nesne');
+
+            setTimeout(function () {
+                btn.classList.add('inaktif-nesne');
+            }, 2000);
+        }
+
     </script>
 </body>
 
