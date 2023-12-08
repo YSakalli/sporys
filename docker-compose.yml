@@ -10,7 +10,7 @@ services:
       MYSQL_PASSWORD: 6NY?]He4V#K3
 
   web:
-    image: php:7.4-apache
+    image: php:8.1-apache
     volumes:
       - .:/var/www/html
     ports:
