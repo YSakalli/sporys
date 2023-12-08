@@ -1,17 +1,11 @@
 <?php
-// 
-$servername = "localhost";
-// dbtecnoc_yusuf
+$servername = "db";
 $username = "dbtecnoc_yusuf";
-// 6NY?]He4V#K3
 $password = "6NY?]He4V#K3";
-// dbtecnoc_sporys
 $dbname = "dbtecnoc_sporys";
 
-// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
