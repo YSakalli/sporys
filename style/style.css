@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
+
+
+
+html {
+    scrollbar-width: normal;
+    scrollbar-color: red;
+}
+
+html::-webkit-scrollbar {
+    width: 0.7vw;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: red;
+    border-radius: 20px;
+}
+
+html::-webkit-scrollbar-track {
+    background-color: rgb(40, 40, 40);
+}
+
 * {
     font-family: "Poppins", sans-serif;
     margin: 0;
@@ -105,6 +126,8 @@ body {
     right: -40px;
     color: white;
     margin-right: 20px;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
+
 }
 
 .navbar a:hover {
@@ -130,7 +153,7 @@ body {
 }
 
 .banner {
-    background: url(/img/banner.jpg);
+    background: url(../img/bannar.webp);
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -141,8 +164,8 @@ body {
 
 .banner .content {
     position: absolute;
-    left: 50px;
-    top: 190px;
+    left: 100px;
+    top: 270px;
     padding: 20px;
     border-radius: 20px;
     color: white;
@@ -151,14 +174,14 @@ body {
 }
 
 .banner .content h3 {
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
     font-weight: 700px;
     font-size: 32px;
     margin-bottom: 20px;
 }
 
 .banner .content p {
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
     font-size: 20px;
 
 }
@@ -166,13 +189,70 @@ body {
 .banner .content .btn {
     position: relative;
     top: 15px;
-    background-color: red;
+    background-color: transparent;
     border-radius: 20px;
     border: none;
     color: white;
     padding: 10px 20px;
     cursor: pointer;
+    border: 2px red solid;
+    overflow: hidden;
+    transition: 0.4s;
+    z-index: 1;
 }
+
+.banner .content .btn::before {
+    background-color: red;
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: 0.4s;
+}
+
+.banner .content .btn:hover:before {
+    width: 0;
+}
+
+
+.banner .paylas {
+    position: absolute;
+    right: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(1.3);
+}
+
+.banner .paylas h3 {
+    margin-bottom: 30px;
+    padding-left: 10px;
+    border-left: 2px solid white;
+    color: white;
+    transform: rotateZ(-90deg);
+    transition: color .4s;
+
+}
+
+.banner .paylas h3:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.banner .paylas a i {
+    color: white;
+    transition: color .4s;
+}
+
+.banner .paylas a i:hover {
+    color: red;
+}
+
+
+
 
 header .sign button a {
     color: white;
@@ -197,9 +277,10 @@ header .sign button {
     border: rgb(209, 56, 56) 2px solid;
     background-color: transparent;
     margin: 10px;
-    padding: 1px 20px;
+    padding: 5px 30px;
     transition: 0.4s ease-in-out;
     cursor: pointer;
+
 }
 
 header .sign button:hover a {

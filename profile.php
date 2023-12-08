@@ -1,12 +1,13 @@
 <?php
 session_start();
-$user = $_SESSION["username"];
-$userID = $_SESSION['id'];
-
-if(!isset($_SESSION['id'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: index.html');
     exit();
 }
+$user = $_SESSION["username"];
+$userID = $_SESSION['id'];
+
+
 include('backend/connect.php');
 $pp = "SELECT pp FROM users WHERE id=?";
 $stmt = $conn->prepare($pp);
@@ -16,7 +17,7 @@ $stmt->bind_result($pp_result);
 $stmt->fetch();
 $stmt->close();
 
-if($pp_result == null) {
+if ($pp_result == null) {
     $pp = 'img/profileicon.png';
 } else {
     $pp = "uploadprofile/$userID/$pp_result";
@@ -76,6 +77,11 @@ if($pp_result == null) {
     <!-- Banner -->
 
     <section class="banner">
+        <div class="paylas">
+            <h3>Paylas</h3>
+            <a href=""><i class="fa-brands fa-github"></i></a>
+            <a href=""><i class="fa-brands fa-linkedin"></i></a>
+        </div>
         <div class="content">
             <h3>Forma Girmek Mi İstiyorsun.</h3>
             <p><span style="border-bottom: tomato 2px solid;">Forma girmenin en iyi zamanı</span> Bloglar ve
@@ -135,6 +141,53 @@ if($pp_result == null) {
 
         <div class="imgbox">
             <img src="img/photo1.jpg" alt="">
+        </div>
+    </div>
+    <!-- Freemium -->
+    <div class="freemium">
+        <div class="plan">
+            <img src="img/banner.jpg" alt="">
+            <span>
+                <h1>Free</h1>
+            </span>
+            <ul>
+                <li>icerikeri okuma</li>
+                <li>antrenman programlari</li>
+            </ul>
+            <a href="">Plan Satin al</a>
+        </div>
+        <div class="plan">
+            <img src="img/banner.jpg" alt="">
+            <span>
+                <h1>10$</h1>
+                <p>/monthly</p>
+            </span>
+
+            <ul>
+                <li>icerikeri okuma</li>
+                <li>antrenman programlari</li>
+                <li>ozel antrenman programi</li>
+                <li>yorum yapabilme</li>
+            </ul>
+            <a href="">Plan Satin al</a>
+
+        </div>
+        <div class="plan">
+            <img src="img/banner.jpg" alt="">
+            <span>
+                <h1>25$</h1>
+                <p>/monthly</p>
+            </span>
+            <ul>
+                <li>icerikeri okuma</li>
+                <li>antrenman programlari</li>
+                <li>ozel antrenman programi</li>
+                <li>yorum yapabilme</li>
+                <li>koc yardimi</li>
+                <li>7/24 soru cevap</li>
+            </ul>
+            <a href="">Plan Satin al</a>
+
         </div>
     </div>
     <!-- Footer -->
