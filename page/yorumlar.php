@@ -31,11 +31,11 @@ if ($role !== 'admin') {
 
 <body>
     <!-- Header Navbar -->
-    <header>
+    <header style="position:relative; margin:0; height:60px; background-color:black;">
         <div class="logo">
             <a href="../profile.php">Logo</a>
         </div>
-        <div class="nav">
+        <div class="nav" style="padding:0; margin:0;">
             <?php
             if ($role == 'admin') {
                 echo '<a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>

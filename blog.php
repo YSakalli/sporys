@@ -92,10 +92,14 @@ if ($count_result) {
     <div style="text-align: center;">
     </div>
     <!-- Banner -->
-    <div class="blogphoto">
-        <h1>Bloglar</h1>
-    </div>
+    <div class='banner'>
 
+        <div class='box'></div>
+        <h1>Blog</h1>
+        <div class="blogphoto">
+            <img src="https://wallpapers.com/images/hd/bodybuilding-pictures-vprgcqbswl84j2ie.jpg" alt="">
+        </div>
+    </div>
     <!-- Blogs -->
     <div class="container">
         <section class="blogs">

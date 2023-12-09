@@ -22,7 +22,6 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border-top: 4px black solid;
     font-family: 'Poppins';
     height: 300vh;
     position: relative;
@@ -114,7 +113,7 @@ header .nav a {
     position: relative;
     text-decoration: none;
     font-weight: 500;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     color: white;
     text-align: right;
@@ -264,29 +263,72 @@ aside .recent a {
     color: red;
 }
 
-
-
-.blogphoto {
-    position: relative;
-    background-image: url(../img/blogfoto.jpg);
-    background-position: 10% 20%;
-    background-repeat: no-repeat;
-    background-size: cover;
+.banner {
     width: 100%;
     height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.banner h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    color: white;
+    z-index: 10;
+    letter-spacing: 2px;
+}
+
+.banner .box {
+    position: relative;
+    height: 100%;
+    width: 75%;
+    background-color: black;
+    z-index: 1;
+}
+
+.banner .blogphoto {
+    height: 100%;
+    position: relative;
+    width: 26%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.banner .blogphoto::before {
+    content: '';
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    left: -100px;
+    top: -50px;
+    height: 500px;
+    width: 200px;
+    filter: blur(50px);
+}
+
+.banner .blogphoto img {
+    object-fit: cover;
 
 }
 
-.blogphoto h1 {
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+.banner .blogphoto h1 {
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    color: red;
     font: 48px;
+    color: white;
     font-weight: bold;
     letter-spacing: 2px;
+    padding: 0px 10px;
+    border-radius: 10px;
+    margin: 0;
 
 }
 
@@ -308,7 +350,6 @@ aside .recent a {
     transform: scale(0.9);
 }
 
-.blogs .blog:hover {}
 
 .blogs .blog .img {
     position: relative;
@@ -398,6 +439,10 @@ aside .recent a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.comments .disabled-form {
+    opacity: 0.5;
 }
 
 .comments .head {

@@ -6,7 +6,6 @@ $link = @$_GET["link"];
 $query = "SELECT * FROM blogs WHERE baslik = '$link'";
 $result = mysqli_query($conn, $query);
 $blog = mysqli_fetch_assoc($result);
-
 ?>
 
 <!DOCTYPE html>
@@ -59,10 +58,33 @@ $blog = mysqli_fetch_assoc($result);
     <!-- Comments -->
     <div class='comments'>
         <h1 class='head'>Comments</h1>
+        <?php
+        if ($role == 'admin') {
+            echo ' 
         <form action="" method="post">
             <input class="text" type="text" name="text" placeholder="Yorum Ekle">
             <input class="btn" type="submit" name="submit">
-        </form>
+        </form>';
+        } else if ($role == '1. Pre') {
+            echo ' 
+        <form action="" method="post">
+            <input class="text" type="text" name="text" placeholder="Yorum Ekle">
+            <input class="btn" type="submit" name="submit">
+        </form>';
+        } else if ($role == '2. Pre') {
+            echo ' 
+        <form action="" method="post">
+            <input class="text" type="text" name="text" placeholder="Yorum Ekle">
+            <input class="btn" type="submit" name="submit">
+        </form>';
+        } else if ($role == '') {
+            echo ' 
+        <form action="" method="post" class="disabled-form">
+            <input class="text" type="text" name="text" placeholder="Yorum Ekle" disabled>
+            <input class="btn" type="submit" name="submit" disabled>
+        </form>';
+        }
+        ?>
         <?php
         // Yorum ekleme kısmı
         if (isset($_POST['submit']) && !empty($_POST['text'])) {

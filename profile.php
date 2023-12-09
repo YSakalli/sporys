@@ -56,7 +56,7 @@ if ($pp_result == null) {
         </nav>
         <!-- Profile -->
         <div class="profile">
-            <h3 style='color: aliceblue; margin-right: 10px;'>
+            <h3 style='margin-right: 10px;'>
                 <?php echo $user ?>
             </h3>
             <div class='imgbox'>
@@ -67,7 +67,6 @@ if ($pp_result == null) {
 
                 <div class="downmenu">
                     <a href="page/profileuser.php">Profile</a>
-                    <a href="">Blog</a>
                     <a href="backend/exit.php">Logout</a>
                 </div>
             </div>
@@ -146,7 +145,7 @@ if ($pp_result == null) {
     <!-- Freemium -->
     <div class="freemium">
         <div class="plan">
-            <img src="img/banner.jpg" alt="">
+            <img src="img/1sub.webp" alt="">
             <span>
                 <h1>Free</h1>
             </span>
@@ -154,10 +153,10 @@ if ($pp_result == null) {
                 <li>icerikeri okuma</li>
                 <li>antrenman programlari</li>
             </ul>
-            <a href="">Plan Satin al</a>
+            <a href="/page/premium.php">Plan Satin al</a>
         </div>
         <div class="plan">
-            <img src="img/banner.jpg" alt="">
+            <img src="img/2sub.webp" alt="">
             <span>
                 <h1>10$</h1>
                 <p>/monthly</p>
@@ -169,11 +168,11 @@ if ($pp_result == null) {
                 <li>ozel antrenman programi</li>
                 <li>yorum yapabilme</li>
             </ul>
-            <a href="">Plan Satin al</a>
+            <a href="/page/premium.php">Plan Satin al</a>
 
         </div>
         <div class="plan">
-            <img src="img/banner.jpg" alt="">
+            <img src="img/3sub.webp" alt="">
             <span>
                 <h1>25$</h1>
                 <p>/monthly</p>
@@ -186,7 +185,7 @@ if ($pp_result == null) {
                 <li>koc yardimi</li>
                 <li>7/24 soru cevap</li>
             </ul>
-            <a href="">Plan Satin al</a>
+            <a href="/page/premium.php">Plan Satin al</a>
 
         </div>
     </div>

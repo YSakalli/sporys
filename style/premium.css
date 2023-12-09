@@ -1,23 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-html {
-    scrollbar-width: normal;
-    scrollbar-color: red;
-}
-
-html::-webkit-scrollbar {
-    width: 0.7vw;
-}
-
-html::-webkit-scrollbar-thumb {
-    background-color: red;
-    border-radius: 20px;
-}
-
-html::-webkit-scrollbar-track {
-    background-color: rgb(40, 40, 40);
-}
-
 body {
     box-sizing: border-box;
     margin: 0;
@@ -25,7 +7,7 @@ body {
     font-family: 'Poppins';
 }
 
-.freemium {
+.freemium form {
     position: relative;
     margin-top: 100px;
     width: 100%;
@@ -37,7 +19,7 @@ body {
 }
 
 
-.freemium .plan {
+.freemium form .plan {
     position: relative;
     background-color: #f8f8f8;
     display: flex;
@@ -45,22 +27,22 @@ body {
     align-items: center;
     justify-content: center;
     width: 20%;
-    max-height: 430px;
-    min-height: 430px;
+    max-height: 470px;
+    min-height: 470px;
     transition: 0.4s;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
 
-.freemium .plan:hover {
-    max-height: 460px;
-    min-height: 460px;
+.freemium form .plan:hover {
+    max-height: 490px;
+    min-height: 490px;
     width: 21.5%;
 
 }
 
 
-.freemium .plan img {
+.freemium form .plan img {
     border-radius: 10px;
     position: absolute;
     top: 0;
@@ -69,11 +51,11 @@ body {
     object-fit: cover;
 }
 
-.freemium .plan span {
+.freemium form .plan span {
     color: white;
     background-color: red;
     position: absolute;
-    padding: 5px 20px;
+    padding: 1px 10px;
     border-radius: 10px 0px 10px 0px;
     width: 170px;
     top: -30px;
@@ -83,43 +65,49 @@ body {
     align-items: center;
     justify-content: center;
     text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
 }
 
-.freemium .plan span h1 {
-    font-size: 27px;
+.freemium form .plan span h1 {
+    font-size: 24px;
+    margin: 5px;
 }
 
-.freemium .plan ul {
-    width: 300px;
+.freemium form .plan ul {
+    position: relative;
+    left: -15px;
+    width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transform: translateY(40%);
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: translateY(50%);
 }
 
-.freemium .plan ul li {
+.freemium form .plan ul li {
     list-style: none;
     border-bottom: #e8e8e8 2px solid;
     margin-bottom: 5px;
 }
 
-.freemium .plan ul li:last-child {
+.freemium form .plan ul li:last-child {
     border: none;
 }
 
-.freemium .plan a {
+.freemium form .plan input {
     position: absolute;
     bottom: -10px;
-    padding: 5px 10px;
+    padding: 8px 20px;
     background-color: red;
     color: white;
     text-decoration: none;
     transition: 0.4s;
+    border: 2px red solid;
+
 }
 
-.freemium .plan a:hover {
+.freemium form .plan input:hover {
     background-color: transparent;
-    border: 2px red solid;
     color: red;
 }
