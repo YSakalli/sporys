@@ -6,7 +6,7 @@ require_once("../backend/class.Upload.php");
 include("../backend/connect.php");
 
 session_start();
-if(!isset($_SESSION["id"])) {
+if (!isset($_SESSION["id"])) {
     header("Location: giris.php");
     exit();
 }
@@ -17,7 +17,7 @@ $usernamenew = $passwordnew = $emailnew = $password = $pass = $eror = "";
 
 
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt = $conn->prepare("SELECT pass FROM users WHERE id = ?");
     $stmt->bind_param("i", $userID);
@@ -26,9 +26,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->fetch();
     $stmt->close();
 
-    if(isset($_POST["submit"]) && !empty($_POST["password"]) && password_verify($_POST["password"], $pass)) {
+    if (isset($_POST["submit"]) && !empty($_POST["password"]) && password_verify($_POST["password"], $pass)) {
 
-        if(empty($_POST['username'])) {
+        if (empty($_POST['username'])) {
         } else {
             $usernamenew = filter_var($_POST["username"], FILTER_SANITIZE_STRING);
             $stmt = $conn->prepare("UPDATE users SET username = ? WHERE id = ?");
@@ -39,8 +39,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        if(empty($_POST['usernamenew'])) {
-            if(empty($_POST['email'])) {
+        if (empty($_POST['usernamenew'])) {
+            if (empty($_POST['email'])) {
             } else {
                 $emailnew = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
                 $stmt = $conn->prepare("UPDATE users SET email = ? WHERE id = ?");
@@ -51,11 +51,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
 
-            if(empty($_POST['passwordnew'])) {
+            if (empty($_POST['passwordnew'])) {
             } else {
                 $passwordnew = $_POST["passwordnew"];
                 $passwordnew = password_hash($passwordnew, PASSWORD_DEFAULT);
-                $emailnew = filter_var($_POST["passwordnew"], FILTER_SANITIZE_STRING);
+                $emailnew = filter_var($_POST["passwordnew"]);
                 $stmt = $conn->prepare("UPDATE users SET pass = ? WHERE id = ?");
                 $stmt->bind_param("si", $passwordnew, $userID);
                 $stmt->execute();
@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
         }
     } else {
-        if(empty($_POST['passwordnew']) && empty($_POST['usernamenew']) && empty($_POST['username']) && empty($_POST['password'])) {
+        if (empty($_POST['passwordnew']) && empty($_POST['usernamenew']) && empty($_POST['username']) && empty($_POST['password'])) {
 
         } else {
             $eror = "Sifreyi dogru girin";
@@ -91,18 +91,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php
     $uploadErr = "";
 
-    if($_FILES) {
+    if ($_FILES) {
         $image = $_FILES['image'];
 
         $foo = new Upload($image);
-        if($foo != '') {
-            if($foo->uploaded) {
+        if ($foo != '') {
+            if ($foo->uploaded) {
                 $foo->file_new_name_body = 'profile';
                 $foo->allowed = array('image/jpeg', 'image/png', 'image/gif');
                 $foo->file_max_size = '1048576';
-                $foo->process('../uploadprofile/'.$_SESSION['id']);
+                $foo->process('../uploadprofile/' . $_SESSION['id']);
 
-                if($foo->processed) {
+                if ($foo->processed) {
                     $isim = $foo->file_dst_name;
                     $stmt = $conn->prepare("UPDATE users SET pp = ? WHERE id = ?");
                     $stmt->bind_param("si", $isim, $userID);
@@ -126,7 +126,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $pp = $row["pp"];
-    if($row['pp'] == null) {
+    if ($row['pp'] == null) {
         $pp = '../img/profileicon.png';
 
     } else {
@@ -145,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <h5>Role:
             <?php
 
-            if($role == "") {
+            if ($role == "") {
                 echo 'Kullanıcı';
             } else {
                 echo $role;

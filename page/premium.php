@@ -38,6 +38,10 @@ $conn->close();
 </head>
 
 <body>
+    <a href="../profile.php">
+        <h5>Anasayfa</h5>
+    </a>
+
     <div class="freemium">
         <form action="" method='POST'>
             <div class="plan">

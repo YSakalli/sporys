@@ -23,31 +23,28 @@ $blog = mysqli_fetch_assoc($result);
 
 <body>
     <!-- Header Navbar -->
-    <header>
-        <div class="logo">
-            <a href="../profile.php">Logo</a>
-        </div>
+    <header style="position:absolute;">
         <div class="nav">
             <?php
             if ($role == 'admin') {
-                echo '<a href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
-            <a href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
-            <a href="yorumlar.php"><i class="fa-solid fa-comment"></i> Yorumlar</a>';
+                echo '<a style="text-shadow:3px 3px 10px rgba(0,0,0,0.5);" href="blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
+            <a style="text-shadow:3px 3px 10px rgba(0,0,0,0.5);" href="blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
+            <a style="text-shadow:3px 3px 10px rgba(0,0,0,0.5);" href="yorumlar.php"><i class="fa-solid fa-comment"></i> Yorumlar</a>';
             }
             ?>
-            <a href="../profile.php">Anasayfa</a>
-            <a href="../blog.php">Bloglar</a>
+            <a style="text-shadow:3px 3px 10px rgba(0,0,0,0.5);" href="../profile.php">Anasayfa</a>
+            <a style="text-shadow:3px 3px 10px rgba(0,0,0,0.5);" href="../blog.php">Bloglar</a>
         </div>
     </header>
 
     <!-- Header -->
-    <div>
-        <div style="display:flex; align-items: center; flex-direction: column; ">
+    <div class='main'>
+        <div class="yazi">
             <h1>
                 <?php echo $blog['baslik']; ?>
             </h1>
-            <img style=" width:400px; align-items:center;" src="<?php echo $blog['resim']; ?>" alt="">
-        </div>
+            <img src="<?php echo $blog['resim']; ?>" alt="">
+        </div class="lead">
         <div style="display:flex; justify-content:center; align-items:center; width:100%">
             <p style="width:60%; font-size:20px;">
                 <?php echo $blog['yazi']; ?>

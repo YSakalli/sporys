@@ -28,7 +28,8 @@ body {
     height: 100vh;
     font-family: 'Poppins';
     overflow: hidden;
-    gap: 50px;
+    gap: 70px;
+
 }
 
 a {
@@ -49,6 +50,8 @@ a:hover {
 }
 
 .file {
+    transform: scale(1.1);
+
     position: relative;
     display: flex;
     flex-direction: column;
@@ -112,6 +115,7 @@ a:hover {
 }
 
 .information {
+    transform: scale(1.1);
     position: relative;
     background-color: #f8f8f8;
     padding: 10px;

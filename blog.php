@@ -69,7 +69,7 @@ if ($count_result) {
     </div>
 
     <!-- Header Navbar -->
-    <header>
+    <header style=" background-color: transparent;">
         <div class="nav">
             <a href="profile.php">Anasayfa</a>
             <a href="blog.php">Bloglar</a>

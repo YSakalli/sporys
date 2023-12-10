@@ -24,6 +24,7 @@ body {
     box-sizing: border-box;
     height: 200vh;
     font-family: "Poppins";
+    overflow-x: hidden;
 }
 
 header {

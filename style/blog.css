@@ -25,6 +25,7 @@ body {
     font-family: 'Poppins';
     height: 300vh;
     position: relative;
+    overflow-x: hidden;
 }
 
 #loading {
@@ -313,7 +314,6 @@ aside .recent a {
 
 .banner .blogphoto img {
     object-fit: cover;
-
 }
 
 .banner .blogphoto h1 {
@@ -534,4 +534,31 @@ aside .recent a {
 .comments form .btn:hover {
     background-color: #dfdfdf;
     cursor: pointer;
+}
+
+
+
+.main .yazi {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main .yazi h1 {
+    position: absolute;
+    bottom: 0;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.main .yazi img {
+    width: 100%;
+    object-fit: cover;
+    height: 300px;
+}
+
+.main .lead {
+    position: relative;
+    bottom: 50px;
+    background-color: aqua;
 }
