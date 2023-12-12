@@ -6,7 +6,7 @@ if (!isset($_SESSION['id'])) {
 }
 $user = $_SESSION["username"];
 $userID = $_SESSION['id'];
-
+$role = $_SESSION['role'];
 
 include('backend/connect.php');
 $pp = "SELECT pp FROM users WHERE id=?";
@@ -53,6 +53,11 @@ if ($pp_result == null) {
             <a href="profile.php">Ana Sayfa</a>
             <a href="blog.php">Blog</a>
             <a href="antrenman.php">Antrenman</a>
+            <?php
+            if ($role == 'admin') {
+                echo '<a href="page/admin.php">Admin Panel</a>';
+            }
+            ?>
         </nav>
         <!-- Profile -->
         <div class="profile">

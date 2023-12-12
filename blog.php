@@ -73,13 +73,6 @@ if ($count_result) {
         <div class="nav">
             <a href="profile.php">Anasayfa</a>
             <a href="blog.php">Bloglar</a>
-            <?php
-            if ($role == 'admin') {
-                echo '<a href="page/blogyonet.php"><i class="fa-solid fa-list-check"></i> Blog yonet</a>
-            <a href="page/blogekle.php"><i class="fa-solid fa-plus"></i> Blog ekle</a>
-            <a href="page/yorumlar.php"><i class="fa-solid fa-comment"></i> Yorumlar</a>';
-            }
-            ?>
         </div>
 
         <div class="logo">
@@ -105,19 +98,13 @@ if ($count_result) {
         <section class="blogs">
             <?php
 
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["sil_id"])) {
-                $id = $_POST["sil_id"];
-                $sil = "DELETE FROM blogs WHERE id = '$id'";
-                $sil_query = mysqli_query($conn, $sil);
-            }
-
             $baslik = "SELECT * FROM blogs ORDER BY id DESC";
             $query = mysqli_query($conn, $baslik);
-
             $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
-
             foreach ($rows as $row) {
-                echo '<div class="blog">
+                if ($row['aktif'] == '1') {
+                    # code...
+                    echo '<div class="blog">
             <div class="img">
                 <img src="' . $row['resim'] . '">
                 <p>Paylasan: ' . $row['sharing'] . ' ' . $row['tarih'] . '</p>
@@ -128,7 +115,9 @@ if ($count_result) {
                 <a href="page/yazi.php?link=' . $row["baslik"] . '" target="_blank">Read More</a>
             </div>
         </div>';
+                }
             }
+
             ?>
 
         </section>

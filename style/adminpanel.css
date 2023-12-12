@@ -1,0 +1,183 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background: url(https://imgv3.fotor.com/images/gallery/feature-background-gallery-wall-5.jpg);
+}
+
+.admin-panel {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    font-weight: bold;
+    min-width: 160px;
+    background-color: #1c1c21;
+    color: #fff;
+    padding: 20px;
+    height: 100%;
+    box-sizing: border-box;
+    transition: .4s;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0;
+}
+
+.sidebar.show {
+    position: absolute;
+    height: 40px;
+    left: -110px;
+
+}
+
+.sidebar.show .menu-btn {
+    position: relative;
+    left: 55px;
+    top: -15px;
+}
+
+.sidebar.show ul {
+    opacity: 0;
+}
+
+.sidebar.show .menu-btn p {
+    display: none;
+}
+
+.menu-btn {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.menu-btn p {
+    margin: 0;
+    position: relative;
+    top: 1px;
+    margin-left: 3px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background-color: #151515;
+}
+
+
+.menu li a {
+    text-decoration: none;
+    color: rgb(108, 108, 108);
+}
+
+
+.content {
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.09);
+    width: 70%;
+    height: 650px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: auto;
+}
+
+.content-section {
+    display: none;
+}
+
+.content-section.show {
+    display: block;
+
+}
+
+.content-section h2 {
+    color: black;
+}
+
+
+.content .blogekle {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .blogekle input {
+    outline: none;
+    border: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 20px;
+    border-bottom: 2px solid rgb(167, 167, 167);
+    width: 300px;
+}
+
+.content .blogekle .btn {
+    border: none;
+    height: 30px;
+    margin: 0;
+    border-radius: 10px;
+    background-color: #f8f8f8;
+    align-items: center;
+}
+
+.content #blog-ekle form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 600px;
+    background-color: transparent;
+
+}
+
+.content #blog-ekle form input,
+.content #blog-ekle form select {
+    outline: none;
+    border: none;
+    border-bottom: #4f4f4f5f 2px solid;
+    width: 200px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    height: 25px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.content #blog-ekle form select {
+    border: none;
+}
+
+.content #blog-ekle form input:nth-child(1) {
+    width: 300px;
+}
+
+.content #blog-ekle form input:last-child {
+    font-weight: bold;
+    background-color: #e8e8e8;
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.content #blog-ekle form input:last-child:hover {
+    background-color: #d4d4d4;
+}
