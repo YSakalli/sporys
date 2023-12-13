@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resimler {
+    margin-top: 50px;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+.resimler img {
+    display: flex;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    height: 400px;
+    width: 400px;
+    object-fit: cover;
+}

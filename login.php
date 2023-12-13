@@ -34,9 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["username"] = $username;
                 $_SESSION["email"] = $email;
                 $_SESSION["role"] = $role;
-
+                if (isset($_POST["remember"])) {
+                    setcookie("id", $id, time() + (60 * 60 * 24));
+                }
                 header("Location: profile.php");
                 exit();
+
             } else {
                 $loginErr = "Invalid password";
             }
@@ -337,7 +340,8 @@ $conn->close();
                     <?php echo $passErr ?>
                 </p>
                 <div class="chb">
-                    <span style="display: flex;"><input type="checkbox"><label for="">Remember me</label></span>
+                    <span style="display: flex;"><input type="checkbox" name="remember"><label for="">Remember
+                            me</label></span>
 
                     <a href="singup.php" style="position: relative; right:30px;">Singup</a>
                 </div>

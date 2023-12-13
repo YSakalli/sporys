@@ -1,3 +1,32 @@
+<?php
+include("backend/connect.php");
+if (isset($_COOKIE["id"])) {
+
+    $query = "SELECT id, username, email, role FROM users WHERE id=?";
+    $stmt = mysqli_stmt_init($conn);
+
+    if (mysqli_stmt_prepare($stmt, $query)) {
+        mysqli_stmt_bind_param($stmt, "s", $_COOKIE["id"]);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_store_result($stmt);
+
+        if (mysqli_stmt_num_rows($stmt) > 0) {
+            mysqli_stmt_bind_result($stmt, $id, $username, $email, $role);
+            mysqli_stmt_fetch($stmt);
+
+            session_start();
+            $_SESSION["id"] = $id;
+            $_SESSION["username"] = $username;
+            $_SESSION["email"] = $email;
+            $_SESSION["role"] = $role;
+
+            header("Location: profile.php");
+            exit();
+        }
+    }
+    mysqli_close($conn);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,10 +49,10 @@
     <!-- NavBar -->
     <header class="header">
         <div class="logo">
-            <a href="index.html" class="logo">Logo</a>
+            <a href="index.php" class="logo">Logo</a>
         </div>
         <nav class="navbar">
-            <a href="index.html">Ana Sayfa</a>
+            <a href="index.php">Ana Sayfa</a>
             <a href="blog.php">Blog</a>
             <a href="antrenman.php">Antrenman</a>
         </nav>

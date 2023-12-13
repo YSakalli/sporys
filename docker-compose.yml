@@ -1,3 +1,4 @@
+# docker-compose.yml
 version: '3.1'
 
 services:
@@ -10,7 +11,9 @@ services:
       MYSQL_PASSWORD: 6NY?]He4V#K3
 
   web:
-    image: php:8.1-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - .:/var/www/html
     ports:
@@ -19,8 +22,7 @@ services:
       - db
     links:
       - db
-    command: >
-      sh -c "docker-php-ext-install mysqli && apache2-foreground"
+    command: "apache2-foreground"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest

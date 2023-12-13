@@ -40,6 +40,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                 <li onclick="showContent('blog-ekle')">Blog Ekle</li>
                 <li onclick="showContent('blog-yonet')">Blog Yönet</li>
                 <li onclick="showContent('yorum-yonet')">Yorum Yönet</li>
+                <li onclick="showContent('users-yonet')">Kullanıcı Yönet</li>
 
                 <li><a href="../profile.php">AnaSayfa</a></li>
                 <li><a href="../blog.php">Bloglar</a></li>
@@ -47,10 +48,6 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
             </ul>
         </div>
         <div class="content">
-
-
-
-
             <div id="blog-ekle" class="content-section">
                 <?php
                 include("../backend/connect.php");
@@ -72,7 +69,6 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                         $row = mysqli_fetch_assoc($result);
                         $name = $row["username"];
                     }
-
                     if (!empty($editorContent)) {
                         $insert = $conn->query("INSERT INTO blogs (yazi,sharing,baslik,resim,tarih,turu) VALUES ('" . $editorContent . "', '$name',
                         '$baslik','$resim','$tarih','$turu')");
@@ -100,7 +96,6 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                     </div>
                     <input type="submit" name="submit" value="Gönder">
                 </form>
-
                 <script
                     src="https://cdn.tiny.cloud/1/drnotwjw8qh08bb9ivhocoh5hvnlf1mynjdx7dslrh7kpull/tinymce/6/tinymce.min.js"
                     referrerpolicy="origin"></script>
@@ -281,6 +276,14 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                 </table>
 
             </div>
+
+            <div id="users-yonet" class="content-section">
+
+
+
+
+            </div>
+
         </div>
     </div>
 
