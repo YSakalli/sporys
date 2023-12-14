@@ -143,7 +143,8 @@ nav a:hover {
 
 body.blur .resimler .imgbox,
 body.blur form,
-body.blur nav {
+body.blur nav,
+body.blur .login {
     filter: blur(7px);
 }
 
@@ -265,9 +266,41 @@ body.blur .resimler .imgbox.active {
 }
 
 .login button {
+    position: relative;
     outline: none;
     border: 2px solid red;
     background-color: transparent;
+    z-index: 1;
+    width: 100px;
+    height: 30px;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    transition: color .4s;
+
+}
+
+.login button::before {
+    content: '';
+    position: absolute;
+    background-color: red;
+    width: 0;
+    height: 100%;
+    transition: .4s;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.login button:hover:before {
+    width: 100%;
+
+}
+
+.login button:hover {
+    color: white;
 }
 
 .resimler .like .like.active {
