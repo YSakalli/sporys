@@ -100,7 +100,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="../profile.php">Anasayfa</a>
         <a href="../userphoto.php">Fotoğraflarım</a>
     </nav>
-    <form action="" method="post" enctype="multipart/form-data">
+    <?php
+    if (isset($_SESSION['id'])) {
+        echo '
+        <form action="" method="post" enctype="multipart/form-data">
         <h1>Resim Yükle</h1>
         <div>
             <input type="text" name="baslik" placeholder="Baslik girin" required>
@@ -113,6 +116,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <button type="submit">Yükle</button>
 
     </form>
+        ';
+    } else {
+        echo ' 
+        <a class="login" href="../login.php"><button>Giris yap</button></a>
+        
+        ';
+    }
+    ?>
+
     <div class="resimler">
         <?php
         $queryOuter = "SELECT * FROM resimler";
@@ -136,8 +148,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <i class="fa-solid fa-xmark xmark"></i>
 
             <div class="like">
-            <i class="fa-regular fa-heart"></i>
-            <i class="fa-regular fa-thumbs-down"></i>
+            <i class="fa-regular fa-heart like"></i>
+            <i class="fa-regular fa-thumbs-down disslike"></i>
             </div>
             <div class="profile">
                 <div class="ppbox">
@@ -153,7 +165,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <img class="resim" src="' . $rowOuter['resim'] . '">
             </div>
             ';
-
         }
         ?>
     </div>
@@ -161,7 +172,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         let images = document.querySelectorAll('.imgbox');
         let xmark = document.querySelectorAll('.xmark');
         let body = document.querySelector('body');
-        let profile = document.querySelectorAll('.profile')
+        let profile = document.querySelectorAll('.profile');
+        let like = document.querySelectorAll('.like');
+        let disslike = document.querySelectorAll('.disslike');
+
         images.forEach(function (img) {
             img.addEventListener('click', function () {
                 img.classList.add('active');
@@ -182,6 +196,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         profile.forEach(function (active) {
             active.addEventListener('click', function () {
                 active.classList.toggle('active');
+            });
+        });
+
+        disslike.forEach(function (dl) {
+            dl.addEventListener('click', function () {
+                disslike.classList.toggle('active');
+            });
+        });
+        like.forEach(function (l) {
+            l.addEventListener('click', function () {
+                like.classList.toggle('active');
             });
         });
 

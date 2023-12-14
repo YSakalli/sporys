@@ -130,6 +130,7 @@ nav a:hover {
     height: 300px;
     width: 300px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .resimler .imgbox {
@@ -141,9 +142,11 @@ nav a:hover {
 }
 
 body.blur .resimler .imgbox,
-body.blur form {
-    filter: blur(10px);
+body.blur form,
+body.blur nav {
+    filter: blur(7px);
 }
+
 
 body.blur .resimler .imgbox.active {
     filter: blur(0);
@@ -163,26 +166,34 @@ body.blur .resimler .imgbox.active {
 
 .resimler .imgbox.active {
     position: fixed;
-    top: 40px;
-    width: 90%;
-    height: 600px;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
     object-fit: contain;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(32, 32, 32, 0.7);
     z-index: 100;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .resimler .imgbox.active img {
-    width: 100%;
-    height: 100%;
+    width: 70%;
+    height: 70%;
     object-fit: contain;
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .resimler .imgbox .like {
     display: flex;
     position: absolute;
-    bottom: -50px;
+    bottom: 50px;
+    display: none;
+}
+
+.resimler .imgbox.active .like {
+    display: flex;
 }
 
 .resimler .imgbox .like i {
@@ -192,13 +203,14 @@ body.blur .resimler .imgbox.active {
 }
 
 .resimler .imgbox .profile {
+    color: white;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     position: absolute;
     display: none;
-    bottom: -70px;
-    left: 80px;
+    top: 20px;
+    left: -15px;
     width: 300px;
 }
 
@@ -218,7 +230,7 @@ body.blur .resimler .imgbox.active {
     min-height: 50px;
     overflow: hidden;
     margin-right: 10px;
-
+    border-radius: 50%;
 }
 
 .resimler .imgbox .profile .ppbox img {
@@ -237,7 +249,7 @@ body.blur .resimler .imgbox.active {
 
 .resimler .imgbox .profile .profile_lead h6 {
     margin: 0;
-    color: rgba(128, 128, 128, 0.3);
+    color: rgba(255, 255, 255, 0.3);
     line-height: 1;
 }
 
@@ -250,4 +262,14 @@ body.blur .resimler .imgbox.active {
 
 .resimler .imgbox.active .profile {
     display: flex;
+}
+
+.login button {
+    outline: none;
+    border: 2px solid red;
+    background-color: transparent;
+}
+
+.resimler .like .like.active {
+    color: yellow;
 }
