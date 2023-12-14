@@ -54,9 +54,11 @@ if ($count_result) {
 
 <head>
     <meta charset="UTF-8">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style/blog.css">
@@ -90,7 +92,8 @@ if ($count_result) {
         <div class='box'></div>
         <h1>Blog</h1>
         <div class="blogphoto">
-            <img src="https://wallpapers.com/images/hd/bodybuilding-pictures-vprgcqbswl84j2ie.jpg" alt="">
+            <img src="https://kalix.club/uploads/posts/2022-12/1672301821_kalix-club-p-oboi-na-telefon-sportzal-oboi-35.jpg"
+                alt="">
         </div>
     </div>
     <!-- Blogs -->

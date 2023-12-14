@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
     margin: 0;
     padding: 0;
+    height: 200vh;
+    font-family: 'Poppins';
 }
 
 form {
@@ -9,22 +13,241 @@ form {
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
+
+form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+form input {
+    margin-bottom: 10px;
+    width: 200px;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid gray;
+}
+
+form input:nth-child(3) {
+    border: none;
+}
+
+form .filec {
+    outline: none;
+    border: none;
+}
+
+form button {
+    border: none;
+    outline: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #e1e1e1;
+}
+
+.users {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.users span h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.users span p {
+    line-height: 0.5;
+    color: gray;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
+    font-weight: 100;
+
+}
+
+.users .ppbox {
+    width: 50px;
+    height: 50px;
+    transform: translateY(10%);
+}
+
+.users .ppbox img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+nav {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+nav a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    transition: .4s;
+}
+
+nav a:hover {
+    color: red;
+}
+
+
 
 .resimler {
     margin-top: 50px;
     display: flex;
     gap: 50px;
     flex-wrap: wrap;
-    justify-content: space-around;
     width: 100%;
+    justify-content: center;
     background-color: #f8f8f8;
+    position: relative;
 }
+
 
 .resimler img {
     display: flex;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     object-fit: cover;
+}
+
+.resimler .imgbox {
+    position: relative;
+}
+
+.resimler .imgbox i {
+    display: none;
+}
+
+body.blur .resimler .imgbox,
+body.blur form {
+    filter: blur(10px);
+}
+
+body.blur .resimler .imgbox.active {
+    filter: blur(0);
+
+}
+
+.resimler .imgbox.active i {
+
+    display: block;
+    color: red;
+    position: absolute;
+    transform: scale(1.5);
+    cursor: pointer;
+    top: 10px;
+    right: 10px;
+}
+
+.resimler .imgbox.active {
+    position: fixed;
+    top: 40px;
+    width: 90%;
+    height: 600px;
+    object-fit: contain;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+
+.resimler .imgbox.active img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.resimler .imgbox .like {
+    display: flex;
+    position: absolute;
+    bottom: -50px;
+}
+
+.resimler .imgbox .like i {
+    color: blue;
+    position: relative;
+    margin-left: 20px;
+}
+
+.resimler .imgbox .profile {
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: absolute;
+    display: none;
+    bottom: -70px;
+    left: 80px;
+    width: 300px;
+}
+
+.resimler .imgbox .profile.active {
+    transform: scale(2);
+    background-color: rgba(0, 0, 0, 0.288);
+    color: white;
+    cursor: pointer;
+    bottom: 0;
+    left: 120px;
+    padding: 10px;
+
+}
+
+.resimler .imgbox .profile .ppbox {
+    min-width: 50px;
+    min-height: 50px;
+    overflow: hidden;
+    margin-right: 10px;
+
+}
+
+.resimler .imgbox .profile .ppbox img {
+    margin: 0;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.resimler .imgbox .profile .profile_lead h1 {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1;
+
+}
+
+.resimler .imgbox .profile .profile_lead h6 {
+    margin: 0;
+    color: rgba(128, 128, 128, 0.3);
+    line-height: 1;
+}
+
+.resimler .imgbox .profile .profile_lead p {
+    font-size: 9px;
+    font-weight: 100;
+    margin: 0;
+    line-height: 1;
+}
+
+.resimler .imgbox.active .profile {
+    display: flex;
 }

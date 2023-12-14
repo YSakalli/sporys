@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['id'])) {
-    header('Location: index.html');
+    header('Location: index.php');
     exit();
 }
 $user = $_SESSION["username"];
@@ -53,6 +53,8 @@ if ($pp_result == null) {
             <a href="profile.php">Ana Sayfa</a>
             <a href="blog.php">Blog</a>
             <a href="antrenman.php">Antrenman</a>
+            <a href="page/gallery.php">Gallery</a>
+
             <?php
             if ($role == 'admin') {
                 echo '<a href="page/admin.php">Admin Panel</a>';

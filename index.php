@@ -55,6 +55,7 @@ if (isset($_COOKIE["id"])) {
             <a href="index.php">Ana Sayfa</a>
             <a href="blog.php">Blog</a>
             <a href="antrenman.php">Antrenman</a>
+            <a href="page/gallery.php">Gallery</a>
         </nav>
         <div class="sign">
             <a href="page/premium.php">Premium</a>

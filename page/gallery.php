@@ -1,5 +1,19 @@
 <?php
 include("../backend/connect.php");
+session_start();
+
+if (isset($_SESSION["id"])) {
+    $query = "SELECT * FROM users WHERE id=?";
+    $stmt = mysqli_stmt_init($conn);
+
+    if (mysqli_stmt_prepare($stmt, $query)) {
+        mysqli_stmt_bind_param($stmt, "i", $_SESSION["id"]);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+        $id = $row["id"];
+    }
+}
 $maxFileSize = 1024 * 1024 * 5;
 function compress_image($source_url, $destination_url, $quality)
 {
@@ -19,10 +33,13 @@ function compress_image($source_url, $destination_url, $quality)
     return $destination_url;
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $baslik = $_POST["baslik"];
+    $yazi = $_POST["yazi"];
 
     if ($_FILES["image"]["size"] > $maxFileSize) {
         echo "Hata: Dosya boyutu 5 MB'den büyük olamaz.";
     } else {
+
         $imname = $_FILES["image"]["tmp_name"];
         $source_photo = $imname;
         $namecreate = "codeconia_" . time();
@@ -32,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dest_photo = '../uploads/' . $finalname;
         $compressimage = compress_image($source_photo, $dest_photo, 60);
         if ($compressimage != '') {
-            $query = "INSERT INTO resimler (resim) VALUES ('$compressimage')";
+            $query = "INSERT INTO resimler (resim,userid,baslik,yazi) VALUES ('$compressimage','$id','$baslik','$yazi')";
             $execute = mysqli_query($conn, $query);
 
             if ($execute) {
@@ -53,29 +70,122 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/gallery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Resim Yükleme Formu</title>
 </head>
 
 <body>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        <h1>Resim Yükleme Formu</h1>
-        <div>
-            <label for="image">Resim Seçin:</label>
-            <input type="file" name="image" required>
-            <button type="submit">Yükle</button>
+    <?php
+    if (isset($_SESSION["id"])) {
+        echo '
+        <div class="users">
+        <div class="ppbox">
+            <img src="../uploadprofile/' . $row["id"] . '/' . $row["pp"] . '">
         </div>
+        <span>
+            <h3>
+                ' . $row["username"] . '
+            </h3>
+            <p>' . $row["role"] . '</p>
+        </span>
+    </div>
+        ';
+    }
+    ?>
+
+
+    <nav>
+        <a href="../profile.php">Anasayfa</a>
+        <a href="../userphoto.php">Fotoğraflarım</a>
+    </nav>
+    <form action="" method="post" enctype="multipart/form-data">
+        <h1>Resim Yükle</h1>
+        <div>
+            <input type="text" name="baslik" placeholder="Baslik girin" required>
+            <input type="text" name="yazi" placeholder="Yorum yazin" required>
+        </div>
+
+        <input class="filec" type="file" name="image" required>
+
+
+        <button type="submit">Yükle</button>
+
     </form>
     <div class="resimler">
         <?php
-        $query = "SELECT * FROM resimler";
-        $result = mysqli_query($conn, $query);
+        $queryOuter = "SELECT * FROM resimler";
+        $resultOuter = mysqli_query($conn, $queryOuter);
 
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo '<img src="' . $row['resim'] . '">';
+        while ($rowOuter = mysqli_fetch_assoc($resultOuter)) {
+
+            $userid = $rowOuter["userid"];
+            $queryInner = "SELECT * FROM users WHERE id=?";
+            $stmtInner = mysqli_stmt_init($conn);
+
+            if (mysqli_stmt_prepare($stmtInner, $queryInner)) {
+                mysqli_stmt_bind_param($stmtInner, "i", $userid);
+                mysqli_stmt_execute($stmtInner);
+                $resultInner = mysqli_stmt_get_result($stmtInner);
+                $userdoc = mysqli_fetch_assoc($resultInner);
+            }
+
+            echo '
+            <div class="imgbox">
+            <i class="fa-solid fa-xmark xmark"></i>
+
+            <div class="like">
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-regular fa-thumbs-down"></i>
+            </div>
+            <div class="profile">
+                <div class="ppbox">
+                    <img src="../uploadprofile/' . $userdoc["id"] . '/' . $userdoc["pp"] . '">
+                
+                </div>
+                <div class="profile_lead"> 
+                    <h1>' . $userdoc["username"] . '</h1>
+                    <h6>22.11.22</h6>
+                    <p>' . $rowOuter['yazi'] . '</p>
+                </div>
+            </div>
+            <img class="resim" src="' . $rowOuter['resim'] . '">
+            </div>
+            ';
+
         }
         ?>
     </div>
+    <script>
+        let images = document.querySelectorAll('.imgbox');
+        let xmark = document.querySelectorAll('.xmark');
+        let body = document.querySelector('body');
+        let profile = document.querySelectorAll('.profile')
+        images.forEach(function (img) {
+            img.addEventListener('click', function () {
+                img.classList.add('active');
+                body.classList.add('blur');
+            });
+        });
+
+        xmark.forEach(function (mark) {
+            mark.addEventListener('click', function (event) {
+                event.stopPropagation();
+                let imgBox = mark.closest('.imgbox');
+                imgBox.classList.remove('active');
+                body.classList.remove('blur');
+
+            });
+        });
+
+        profile.forEach(function (active) {
+            active.addEventListener('click', function () {
+                active.classList.toggle('active');
+            });
+        });
+
+    </script>
 </body>
 
 </html>
