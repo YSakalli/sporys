@@ -56,9 +56,11 @@ if (isset($_COOKIE["id"])) {
             <a href="blog.php">Blog</a>
             <a href="antrenman.php">Antrenman</a>
             <a href="page/gallery.php">Gallery</a>
+            <a href="page/store.php">Mağaza</a>
+
         </nav>
         <div class="sign">
-            <a href="page/premium.php">Premium</a>
+            <a href="page/store.php">Premium</a>
             <a href="login.php"> <button><span></span>Giris</button></a>
         </div>
     </header>
@@ -143,7 +145,7 @@ if (isset($_COOKIE["id"])) {
                 <li>icerikeri okuma</li>
                 <li>antrenman programlari</li>
             </ul>
-            <a href="/page/premium.php">Plan Satin al</a>
+            <a href="/page/store.php">Plan Satin al</a>
         </div>
         <div class="plan">
             <img src="img/2sub.webp" alt="">
@@ -158,7 +160,7 @@ if (isset($_COOKIE["id"])) {
                 <li>ozel antrenman programi</li>
                 <li>yorum yapabilme</li>
             </ul>
-            <a href="/page/premium.php">Plan Satin al</a>
+            <a href="/page/store.php">Plan Satin al</a>
 
         </div>
         <div class="plan">
@@ -175,7 +177,7 @@ if (isset($_COOKIE["id"])) {
                 <li>koc yardimi</li>
                 <li>7/24 soru cevap</li>
             </ul>
-            <a href="/page/premium.php">Plan Satin al</a>
+            <a href="/page/store.php">Plan Satin al</a>
 
         </div>
     </div>

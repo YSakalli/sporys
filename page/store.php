@@ -118,19 +118,19 @@ $conn->close();
             </div>
         </form>
         <h1>Store</h1>
+        <div id="store" class="store">
 
-        <?php
-        include('../backend/connect.php');
+            <?php
+            include('../backend/connect.php');
 
-        $query = "SELECT * FROM product";
-        $stmt = mysqli_stmt_init($conn);
-        if (mysqli_stmt_prepare($stmt, $query)) {
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $price = $row['price'];
-                echo '
-                    <div id="store" class="store">
+            $query = "SELECT * FROM product";
+            $stmt = mysqli_stmt_init($conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $price = $row['price'];
+                    echo '
                         <div class="product">
                             <div class="imgbox">
                                 <img src="' . $row['resim'] . '" alt="">
@@ -145,55 +145,42 @@ $conn->close();
                                 <button type="submit" name="submit">Sepete Ekle</button>
                             </form>
                         </div>
-                    </div>';
+                    ';
+                }
             }
-        }
-        if (isset($_POST['submit'])) {
-            $product_id = $_POST['product_id'];
+            if (isset($_POST['submit'])) {
+                $product_id = $_POST['product_id'];
 
-            if (isset($_SESSION['id'])) {
-                $id = $_SESSION['id'];
+                if (isset($_SESSION['id'])) {
+                    $id = $_SESSION['id'];
 
-                $checkQuery = "SELECT * FROM cart WHERE user_id = '$id' AND product_id = '$product_id'";
-                $checkResult = mysqli_query($conn, $checkQuery);
+                    $checkQuery = "SELECT * FROM cart WHERE user_id = '$id' AND product_id = '$product_id'";
+                    $checkResult = mysqli_query($conn, $checkQuery);
 
-                if (mysqli_num_rows($checkResult) > 0) {
-                    $row = mysqli_fetch_assoc($checkResult);
-                    $quantity = $row["quantity"];
-                    $newQuantity = $quantity + 1;
-                    $newprice = $price * $newQuantity;
+                    if (mysqli_num_rows($checkResult) > 0) {
+                        $row = mysqli_fetch_assoc($checkResult);
+                        $quantity = $row["quantity"];
+                        $newQuantity = $quantity + 1;
+                        $newprice = $price * $newQuantity;
 
-                    $updateQuery = "UPDATE cart SET quantity = '$newQuantity', total_amount = '$newprice' WHERE user_id = '$id' AND product_id = '$product_id'";
-                    $updateResult = mysqli_query($conn, $updateQuery);
+                        $updateQuery = "UPDATE cart SET quantity = '$newQuantity', total_amount = '$newprice' WHERE user_id = '$id' AND product_id = '$product_id'";
+                        $updateResult = mysqli_query($conn, $updateQuery);
 
-                    if ($updateResult) {
-                        echo "Product quantity updated in the cart.";
                     } else {
-                        echo "Error updating product quantity: " . mysqli_error($conn);
-                    }
-                } else {
-                    $getProductQuery = "SELECT * FROM product WHERE id = '$product_id'";
-                    $getProductResult = mysqli_query($conn, $getProductQuery);
+                        $getProductQuery = "SELECT * FROM product WHERE id = '$product_id'";
+                        $getProductResult = mysqli_query($conn, $getProductQuery);
 
-                    if ($getProductResult && $productRow = mysqli_fetch_assoc($getProductResult)) {
-                        $price = $productRow['price'];
-                        $newprice = $price;
-                        $insertQuery = "INSERT INTO cart (user_id, product_id, quantity, total_amount) VALUES ('$id', '$product_id', '1', '$newprice')";
-                        $insertResult = mysqli_query($conn, $insertQuery);
-
-                        if ($insertResult) {
-                            echo "Product added to the cart.";
-                        } else {
-                            echo "Error adding product to the cart: " . mysqli_error($conn);
+                        if ($getProductResult && $productRow = mysqli_fetch_assoc($getProductResult)) {
+                            $price = $productRow['price'];
+                            $newprice = $price;
+                            $insertQuery = "INSERT INTO cart (user_id, product_id, quantity, total_amount) VALUES ('$id', '$product_id', '1', '$newprice')";
+                            $insertResult = mysqli_query($conn, $insertQuery);
                         }
-                    } else {
-                        echo "Error retrieving product information: " . mysqli_error($conn);
                     }
                 }
             }
-        }
-        ?>
-
+            ?>
+        </div>
 
     </div>
     <script>

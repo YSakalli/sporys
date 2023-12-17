@@ -39,7 +39,9 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                 <li onclick="showContent('blog-ekle')">Blog Ekle</li>
                 <li onclick="showContent('blog-yonet')">Blog Yönet</li>
                 <li onclick="showContent('yorum-yonet')">Yorum Yönet</li>
-                <li onclick="showContent('product-yonet')">Kullanıcı Yönet</li>
+                <li onclick="showContent('product-ekle')">Ürün Ekle</li>
+                <li onclick="showContent('product-yonet')">Ürün Yonet</li>
+
 
                 <li><a href="../profile.php">AnaSayfa</a></li>
                 <li><a href="../blog.php">Bloglar</a></li>
@@ -154,7 +156,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                         if ($row["aktif"] == 0) {
                             $aktiflik = "<p style='color:red;'>inaktif</p>";
                         } else {
-                            $aktiflik = "<p style='color:green;'>inaktif</p>";
+                            $aktiflik = "<p style='color:green;'>aktif</p>";
                         }
                         echo '<tr>
                         <td>' . $row["id"] . '</td>
@@ -239,7 +241,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                             if ($row["aktif"] == 0) {
                                 $aktiflik = "<p style='color:red;'>inaktif</p>";
                             } else {
-                                $aktiflik = "<p style='color:green;'>inaktif</p>";
+                                $aktiflik = "<p style='color:green;'>aktif</p>";
                             }
 
                             echo '<tr>
@@ -276,11 +278,113 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
 
             </div>
 
-            <div id="product-yonet" class="content-section">
+            <div id="product-ekle" class="content-section">
+                <?php
+                include("../backend/connect.php");
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+                    $name = $_POST['name'];
+                    $text = $_POST['text'];
+                    $resim = $_POST['resim'];
+                    $price = $_POST['price'];
+                    $query = "INSERT INTO product (name,text,resim,price) VALUE ('$name','$text','$resim','$price')";
+                    $result = mysqli_query($conn, $query);
+                }
+                ?>
+                <form class="productadd" action="" method="post">
+                    <label for="name">Ürün Adı</label>
+                    <input type="text" name="name" placeholder="Ürün Adı">
+                    <label for="name">Resim Url</label>
+
+                    <input type="text" name="resim" placeholder="Resim Url">
+                    <label for="name">Açıklama</label>
+
+                    <input type="text" name="text" placeholder="Açıklama">
+                    <label for="name">Fiyatı</label>
+
+                    <input type="text" name="price" placeholder="Fiyatı">
+                    <button name="submit">Gönder</button>
+
+                </form>
 
 
             </div>
+            <div id="product-yonet" class="content-section">
+                <table class="table table-striped" position:relative;>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Açıklama</th>
+                            <th>Fiyat</th>
+                            <th>Aktiflik</th>
+                            <th>Sil</th>
+                            <th>Aktif</th>
+                        </tr>
+                    </thead>
+                    <?php
+                    include("../backend/connect.php");
+                    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                        if (isset($_POST["sil_id"])) {
+                            $id = $_POST["sil_id"];
+                            $sil = "DELETE FROM product WHERE id = '$id'";
+                            $sil_query = mysqli_query($conn, $sil);
+                        }
+                        if (isset($_POST["aktif_id"])) {
+                            $id = $_POST["aktif_id"];
+                            $aktif = "UPDATE product SET aktif = 1 WHERE id = '$id'";
+                            $aktif_query = mysqli_query($conn, $aktif);
+                        }
+                        if (isset($_POST["inaktif_id"])) {
+                            $id = $_POST["inaktif_id"];
+                            $inaktif = "UPDATE product SET aktif = 0 WHERE id = '$id'";
+                            $inaktif_query = mysqli_query($conn, $inaktif);
+                        }
+                    }
+                    $blogbaslik = "SELECT * FROM product ORDER BY id DESC";
+                    $query = mysqli_query($conn, $blogbaslik);
+                    $rows = mysqli_fetch_all($query, MYSQLI_ASSOC);
 
+                    foreach ($rows as $row) {
+
+
+                        if ($row["aktif"] == 0) {
+                            $aktiflik = "<p style='color:red;'>inaktif</p>";
+                        } else {
+                            $aktiflik = "<p style='color:green;'>aktif</p>";
+                        }
+
+                        echo '<tr>
+                                <td>' . $row["id"] . '</td>
+                                <td>' . $row["name"] . '</td>
+                                <td>' . $row["text"] . '</td>
+                                <td>' . $row["price"] . '$</td>
+                                <td>' . $aktiflik . '</td>
+
+                                <td>
+                                    <form method="post" action="">
+                                        <input type="hidden" name="sil_id" value="' . $row["id"] . '">
+                                        <input type="submit" value="sil">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post" action="">
+                                        <input type="hidden" name="aktif_id" value="' . $row["id"] . '">
+                                        <input style="width:75px; color:green; font-size:16px; text-align:center;" type="submit" value="aktif">
+                                    </form>
+                                    <form method="post" action="">
+                                        <input type="hidden" name="inaktif_id" value="' . $row["id"] . '">
+                                        <input style="width:75px; color:red; font-size:16px; text-align:center;" type="submit" value="inaktif">
+                                    </form>
+                                </td>
+                            </tr>';
+                    }
+                    ?>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
         </div>
     </div>
 

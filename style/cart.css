@@ -11,16 +11,17 @@ body {
 
 nav {
     position: absolute;
-    left: 40px;
-    top: 10px;
+    left: 0px;
+    top: 0px;
 }
 
 nav a {
-    color: black;
     text-decoration: none;
-    background-color: #f8f8f8;
-    padding: 15px 10px;
+    padding: 10px 8px;
+    margin-left: 10px;
     border-radius: 0px 0px 10px 10px;
+    background-color: #f8f8f8;
+    color: black;
 }
 
 nav a:hover {
@@ -35,7 +36,6 @@ nav a:hover {
     width: 80%;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .container .product {
@@ -44,11 +44,12 @@ nav a:hover {
     grid-template-columns: 550px 150px 150px 150px;
     width: 1000px;
     height: 150px;
-    background-color: #ededed;
+    background-color: rgb(245, 245, 245);
     align-items: center;
     justify-content: center;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    margin-top: 20px;
 }
 
 .container .product .markform {
@@ -85,7 +86,7 @@ nav a:hover {
 .container .product .imgbox p {
     margin: 0;
     margin-left: 20px;
-    font-weight: lighter;
+    font-weight: 100;
 }
 
 .container .product .imgbox img {
@@ -102,8 +103,8 @@ nav a:hover {
     position: relative;
     justify-content: end;
     align-items: center;
-    margin-top: 50px;
-
+    margin-bottom: -30px;
+    margin-top: 20px;
 
 }
 
@@ -167,17 +168,16 @@ aside {
     height: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 aside .cart {
     position: relative;
-
     height: 350px;
     width: 300px;
-    background-color: #f1f1f1;
+    background-color: rgb(250, 250, 250);
     border-radius: 10px;
-
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.09);
 }
 
 aside .cart .total {

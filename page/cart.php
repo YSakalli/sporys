@@ -18,17 +18,19 @@ $id = @$_SESSION['id'];
 
 <body>
     <nav>
-        <a href="store.php">Mağaza</a>
         <a href="../profile.php">Anasayfa</a>
+        <a href="store.php">Mağaza</a>
+
     </nav>
 
     <div class="container">
         <div class="info">
-            <p>urun</p>
-            <p>fiyat</p>
-            <p>miktar</p>
-            <p>toplam fiyat</p>
+            <p>Ürüm</p>
+            <p>Fiyat</p>
+            <p>Miktar</p>
+            <p>Toplam Fiyat</p>
         </div>
+
         <?php
         include("../backend/connect.php");
 
@@ -116,7 +118,7 @@ $id = @$_SESSION['id'];
                                 <p>' . $rowproduct['text'] . '</p>
                             </div>
                         </div>
-                        <p>' . $rowproduct['price'] . 'tl</p>
+                        <p>' . $rowproduct['price'] . '$</p>
 
                         <form class="quantity" action="" method="POST">
                             <button type"submit" name="up">+</button>
@@ -124,16 +126,15 @@ $id = @$_SESSION['id'];
                             <input type="text" value="' . $row['quantity'] . '" disabled>
                             <button type"submit" name="down">-</button >
                         </form>
-                        <p>' . $row['total_amount'] . 'tl</p>
-                    </div>
-                </div>';
+                        <p>' . $row['total_amount'] . '$</p>
+                    </div>';
                 }
             }
         } else {
             echo '
                 <div style="display:flex; flex-direction: column;" class="product">
                         <h1 style="color: rgb(40,40,40,0.5); align-self: center;">Ürün Bulunamadı</h1>
-                        <a class="urungit" href="premium.php">Ürün Ekle</a>
+                        <a class="urungit" href="store.php">Ürün Ekle</a>
                     </div>
                 </div>
                 ';
@@ -141,6 +142,7 @@ $id = @$_SESSION['id'];
         ?>
 
     </div>
+
 
     <!-- Aside -->
     <aside>
@@ -158,7 +160,7 @@ $id = @$_SESSION['id'];
             echo '
                 <div class="total">
                     <h1>Ara toplam <span style="color:red;">(' . $piece . ' adet)</span></h1>
-                    <p>' . $totalprice . '</p>
+                    <p>' . $totalprice . '$</p>
                     <hr>
                 </div>
                 <div class="totalfinal">
@@ -167,7 +169,7 @@ $id = @$_SESSION['id'];
                         <p>(KDV dahil)</p>
                     </span>
 
-                    <h3>' . $totalprice . '</h3>
+                    <h3>' . $totalprice . '$</h3>
                 </div>
                 <form action="" method="">
                     <button name="submit">Sepete Onayla</button>

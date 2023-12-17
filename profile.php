@@ -54,7 +54,7 @@ if ($pp_result == null) {
             <a href="blog.php">Blog</a>
             <a href="antrenman.php">Antrenman</a>
             <a href="page/gallery.php">Gallery</a>
-
+            <a href="page/store.php">Mağaza</a>
             <?php
             if ($role == 'admin') {
                 echo '<a href="page/admin.php">Admin Panel</a>';
@@ -160,7 +160,7 @@ if ($pp_result == null) {
                 <li>icerikeri okuma</li>
                 <li>antrenman programlari</li>
             </ul>
-            <a href="/page/premium.php">Plan Satin al</a>
+            <a href="/page/store.php">Plan Satin al</a>
         </div>
         <div class="plan">
             <img src="img/2sub.webp" alt="">
@@ -175,7 +175,7 @@ if ($pp_result == null) {
                 <li>ozel antrenman programi</li>
                 <li>yorum yapabilme</li>
             </ul>
-            <a href="/page/premium.php">Plan Satin al</a>
+            <a href="/page/store.php">Plan Satin al</a>
 
         </div>
         <div class="plan">
@@ -192,7 +192,7 @@ if ($pp_result == null) {
                 <li>koc yardimi</li>
                 <li>7/24 soru cevap</li>
             </ul>
-            <a href="/page/premium.php">Plan Satin al</a>
+            <a href="/page/store.php">Plan Satin al</a>
 
         </div>
     </div>

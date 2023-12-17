@@ -103,6 +103,11 @@ body {
 
 .content-section {
     display: none;
+
+}
+
+.content-section table tr td {
+    text-justify: center;
 }
 
 .content-section.show {
@@ -141,6 +146,7 @@ body {
 }
 
 .content #blog-ekle form {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -163,6 +169,7 @@ body {
 
 .content #blog-ekle form select {
     border: none;
+
 }
 
 .content #blog-ekle form input:nth-child(1) {
@@ -180,4 +187,39 @@ body {
 
 .content #blog-ekle form input:last-child:hover {
     background-color: #d4d4d4;
+}
+
+.content-section .productadd {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.content-section .productadd label {
+    font-weight: bold;
+    margin-top: 10px;
+
+}
+
+
+.content-section .productadd input {
+    width: 100%;
+    border: none;
+    margin-top: 10px;
+    border-bottom: rgba(128, 128, 128, 0.5) 2px solid;
+    background-color: transparent;
+    outline: none;
+}
+
+.content-section .productadd button {
+    margin-top: 30px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.content-section .productadd button:hover {
+    background-color: rgb(230, 230, 230);
 }

@@ -166,6 +166,7 @@ nav .cart i p {
     display: flex;
     gap: 50px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .store .product {
