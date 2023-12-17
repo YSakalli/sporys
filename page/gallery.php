@@ -111,16 +111,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <input class="filec" type="file" name="image" required>
-
-
         <button type="submit">Yükle</button>
-
     </form>
         ';
     } else {
         echo ' 
         <a class="login" href="../login.php"><button>Giris yap</button></a>
-        
         ';
     }
     ?>
@@ -145,11 +141,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             echo '
             <div class="imgbox">
-            <i class="fa-solid fa-xmark xmark"></i>
-
-            <div class="like">
-            <i class="fa-regular fa-heart like"></i>
-            <i class="fa-regular fa-thumbs-down disslike"></i>
+            <div class="close">
+                <i class="fa-solid fa-xmark xmark"></i>
+            </div>
+            <div class="rate">
+                <i class="fa-regular fa-heart like"></i>
+                <i class="fa-regular fa-thumbs-down disslike"></i>
             </div>
             <div class="profile">
                 <div class="ppbox">
@@ -173,8 +170,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         let xmark = document.querySelectorAll('.xmark');
         let body = document.querySelector('body');
         let profile = document.querySelectorAll('.profile');
-        let like = document.querySelectorAll('.like');
-        let disslike = document.querySelectorAll('.disslike');
+        const dislike = document.querySelectorAll('.dislike');
+        const like = document.querySelectorAll('.like');
 
         images.forEach(function (img) {
             img.addEventListener('click', function () {
@@ -193,22 +190,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
         });
 
+    
         profile.forEach(function (active) {
             active.addEventListener('click', function () {
                 active.classList.toggle('active');
             });
         });
 
-        disslike.forEach(function (dl) {
-            dl.addEventListener('click', function () {
-                disslike.classList.toggle('active');
-            });
-        });
-        like.forEach(function (l) {
-            l.addEventListener('click', function () {
-                like.classList.toggle('active');
-            });
-        });
+
 
     </script>
 </body>

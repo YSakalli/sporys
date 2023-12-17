@@ -39,7 +39,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                 <li onclick="showContent('blog-ekle')">Blog Ekle</li>
                 <li onclick="showContent('blog-yonet')">Blog Yönet</li>
                 <li onclick="showContent('yorum-yonet')">Yorum Yönet</li>
-                <li onclick="showContent('users-yonet')">Kullanıcı Yönet</li>
+                <li onclick="showContent('product-yonet')">Kullanıcı Yönet</li>
 
                 <li><a href="../profile.php">AnaSayfa</a></li>
                 <li><a href="../blog.php">Bloglar</a></li>
@@ -255,7 +255,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                                         <input type="submit" value="sil">
                                     </form>
                                 </td>
-                                <td style="">
+                                <td>
                                     <form method="post" action="">
                                         <input type="hidden" name="aktif_id" value="' . $row["id"] . '">
                                         <input style="width:75px; color:green; font-size:16px; text-align:center;" type="submit" value="aktif">
@@ -276,9 +276,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
 
             </div>
 
-            <div id="users-yonet" class="content-section">
-
-
+            <div id="product-yonet" class="content-section">
 
 
             </div>

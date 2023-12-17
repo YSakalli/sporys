@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;500;700&display=swap');
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    font-family: 'Kanit';
+}
+
+nav {
+    position: absolute;
+    left: 40px;
+    top: 10px;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+    background-color: #f8f8f8;
+    padding: 15px 10px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+nav a:hover {
+    color: red;
+    background-color: #eeeeee;
+}
+
+.container {
+    transform: scale(0.9);
+    position: relative;
+    height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container .product {
+    position: relative;
+    display: grid;
+    grid-template-columns: 550px 150px 150px 150px;
+    width: 1000px;
+    height: 150px;
+    background-color: #ededed;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.container .product .markform {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+}
+
+.container .product .markform .xmark {
+    position: absolute;
+    border: none;
+    cursor: pointer;
+}
+
+
+.container .product .markform .xmark i {
+    position: absolute;
+    transform: scale(1.2);
+    color: red;
+}
+
+
+.container .product .imgbox {
+    margin-left: 40px;
+    height: 100%;
+    width: 100%;
+}
+
+.container .product .imgbox h3 {
+    margin: 0;
+    margin-left: 20px;
+}
+
+.container .product .imgbox p {
+    margin: 0;
+    margin-left: 20px;
+    font-weight: lighter;
+}
+
+.container .product .imgbox img {
+    height: 100%;
+    width: 150px;
+    object-fit: cover;
+}
+
+.container .info {
+    margin: 0;
+    width: 1000px;
+    display: grid;
+    grid-template-columns: 500px 150px 150px 150px;
+    position: relative;
+    justify-content: end;
+    align-items: center;
+    margin-top: 50px;
+
+
+}
+
+.container .info p {
+    display: flex;
+    align-items: center;
+
+}
+
+
+
+.container .product .imgbox {
+    width: 500px;
+    height: 100px;
+    display: flex;
+}
+
+.container .product img {
+    width: 200px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.container .product p {
+    width: 200px;
+}
+
+.container .product {}
+
+.container .product .quantity input {
+    width: 20px;
+}
+
+.container .product .quantity button {
+    text-align: center;
+    width: 20px;
+    height: 20px;
+}
+
+.container .product .urungit {
+    width: 100px;
+    height: 30px;
+    background-color: rgb(255, 60, 60);
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .product .urungit:hover {
+    background-color: red;
+
+}
+
+
+
+aside {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+aside .cart {
+    position: relative;
+
+    height: 350px;
+    width: 300px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+
+}
+
+aside .cart .total {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+aside .cart .total hr {
+    position: absolute;
+    width: 90%;
+    border-left: none;
+    opacity: 0.4;
+    height: 3px;
+    bottom: -10px;
+}
+
+aside .cart .total h1 {
+    text-align: center;
+    font-size: 16px;
+
+}
+
+aside .cart .total p {
+    font-size: 12px;
+}
+
+aside .cart .totalfinal {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+aside .cart .totalfinal span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+aside .cart .totalfinal h1 {
+    font-size: 20px;
+}
+
+aside .cart .totalfinal p {
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+aside .cart .totalfinal h3 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+aside .cart form {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+aside .cart form button {
+    outline: none;
+    border: none;
+    width: 200px;
+    height: 30px;
+    background-color: #ededed;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(255, 60, 60);
+    color: white;
+    cursor: pointer;
+}
+
+aside .cart form button:hover {
+    background-color: red;
+
+}

@@ -137,14 +137,15 @@ nav a:hover {
     position: relative;
 }
 
-.resimler .imgbox i {
+.resimler .imgbox .close i {
     display: none;
 }
 
 body.blur .resimler .imgbox,
 body.blur form,
 body.blur nav,
-body.blur .login {
+body.blur .login,
+body.blur .users {
     filter: blur(7px);
 }
 
@@ -154,8 +155,7 @@ body.blur .resimler .imgbox.active {
 
 }
 
-.resimler .imgbox.active i {
-
+.resimler .imgbox.active .close i {
     display: block;
     color: red;
     position: absolute;
@@ -186,22 +186,9 @@ body.blur .resimler .imgbox.active {
     box-shadow: none;
 }
 
-.resimler .imgbox .like {
-    display: flex;
-    position: absolute;
-    bottom: 50px;
-    display: none;
-}
 
-.resimler .imgbox.active .like {
-    display: flex;
-}
 
-.resimler .imgbox .like i {
-    color: blue;
-    position: relative;
-    margin-left: 20px;
-}
+
 
 .resimler .imgbox .profile {
     color: white;
@@ -303,6 +290,72 @@ body.blur .resimler .imgbox.active {
     color: white;
 }
 
-.resimler .like .like.active {
-    color: yellow;
+.resimler .rate i {
+    display: none;
+}
+
+body.blur .resimler .rate i {
+    display: inline;
+}
+
+.resimler .rate {
+    width: 100px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    color: black;
+    bottom: 20px;
+}
+
+.resimler .rate i {
+    margin: 10px;
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+.resimler .rate .like {
+    position: relative;
+}
+
+.resimler .rate .like i {
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
+
+}
+
+.resimler .rate .like.active {
+    position: relative;
+    color: rgb(0, 160, 0);
+
+    animation: like .5s linear;
+    transition: .4s;
+}
+
+@keyframes like {
+    0% {
+        color: rgb(0, 47, 0);
+        bottom: 3px;
+    }
+
+    100% {
+        color: rgb(0, 160, 0);
+        bottom: 0px;
+    }
+}
+
+.resimler .rate .disslike.active {
+    position: relative;
+    color: red;
+    animation: disslike .5s linear;
+}
+
+@keyframes disslike {
+    0% {
+        color: rgb(50, 0, 0);
+        bottom: 3px;
+    }
+
+    100% {
+        color: red;
+        bottom: 0px;
+    }
 }
