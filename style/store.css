@@ -63,7 +63,7 @@ nav .cart i p {
     height: 500px;
     display: flex;
     justify-content: center;
-    gap: 70px;
+    gap: 20px;
     align-items: center;
 }
 
@@ -81,6 +81,7 @@ nav .cart i p {
     transition: 0.4s;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    transform: scale(0.9);
 }
 
 .freemium form .plan:hover {
@@ -167,6 +168,7 @@ nav .cart i p {
     gap: 50px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .store .product {

@@ -1,5 +1,6 @@
 <?php
 include("backend/connect.php");
+
 if (isset($_COOKIE["id"])) {
 
     $query = "SELECT id, username, email, role FROM users WHERE id=?";

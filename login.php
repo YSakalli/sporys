@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 include("backend/connect.php");
 
@@ -29,11 +30,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->fetch()) {
 
+
             if (password_verify($password, $hashed_password)) {
                 $_SESSION["id"] = $id;
                 $_SESSION["username"] = $username;
                 $_SESSION["email"] = $email;
                 $_SESSION["role"] = $role;
+
+                if (isset($_COOKIE['cart'])) {
+                    $existing_cart = isset($_COOKIE['cart']) ? unserialize($_COOKIE['cart']) : array();
+                    foreach ($existing_cart as $product_id) {
+                        echo $product_id;
+                        include("backend/connect.php");
+
+                        $getProductQuery = "SELECT * FROM product WHERE id = '$product_id'";
+                        $getProductResult = mysqli_query($conn, $getProductQuery);
+
+                        if ($getProductResult) {
+                            if ($productRow = mysqli_fetch_assoc($getProductResult)) {
+                                $price = $productRow['price'];
+                                $newprice = $price;
+                                $userquery = "SELECT *FROM cart ";
+                                $insertQuery = "INSERT INTO cart (user_id, product_id, quantity, total_amount) VALUES ('$id', '$product_id', '1', '$newprice')";
+                                $insertResult = mysqli_query($conn, $insertQuery);
+                            }
+                        }
+                    }
+                    setcookie('cart', '', time() - 3600);
+                    header("Location: profile.php");
+                    exit();
+                } else {
+                    header("Location: profile.php");
+                    exit();
+                }
+
                 if (isset($_POST["remember"])) {
                     setcookie("id", $id, time() + (60 * 60 * 24));
                 }
@@ -49,6 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 $conn->close();
+ob_end_flush();
+
 ?>
 
 
@@ -350,7 +382,9 @@ $conn->close();
                     <input type="submit" name="login" value="Sing up">
                 </div>
                 <p class="erortext center">
-                    <?php echo $loginErr ?>
+                    <?php echo $loginErr
+                        ?>
+
                 </p>
             </form>
         </div>

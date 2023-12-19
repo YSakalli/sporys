@@ -25,6 +25,9 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
     <link rel="stylesheet" href="../style/adminpanel.css">
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
         type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Admin Panel</title>
@@ -46,6 +49,8 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                 <li><a href="../profile.php">AnaSayfa</a></li>
                 <li><a href="../blog.php">Bloglar</a></li>
                 <li><a href="../antrenman.php">Anternmanlar</a></li>
+                <li><a href="store.php">Mağaza</li></a>
+
             </ul>
         </div>
         <div class="content">
@@ -291,17 +296,17 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                 }
                 ?>
                 <form class="productadd" action="" method="post">
+
                     <label for="name">Ürün Adı</label>
                     <input type="text" name="name" placeholder="Ürün Adı">
-                    <label for="name">Resim Url</label>
-
-                    <input type="text" name="resim" placeholder="Resim Url">
                     <label for="name">Açıklama</label>
-
                     <input type="text" name="text" placeholder="Açıklama">
-                    <label for="name">Fiyatı</label>
+                    <label for="name">Resim Url</label>
+                    <input type="text" name="resim" placeholder="Resim Url">
 
+                    <label for="name">Fiyatı</label>
                     <input type="text" name="price" placeholder="Fiyatı">
+
                     <button name="submit">Gönder</button>
 
                 </form>
@@ -312,6 +317,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                 <table class="table table-striped" position:relative;>
                     <thead>
                         <tr>
+                            <th>Edit</th>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Açıklama</th>
@@ -339,6 +345,10 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                             $inaktif = "UPDATE product SET aktif = 0 WHERE id = '$id'";
                             $inaktif_query = mysqli_query($conn, $inaktif);
                         }
+                        if (isset($_POST["edit"])) {
+                            $id = $_POST["edit"];
+                            echo "id :" . $id;
+                        }
                     }
                     $blogbaslik = "SELECT * FROM product ORDER BY id DESC";
                     $query = mysqli_query($conn, $blogbaslik);
@@ -352,11 +362,18 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                         } else {
                             $aktiflik = "<p style='color:green;'>aktif</p>";
                         }
-
                         echo '<tr>
+                                <td>
+                                <form method="post" action="">
+                                <input type="hidden" name="edit" value="' . $row["id"] . '">
+                                <button type="submit" name="edit" style="border:none;background-color: transparent;">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
+                            </form>
+                                </td>
                                 <td>' . $row["id"] . '</td>
                                 <td>' . $row["name"] . '</td>
-                                <td>' . $row["text"] . '</td>
+                                <td>' . kisalt($row["text"]) . '</td>
                                 <td>' . $row["price"] . '$</td>
                                 <td>' . $aktiflik . '</td>
 

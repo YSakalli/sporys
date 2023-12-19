@@ -223,3 +223,8 @@ body {
 .content-section .productadd button:hover {
     background-color: rgb(230, 230, 230);
 }
+
+#product-yonet table tr .fa-regular {
+    position: absolute;
+    color: red;
+}

@@ -1,7 +1,8 @@
 <?php
+ob_start();
 session_start();
 $id = @$_SESSION['id'];
-
+$cookietotalprice = $sayac = 0;
 
 ?>
 <!DOCTYPE html>
@@ -102,7 +103,6 @@ $id = @$_SESSION['id'];
                 $resultproduct = mysqli_query($conn, $queryproduct);
 
                 while ($rowproduct = mysqli_fetch_assoc($resultproduct)) {
-
                     echo '
                     <div class="product">
                         <form class="markform" action="" method="post">
@@ -130,19 +130,80 @@ $id = @$_SESSION['id'];
                     </div>';
                 }
             }
+        } else if (isset($_COOKIE['cart'])) {
+            $existing_cart = isset($_COOKIE['cart']) ? unserialize($_COOKIE['cart']) : array();
+            if (empty($existing_cart)) {
+                echo '
+            <div style="display:flex; flex-direction: column;" class="product">
+                    <h1 style="color: rgb(40,40,40,0.5); align-self: center;">Ürün Bulunamadı</h1>
+                    <a class="urungit" href="store.php">Ürün Ekle</a>
+                </div>
+            </div>
+            ';
+            } else {
+                if (isset($_POST['delete'])) {
+                    $deleteid = $_POST['deleteid'];
+                    $index = array_search($deleteid, $existing_cart);
+                    if ($index !== false) {
+                        unset($existing_cart[$index]);
+                    }
+                    $existing_cart = array_values($existing_cart);
+
+                    setcookie('cart', serialize($existing_cart), time() + 60 * 60 * 24, '/');
+                    header('Location: cart.php');
+                    exit();
+
+                }
+                if (!empty($existing_cart)) {
+                    foreach ($existing_cart as $product_id) {
+                        $queryproduct = "SELECT * FROM product WHERE id = '$product_id'";
+                        $resultproduct = mysqli_query($conn, $queryproduct);
+                        while ($rowproduct = mysqli_fetch_assoc($resultproduct)) {
+                            $cookietotalprice = isset($cookietotalprice) ? $cookietotalprice + $rowproduct["price"] : $rowproduct["price"];
+                            $sayac = isset($sayac) ? $sayac + 1 : 1;
+                            echo '
+                        <div class="product">
+                            <form class="markform" action="" method="post">
+                                <input type="hidden" name="deleteid" value="' . $rowproduct['id'] . '">
+                                <button name="delete" class="xmark">
+                                    <i class="fa-solid fa-xmark"></i>                               
+                                </button>
+                            </form>
+                            <div class="imgbox">
+                                <img src="' . $rowproduct['resim'] . '" alt="' . $rowproduct['name'] . '">
+                                <div>
+                                    <h3>' . $rowproduct['name'] . '</h3>
+                                    <p>' . $rowproduct['text'] . '</p>
+                                </div>
+                            </div>
+                            <p>' . $rowproduct["price"] . '$</p>
+            
+                            <form class="quantity" action="" method="POST">
+                                <button type="submit" name="up">+</button>
+                                <input type="hidden" name="update" value="">
+                                <input type="text" value=""disabled>
+                                <button type="submit" name="down">-</button>
+                            </form>
+                            <p>' . $rowproduct["price"] . '$</p>
+                        </div>';
+
+                        }
+                    }
+                }
+            }
+
         } else {
             echo '
-                <div style="display:flex; flex-direction: column;" class="product">
-                        <h1 style="color: rgb(40,40,40,0.5); align-self: center;">Ürün Bulunamadı</h1>
-                        <a class="urungit" href="store.php">Ürün Ekle</a>
-                    </div>
+            <div style="display:flex; flex-direction: column;" class="product">
+                    <h1 style="color: rgb(40,40,40,0.5); align-self: center;">Ürün Bulunamadı</h1>
+                    <a class="urungit" href="store.php">Ürün Ekle</a>
                 </div>
-                ';
+            </div>
+            ';
         }
         ?>
 
     </div>
-
 
     <!-- Aside -->
     <aside>
@@ -152,12 +213,31 @@ $id = @$_SESSION['id'];
             $piece = 0;
             $selectAllProducts = "SELECT * FROM cart";
             $resultAllProducts = mysqli_query($conn, $selectAllProducts);
+            if (isset($_COOKIE["cart"])) {
+                echo '
+                <div class="total">
+                    <h1>Ara toplam <span style="color:red;">(' . @$sayac . ' adet)</span></h1>
+                    <p>' . @$cookietotalprice . '$</p>
+                    <hr>
+                </div>
+                <div class="totalfinal">
+                    <span>
+                        <h1>Toplam </h1>
+                        <p>(KDV dahil)</p>
+                    </span>
 
-            while ($row = mysqli_fetch_assoc($resultAllProducts)) {
-                $totalprice += $row['total_amount'];
-                $piece += $row['quantity'];
-            }
-            echo '
+                    <h3>' . @$cookietotalprice . '$</h3>
+                </div>
+                <form action="" method="">
+                    <button name="submit">Sepete Onayla</button>
+                </form>
+                ';
+            } else {
+                while ($row = mysqli_fetch_assoc($resultAllProducts)) {
+                    $totalprice += $row['total_amount'];
+                    $piece += $row['quantity'];
+                }
+                echo '
                 <div class="total">
                     <h1>Ara toplam <span style="color:red;">(' . $piece . ' adet)</span></h1>
                     <p>' . $totalprice . '$</p>
@@ -174,12 +254,11 @@ $id = @$_SESSION['id'];
                 <form action="" method="">
                     <button name="submit">Sepete Onayla</button>
                 </form>
-                
                 ';
+            }
 
-
+            ob_end_flush();
             ?>
-
         </div>
     </aside>
 </body>
