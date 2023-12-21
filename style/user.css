@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit';
+
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    position: relative;
+    width: 50%;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    height: 140px;
+    display: grid;
+    justify-content: center;
+
+}
+
+.profile .ppbox {
+    left: -25px;
+    top: -25px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    background-color: red;
+    overflow: hidden;
+}
+
+.profile .ppbox img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.profile .rate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+
+.profile .rate h3 {
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.profile .rate h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.profile .rate p {
+    margin: 0;
+    text-align: center;
+    color: rgba(128, 128, 128, 0.5);
+}
+
+
+.profile .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.profile .content p {
+    width: 70%;
+    margin-left: 10px;
+}
+
+.profile .content button {
+    position: absolute;
+    border: none;
+    outline: none;
+    padding: 5px 20px;
+    bottom: 20px;
+    right: 0px;
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+}
+
+.container {
+    width: 90%;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 50px;
+
+}
+
+.container .nav {
+    position: absolute;
+    top: -15px;
+    transform: translateX(-50%);
+    left: 50%;
+    background-color: #f8f8f8;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
+    width: 40%;
+    height: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.container .nav h3 {
+    font-size: 16px;
+    margin-left: 30px;
+    text-decoration: none;
+    color: black;
+    transition: .4s;
+    cursor: pointer;
+}
+
+.container .nav h3:hover {
+    color: red;
+}
+
+.container .images {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container .images .imgbox {
+    background-color: #dedede;
+    width: 300px;
+    height: 300px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.container .images .imgbox.active {
+    position: fixed;
+    top: -20px;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(128, 128, 128, 0.6);
+    z-index: 100;
+}
+
+.container .images .imgbox.active img {
+    object-fit: contain;
+    width: 80%;
+    height: 80%;
+}
+
+.container .images .imgbox.active i {
+    display: none;
+}
+
+.container .images .imgbox img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+
+}
+
+.container .images .imgbox i {
+    position: absolute;
+    top: -20px;
+    right: 25px;
+    z-index: 10;
+    cursor: pointer;
+    color: white;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+}
+
+.container .images .imgbox .downmenu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    right: -16px;
+}
+
+.container .images .imgbox .downmenu.active button {
+    display: block;
+}
+
+.container .images .imgbox .downmenu button {
+    border: none;
+    outline: none;
+    padding: 2px 4px;
+    display: none;
+}
+
+.container .images .imgbox .downmenu button:hover {
+    background-color: #dedede;
+    display: block;
+}
+
+.container .images .noneimg {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container .images .noneimg h1 {
+    color: gray;
+}
+
+.container .images .noneimg a {
+    padding: 4px 20px;
+    margin-top: 5px;
+    color: white;
+    background-color: rgb(255, 50, 50);
+    text-decoration: none;
+}
+
+.container .images .noneimg a:hover {
+    background-color: red;
+}

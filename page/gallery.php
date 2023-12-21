@@ -1,7 +1,8 @@
 <?php
+ob_start();
 include("../backend/connect.php");
 session_start();
-
+$sessionid = @$_SESSION["id"];
 if (isset($_SESSION["id"])) {
     $query = "SELECT * FROM users WHERE id=?";
     $stmt = mysqli_stmt_init($conn);
@@ -32,10 +33,9 @@ function compress_image($source_url, $destination_url, $quality)
 
     return $destination_url;
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['file'])) {
     $baslik = $_POST["baslik"];
     $yazi = $_POST["yazi"];
-
     if ($_FILES["image"]["size"] > $maxFileSize) {
         echo "Hata: Dosya boyutu 5 MB'den büyük olamaz.";
     } else {
@@ -51,12 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($compressimage != '') {
             $query = "INSERT INTO resimler (resim,userid,baslik,yazi) VALUES ('$compressimage','$id','$baslik','$yazi')";
             $execute = mysqli_query($conn, $query);
-
-            if ($execute) {
-                echo "Resim başarıyla eklendi.";
-            } else {
-                echo "Veritabanına resim eklenirken bir hata oluştu: " . mysqli_error($conn);
-            }
         }
     }
 }
@@ -93,6 +87,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
         ';
     }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && (isset($_SESSION["id"]) && isset($_POST["like"]))) {
+        $imgidby = $_POST["likeby"];
+        $imgid = $_POST["imglike"];
+
+        $queryliked = "SELECT * FROM likes WHERE liked_user = ? AND likedby_user = ? AND liked_img = ?";
+        $stmt = mysqli_stmt_init($conn);
+
+        if (mysqli_stmt_prepare($stmt, $queryliked)) {
+            mysqli_stmt_bind_param($stmt, "iii", $imgidby, $sessionid, $imgid);
+            mysqli_stmt_execute($stmt);
+            $executeliked = mysqli_stmt_get_result($stmt);
+            $row = mysqli_fetch_assoc($executeliked);
+            $deleteid = @$row['id'];
+            if (mysqli_num_rows($executeliked) == 1) {
+                $querydelete = "DELETE FROM likes WHERE id=?";
+                $stmtdelete = mysqli_stmt_init($conn);
+                if (mysqli_stmt_prepare($stmtdelete, $querydelete)) {
+                    mysqli_stmt_bind_param($stmtdelete, 'i', $deleteid);
+                    mysqli_stmt_execute($stmtdelete);
+                }
+
+            } else {
+                $queryaddlik = "INSERT INTO likes (liked_user, likedby_user, liked_img) VALUES (?, ?, ?)";
+                $stmt = mysqli_stmt_init($conn);
+                if (mysqli_stmt_prepare($stmt, $queryaddlik)) {
+                    mysqli_stmt_bind_param($stmt, "iii", $imgidby, $sessionid, $imgid);
+                    mysqli_stmt_execute($stmt);
+                }
+            }
+
+
+        }
+    }
+
+
     ?>
 
 
@@ -103,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php
     if (isset($_SESSION['id'])) {
         echo '
-        <form action="" method="post" enctype="multipart/form-data">
+        <form class="upload" action="" method="post" enctype="multipart/form-data">
         <h1>Resim Yükle</h1>
         <div>
             <input type="text" name="baslik" placeholder="Baslik girin" required>
@@ -111,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
         <input class="filec" type="file" name="image" required>
-        <button type="submit">Yükle</button>
+        <button type="submit" name="file">Yükle</button>
     </form>
         ';
     } else {
@@ -123,12 +152,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="resimler">
         <?php
+
         $queryOuter = "SELECT * FROM resimler";
         $resultOuter = mysqli_query($conn, $queryOuter);
 
         while ($rowOuter = mysqli_fetch_assoc($resultOuter)) {
-
             $userid = $rowOuter["userid"];
+            $imgid = $rowOuter["id"];
+
+            $querylike = "SELECT COUNT(*) AS likesrate FROM likes WHERE liked_img = ?";
+            $stmt = mysqli_stmt_init($conn);
+
+            if (mysqli_stmt_prepare($stmt, $querylike)) {
+                mysqli_stmt_bind_param($stmt, 'i', $imgid);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                $row = mysqli_fetch_assoc($result);
+                $likerate = $row['likesrate'];
+
+            }
             $queryInner = "SELECT * FROM users WHERE id=?";
             $stmtInner = mysqli_stmt_init($conn);
 
@@ -145,34 +187,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <i class="fa-solid fa-xmark xmark"></i>
             </div>
             <div class="rate">
-                <i class="fa-regular fa-heart like"></i>
-                <i class="fa-regular fa-thumbs-down disslike"></i>
-            </div>
-            <div class="profile">
-                <div class="ppbox">
-                    <img src="../uploadprofile/' . $userdoc["id"] . '/' . $userdoc["pp"] . '">
+
+            <form action="" method="post">
+                <input type="hidden" name="likeby" value="' . $userdoc['id'] . '">
+                <input type="hidden" name="imglike" value="' . $rowOuter['id'] . '">
+                <button type="submit" name="like">';
+            ?>
+
+            <?php
+            if (isset($_SESSION['id'])) {
+                $querylikescontrol = "SELECT * FROM likes WHERE liked_user = ? AND likedby_user='' AND liked_img=? ";
+                $stmtControl = mysqli_stmt_init($conn);
+
+                if (mysqli_stmt_prepare($stmtControl, $querylikescontrol)) {
+                    mysqli_stmt_bind_param($stmtControl, 'ii', $_SESSION['id'], $rowOuter['id']);
+                    mysqli_stmt_execute($stmtControl);
+                    $resultlikescontrol = mysqli_stmt_get_result($stmtControl);
+
+
+                    if (isset($resultlikescontrol) && mysqli_num_rows($resultlikescontrol) == 1) {
+                        echo '<i style="color:black;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
+                    } else {
+                        echo '<i style="color:green;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
+                    }
+                }
+            }
+            ?>
+
+            <?php
+            echo '
+                </button>
+            </form>
                 
-                </div>
-                <div class="profile_lead"> 
-                    <h1>' . $userdoc["username"] . '</h1>
-                    <h6>22.11.22</h6>
-                    <p>' . $rowOuter['yazi'] . '</p>
-                </div>
             </div>
+            <a href="user.php?user_id=' . $userdoc['id'] . '">
+                <div class="profile">
+                    <div class="ppbox">
+                            <img src="../uploadprofile/' . $userdoc["id"] . '/' . $userdoc["pp"] . '">
+                    </div>
+                    <div class="profile_lead"> 
+                        <h1>' . $userdoc["username"] . '</h1>
+                        <h6>22.11.22</h6>
+                        <p>' . $rowOuter['yazi'] . '</p>
+                    </div>
+                </div>
+            </a>
             <img class="resim" src="' . $rowOuter['resim'] . '">
             </div>
             ';
         }
+        ob_end_flush();
         ?>
     </div>
     <script>
         let images = document.querySelectorAll('.imgbox');
         let xmark = document.querySelectorAll('.xmark');
         let body = document.querySelector('body');
-        let profile = document.querySelectorAll('.profile');
-        const dislike = document.querySelectorAll('.dislike');
-        const like = document.querySelectorAll('.like');
+        const likes = document.querySelectorAll('.like');
 
+        likes.forEach(function (like) {
+            like.addEventListener('click', function () {
+                like.classList.toggle('active');
+
+            });
+        });
         images.forEach(function (img) {
             img.addEventListener('click', function () {
                 img.classList.add('active');
@@ -186,19 +264,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 let imgBox = mark.closest('.imgbox');
                 imgBox.classList.remove('active');
                 body.classList.remove('blur');
-
             });
         });
-
-    
-        profile.forEach(function (active) {
-            active.addEventListener('click', function () {
-                active.classList.toggle('active');
-            });
-        });
-
-
-
     </script>
 </body>
 

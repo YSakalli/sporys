@@ -142,7 +142,7 @@ nav a:hover {
 }
 
 body.blur .resimler .imgbox,
-body.blur form,
+body.blur .upload,
 body.blur nav,
 body.blur .login,
 body.blur .users {
@@ -152,7 +152,6 @@ body.blur .users {
 
 body.blur .resimler .imgbox.active {
     filter: blur(0);
-
 }
 
 .resimler .imgbox.active .close i {
@@ -185,10 +184,6 @@ body.blur .resimler .imgbox.active {
     background-color: transparent;
     box-shadow: none;
 }
-
-
-
-
 
 .resimler .imgbox .profile {
     color: white;
@@ -290,42 +285,34 @@ body.blur .resimler .imgbox.active {
     color: white;
 }
 
-.resimler .rate i {
+.resimler .rate {
+    position: absolute;
+    bottom: 30px;
     display: none;
 }
 
-body.blur .resimler .rate i {
-    display: inline;
+body.blur .resimler .rate {
+    display: block;
 }
 
-.resimler .rate {
-    width: 100px;
-    position: absolute;
-    display: flex;
-    justify-content: center;
+.resimler .rate form button {
+    background-color: transparent;
+}
+
+.resimler .rate form button i {
     color: black;
-    bottom: 20px;
-}
-
-.resimler .rate i {
-    margin: 10px;
     transform: scale(1.5);
-    cursor: pointer;
+    margin: 5px;
 }
 
-.resimler .rate .like {
-    position: relative;
+.resimler .rate form button span {
+    color: black;
+    margin: 5px 5px 5px 0px;
 }
 
-.resimler .rate .like i {
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
-
-}
-
-.resimler .rate .like.active {
+.resimler .rate form button i.active {
     position: relative;
     color: rgb(0, 160, 0);
-
     animation: like .5s linear;
     transition: .4s;
 }
@@ -338,24 +325,6 @@ body.blur .resimler .rate i {
 
     100% {
         color: rgb(0, 160, 0);
-        bottom: 0px;
-    }
-}
-
-.resimler .rate .disslike.active {
-    position: relative;
-    color: red;
-    animation: disslike .5s linear;
-}
-
-@keyframes disslike {
-    0% {
-        color: rgb(50, 0, 0);
-        bottom: 3px;
-    }
-
-    100% {
-        color: red;
         bottom: 0px;
     }
 }
