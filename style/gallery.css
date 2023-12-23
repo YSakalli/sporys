@@ -119,9 +119,32 @@ nav a:hover {
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
-    background-color: #f8f8f8;
+    background-color: #f1f1f1;
     position: relative;
 }
+
+.resimler .location {
+    position: absolute;
+    left: 0;
+    top: -15px;
+}
+
+body.blur .resimler .location {
+    filter: blur(8px);
+}
+
+.resimler .location form {
+    display: flex;
+    flex-direction: row;
+}
+
+.resimler .location form button {
+    background-color: #f8f8f8;
+    margin-left: 10px;
+}
+
+
+
 
 
 .resimler img {
@@ -135,6 +158,8 @@ nav a:hover {
 
 .resimler .imgbox {
     position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .resimler .imgbox .close i {
@@ -166,7 +191,7 @@ body.blur .resimler .imgbox.active {
 
 .resimler .imgbox.active {
     position: fixed;
-    top: 0px;
+    top: -40px;
     width: 100%;
     height: 100vh;
     object-fit: contain;
@@ -293,6 +318,11 @@ body.blur .resimler .imgbox.active {
 
 body.blur .resimler .rate {
     display: block;
+}
+
+.resimler .nonefriend {
+    text-align: center;
+    color: gray;
 }
 
 .resimler .rate form button {

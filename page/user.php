@@ -120,7 +120,13 @@ $followbutton = "Follow";
                     echo '
                         <!-- Image -->
                         <div class="imgbox">
-                            <img src="' . $row['resim'] . '" alt="">
+                            <img src="' . $row['resim'] . '" alt="">';
+                    ?>
+                    <?php
+                    if (isset($_SESSION['id'])) {
+                        $getid = $_SESSION['id'];
+                        if ($id == $getid) {
+                            echo '
                             <!-- there dots -->
                             <form action="" method="post">
                                 <input type="hidden" value="">
@@ -132,7 +138,15 @@ $followbutton = "Follow";
                                     <button type="submit" name="edit">Edit</button>
                                 </div>
                             </form>
-                        </div>';
+                            ';
+                        }
+                    }
+
+                    ?>
+                    <?php
+
+
+                    echo '</div>';
                 }
 
             } else {
@@ -150,6 +164,9 @@ $followbutton = "Follow";
         </form>
     </div>
     <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
         let imgbox = document.querySelectorAll('.imgbox');
         imgbox.forEach(function (img) {
             img.addEventListener('click', function () {

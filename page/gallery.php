@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include("../backend/connect.php");
+$kesfet = 0;
 session_start();
 $sessionid = @$_SESSION["id"];
 if (isset($_SESSION["id"])) {
@@ -151,14 +152,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['file'])) {
     ?>
 
     <div class="resimler">
-        <?php
-
-        $queryOuter = "SELECT * FROM resimler";
-        $resultOuter = mysqli_query($conn, $queryOuter);
-
-        while ($rowOuter = mysqli_fetch_assoc($resultOuter)) {
-            $userid = $rowOuter["userid"];
-            $imgid = $rowOuter["id"];
+        <div class="location">
+            <?php
 
             $querylike = "SELECT COUNT(*) AS likesrate FROM likes WHERE liked_img = ?";
             $stmt = mysqli_stmt_init($conn);
@@ -169,19 +164,160 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['file'])) {
                 $result = mysqli_stmt_get_result($stmt);
                 $row = mysqli_fetch_assoc($result);
                 $likerate = $row['likesrate'];
+            }
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['kesfet'])) {
+                    $kesfet = 0;
+                }
+                if (isset($_POST['ozel'])) {
+                    $kesfet = 1;
+                }
+            }
+            ?>
+            <form action="" method="post">
+                <?php
+                if ($kesfet == 0) {
+                    echo '
+                    <button style="background-color:#f1f1f1;" type="submit" name="kesfet">
+                    Kesfet
+                </button>
+                ';
+                } else {
+                    echo '
+                    <button  type="submit" name="kesfet">
+                    Kesfet
+                </button>
+                ';
+                }
+
+                ?>
+                <?php
+                if (isset($_SESSION['id'])) {
+                    if ($kesfet == 0) {
+                        echo ' <button type="submit" name="ozel">
+                    Arkadaslar
+                </button>';
+                    } else {
+                        echo ' <button style="background-color:#f1f1f1;" type="submit" name="ozel">
+                    Arkadaslar
+                </button>';
+                    }
+
+
+                } else {
+                    echo ' <button type="submit" name="ozel" disabled>
+                    Arkadaslar
+                </button>';
+                }
+                ?>
+            </form>
+        </div>
+        <?php
+        if (isset($_SESSION['id']) && $kesfet == 1) {
+            $id = $_SESSION['id'];
+
+            $query = "SELECT * FROM follows WHERE follower='$id'";
+            $result = mysqli_query($conn, $query);
+            if (mysqli_num_rows($result) == 0) {
+                echo ' <div class="nonefriend">
+                <h1>Resim Bulunamadı</h1>
+                <h2>Arkadaş edin</h2>
+                    </div>';
 
             }
-            $queryInner = "SELECT * FROM users WHERE id=?";
-            $stmtInner = mysqli_stmt_init($conn);
+            while ($row = mysqli_fetch_assoc($result)) {
+                $rowid = $row['follow'];
+                $queryuser = "SELECT * FROM users WHERE id='$rowid'";
+                $resultuser = mysqli_query($conn, $queryuser);
 
-            if (mysqli_stmt_prepare($stmtInner, $queryInner)) {
-                mysqli_stmt_bind_param($stmtInner, "i", $userid);
-                mysqli_stmt_execute($stmtInner);
-                $resultInner = mysqli_stmt_get_result($stmtInner);
-                $userdoc = mysqli_fetch_assoc($resultInner);
+                while ($rowuser = mysqli_fetch_assoc($resultuser)) {
+                    $rowid = $rowuser['id'];
+                    $queryresim = "SELECT * FROM resimler WHERE userid='$rowid'";
+                    $resultResim = mysqli_query($conn, $queryresim);
+
+                    while ($row = mysqli_fetch_array($resultResim)) {
+                        echo '
+                        <div class="imgbox">
+                        <div class="close">
+                            <i class="fa-solid fa-xmark xmark"></i>
+                        </div>
+                        <div class="rate">
+            
+                        <form action="" method="post">
+                            <input type="hidden" name="likeby" value="' . $rowuser['id'] . '">
+                            <input type="hidden" name="imglike" value="' . $row['id'] . '">
+                            <button type="submit" name="like">';
+                        ?>
+
+                        <?php
+                        $querylikescontrol = "SELECT * FROM likes WHERE liked_user = ? AND likedby_user='' AND liked_img=? ";
+                        $stmtControl = mysqli_stmt_init($conn);
+
+                        if (mysqli_stmt_prepare($stmtControl, $querylikescontrol)) {
+                            mysqli_stmt_bind_param($stmtControl, 'ii', $_SESSION['id'], $rowOuter['id']);
+                            mysqli_stmt_execute($stmtControl);
+                            $resultlikescontrol = mysqli_stmt_get_result($stmtControl);
+                        }
+                        if (mysqli_num_rows($resultlikescontrol) == 1) {
+                            echo '<i style="color:green;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
+                        } else if (mysqli_num_rows($resultlikescontrol) == 0) {
+                            echo '<i style="color:green;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
+                        }
+
+                        ?>
+
+                        <?php
+
+                        echo '
+                            </button>
+                        </form>
+                            
+                        </div>
+                        <a href="user.php?user_id=' . $rowuser['id'] . '">
+                            <div class="profile">
+                                <div class="ppbox">
+                                        <img src="../uploadprofile/' . $rowuser["id"] . '/' . $rowuser["pp"] . '">
+                                </div>
+                                <div class="profile_lead"> 
+                                    <h1>' . $rowuser["username"] . '</h1>
+                                    <h6>22.11.22</h6>
+                                    <p>' . $row['yazi'] . '</p>
+                                </div>
+                            </div>
+                        </a>
+                        <img class="resim" src="' . $row['resim'] . '">
+                        </div>
+                        ';
+                    }
+                }
+
             }
 
-            echo '
+
+
+        } else {
+
+            $queryOuter = "SELECT * FROM resimler";
+            $resultOuter = mysqli_query($conn, $queryOuter);
+
+            $queryOuter = "SELECT * FROM resimler";
+            $resultOuter = mysqli_query($conn, $queryOuter);
+
+            while ($rowOuter = mysqli_fetch_assoc($resultOuter)) {
+                $userid = $rowOuter["userid"];
+                $imgid = $rowOuter["id"];
+
+                $queryInner = "SELECT * FROM users WHERE id=?";
+                $stmtInner = mysqli_stmt_init($conn);
+
+                if (mysqli_stmt_prepare($stmtInner, $queryInner)) {
+                    mysqli_stmt_bind_param($stmtInner, "i", $userid);
+                    mysqli_stmt_execute($stmtInner);
+                    $resultInner = mysqli_stmt_get_result($stmtInner);
+                    $userdoc = mysqli_fetch_assoc($resultInner);
+                }
+
+                echo '
             <div class="imgbox">
             <div class="close">
                 <i class="fa-solid fa-xmark xmark"></i>
@@ -192,10 +328,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['file'])) {
                 <input type="hidden" name="likeby" value="' . $userdoc['id'] . '">
                 <input type="hidden" name="imglike" value="' . $rowOuter['id'] . '">
                 <button type="submit" name="like">';
-            ?>
+                ?>
 
-            <?php
-            if (isset($_SESSION['id'])) {
+                <?php
                 $querylikescontrol = "SELECT * FROM likes WHERE liked_user = ? AND likedby_user='' AND liked_img=? ";
                 $stmtControl = mysqli_stmt_init($conn);
 
@@ -203,19 +338,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['file'])) {
                     mysqli_stmt_bind_param($stmtControl, 'ii', $_SESSION['id'], $rowOuter['id']);
                     mysqli_stmt_execute($stmtControl);
                     $resultlikescontrol = mysqli_stmt_get_result($stmtControl);
-
-
-                    if (isset($resultlikescontrol) && mysqli_num_rows($resultlikescontrol) == 1) {
-                        echo '<i style="color:black;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
-                    } else {
-                        echo '<i style="color:green;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
-                    }
                 }
-            }
-            ?>
+                if (mysqli_num_rows($resultlikescontrol) == 1) {
+                    echo '<i style="color:green;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
+                } else if (mysqli_num_rows($resultlikescontrol) == 0) {
+                    echo '<i style="color:green;" class="fa-regular fa-heart like"></i><span>' . $likerate . '</span>';
+                }
 
-            <?php
-            echo '
+                ?>
+
+                <?php
+
+                echo '
                 </button>
             </form>
                 
@@ -235,22 +369,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['file'])) {
             <img class="resim" src="' . $rowOuter['resim'] . '">
             </div>
             ';
+            }
         }
+
         ob_end_flush();
         ?>
     </div>
     <script>
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
         let images = document.querySelectorAll('.imgbox');
         let xmark = document.querySelectorAll('.xmark');
         let body = document.querySelector('body');
         const likes = document.querySelectorAll('.like');
 
-        likes.forEach(function (like) {
-            like.addEventListener('click', function () {
-                like.classList.toggle('active');
 
-            });
-        });
         images.forEach(function (img) {
             img.addEventListener('click', function () {
                 img.classList.add('active');
