@@ -50,7 +50,7 @@ if (isset($_COOKIE["id"])) {
     <!-- NavBar -->
     <header class="header">
         <div class="logo">
-            <a href="index.php" class="logo">Logo</a>
+            <a href="index.php" class="logo">Sporys</a>
         </div>
         <nav class="navbar">
             <a href="index.php">Ana Sayfa</a>

@@ -93,17 +93,17 @@ $cookietotalprice = $sayac = 0;
                 }
             }
         }
+        if (isset($_SESSION["id"])) {
+            $query = "SELECT * FROM cart WHERE user_id = '$id'";
+            $result = mysqli_query($conn, $query);
+            if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $product_id = $row["product_id"];
+                    $queryproduct = "SELECT * FROM product WHERE id = '$product_id'";
+                    $resultproduct = mysqli_query($conn, $queryproduct);
 
-        $query = "SELECT * FROM cart WHERE user_id = '$id'";
-        $result = mysqli_query($conn, $query);
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $product_id = $row["product_id"];
-                $queryproduct = "SELECT * FROM product WHERE id = '$product_id'";
-                $resultproduct = mysqli_query($conn, $queryproduct);
-
-                while ($rowproduct = mysqli_fetch_assoc($resultproduct)) {
-                    echo '
+                    while ($rowproduct = mysqli_fetch_assoc($resultproduct)) {
+                        echo '
                     <div class="product">
                         <form class="markform" action="" method="post">
                             <input type="hidden" name="delete" value="' . $row['id'] . '">
@@ -128,6 +128,7 @@ $cookietotalprice = $sayac = 0;
                         </form>
                         <p>' . $row['total_amount'] . '$</p>
                     </div>';
+                    }
                 }
             }
         } else if (isset($_COOKIE['cart'])) {
@@ -213,6 +214,11 @@ $cookietotalprice = $sayac = 0;
             $piece = 0;
             $selectAllProducts = "SELECT * FROM cart";
             $resultAllProducts = mysqli_query($conn, $selectAllProducts);
+            if (isset($_POST["login"])) {
+                header("../login.php");
+                exit();
+            }
+
             if (isset($_COOKIE["cart"])) {
                 echo '
                 <div class="total">
@@ -228,11 +234,34 @@ $cookietotalprice = $sayac = 0;
 
                     <h3>' . @$cookietotalprice . '$</h3>
                 </div>
-                <form action="" method="">
-                    <button name="submit">Sepete Onayla</button>
+                <form action="" method="post">
+                    <button name="login" type="submit">Sepete Onayla</button>
                 </form>
                 ';
             } else {
+                if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cart'])) {
+                    $queryuser = "SELECT *FROM users WHERE id=?";
+                    $stmt = mysqli_stmt_init($conn);
+                    if (mysqli_stmt_prepare($stmt, $queryuser)) {
+                        mysqli_stmt_bind_param($stmt, "s", $id);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+                        $rowuser = mysqli_fetch_assoc($result);
+                        $username = $rowuser["username"];
+                        $email = $rowuser["email"];
+                    }
+                    $query = "SELECT * FROM cart WHERE user_id='$id'";
+                    $result = mysqli_query($conn, $query);
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $quantity = $row['quantity'];
+                        $product_id = $row['product_id'];
+                        $totalamount = $row['total_amount'];
+                        $queryinsert = "INSERT INTO orders (product_id,'user_id',quantity,total_amount,customer_name,customer_email) 
+                        VALUE ('$product_id','$id','$quantity','$totalamount','$username','$email')";
+                        $execute = mysqli_query($conn, $queryinsert);
+                        $querydelete = "DELETE FROM cart WHERE  ";
+                    }
+                }
                 while ($row = mysqli_fetch_assoc($resultAllProducts)) {
                     $totalprice += $row['total_amount'];
                     $piece += $row['quantity'];
@@ -251,8 +280,8 @@ $cookietotalprice = $sayac = 0;
 
                     <h3>' . $totalprice . '$</h3>
                 </div>
-                <form action="" method="">
-                    <button name="submit">Sepete Onayla</button>
+                <form action="" method="post">
+                    <button type="submit" name="cart">Sepete Onayla</button>
                 </form>
                 ';
             }

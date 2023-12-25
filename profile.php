@@ -75,6 +75,7 @@ if ($pp_result == null) {
                 <div class="downmenu">
                     <a href="page/profileuser.php">Profile</a>
                     <a href="backend/exit.php">Logout</a>
+                    <a href="page/orders.php">Orders</a>
                 </div>
             </div>
         </div>
