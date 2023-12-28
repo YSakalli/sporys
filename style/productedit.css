@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', Arial, Helvetica, sans-serif;
+}
+
+html {
+    min-height: 100vh;
+    max-height: 100vh;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    cursor: pointer;
+    color: black;
+}
+
+a h1 {
+    font-size: 24px;
+    margin-left: 5px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-color: #f8f8f8;
+    width: 60%;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+section form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 80%;
+    height: 100%;
+}
+
+section form input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    border: none;
+
+}
+
+section form button {
+    width: 10%;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    outline: none;
+    border: none;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 450px;
+    min-width: 300px;
+    max-height: 450px;
+    max-width: 30px;
+    background-color: #f8f8f8;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    position: relative;
+    transition: .4s ease;
+    bottom: 0;
+    margin: auto;
+    margin-left: 90px;
+
+}
+
+
+.product:hover {
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    bottom: 5px;
+}
+
+.product h3 {
+    padding: 10px;
+    margin: 0;
+    font-size: 24px;
+}
+
+.product p {
+    padding: 10px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.product .price {
+    margin: 10px 10px;
+    font-size: 20px;
+    color: rgb(148, 148, 148);
+}
+
+.product .imgbox {
+    width: 300px;
+    height: 300px;
+
+}
+
+.product .imgbox img {
+    min-width: 300px;
+    min-height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.product form {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.product button {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 30px;
+    background-color: rgb(255, 66, 66);
+    border: red 2px solid;
+    color: white;
+
+}
+
+.product button:hover {
+    background-color: rgb(255, 30, 30);
+
+}

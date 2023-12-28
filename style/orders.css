@@ -6,7 +6,36 @@
 
 body {
     height: 100vh;
+    position: relative;
 }
+
+.filter {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+}
+
+.filter select {
+    width: 200px;
+    height: 30px;
+    outline: none;
+    border-radius: 10px;
+}
+
+.filter input {
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.04);
+    border: none;
+    outline: none;
+}
+
+.filter input:hover {
+    background-color: #e4e4e4;
+}
+
 
 section {
     width: 100%;

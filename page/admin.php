@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 $role = isset($_SESSION['role']) ? $_SESSION['role'] : null;
 if ($role != "admin") {
@@ -346,8 +347,10 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                             $inaktif_query = mysqli_query($conn, $inaktif);
                         }
                         if (isset($_POST["edit"])) {
-                            $id = $_POST["edit"];
-                            echo "id :" . $id;
+                            $editid = $_POST["editid"];
+                            $_SESSION['productid'] = $editid;
+                            header('Location: productedit.php');
+                            exit();
                         }
                     }
                     $blogbaslik = "SELECT * FROM product ORDER BY id DESC";
@@ -365,7 +368,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                         echo '<tr>
                                 <td>
                                 <form method="post" action="">
-                                <input type="hidden" name="edit" value="' . $row["id"] . '">
+                                <input type="hidden" name="editid" value="' . $row["id"] . '">
                                 <button type="submit" name="edit" style="border:none;background-color: transparent;">
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
@@ -395,6 +398,7 @@ function kisalt($metin, $uzunluk = 20, $ek = '...')
                                 </td>
                             </tr>';
                     }
+                    ob_end_flush();
                     ?>
                     <tbody>
 

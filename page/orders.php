@@ -16,13 +16,32 @@ $id = $_SESSION['id'];
 </head>
 
 <body>
+
+    <form action="" method="POST" class="filter">
+        <select name="filter">
+            <?php
+            $query = " SELECT * FROM orders";
+            $result = mysqli_query($conn, $query);
+            while ($row = mysqli_fetch_array($result)) {
+                $orderdate = $row['order_date'];
+                $orderid = $row['id'];
+                echo '<option value="' . $orderid . '">' . $orderdate . ' / ID: ' . $orderid . '</option>';
+            }
+            ?>
+
+        </select>
+        <input type="submit" name="submit" value="Filtre">
+
+    </form>
+
     <section>
         <div class="containerinfo">
             <div class="info">
 
                 <hr class="hr1">
                 <hr class="hr2">
-                <div style="background-color:rgb(0,180,0);" class="c1">
+
+                <div class="c1">
                     <i class="fa-solid fa-box"></i>
                     <h3>Hazırlanıyor</h3>
                 </div>
@@ -47,6 +66,10 @@ $id = $_SESSION['id'];
             </div>
 
             <?php
+            if (isset($_POST['submit'])) {
+                $product_id = $_POST["filter"];
+
+            }
             $query = "SELECT * FROM orders WHERE user_id=?";
             $stmt = mysqli_stmt_init($conn);
             if (mysqli_stmt_prepare($stmt, $query)) {
@@ -54,19 +77,19 @@ $id = $_SESSION['id'];
                 mysqli_stmt_execute($stmt);
                 $result = mysqli_stmt_get_result($stmt);
             }
-            while ($row = mysqli_fetch_assoc($result)) {
-                $product_id = $row['product_id'];
+
+            $row = mysqli_fetch_assoc($result);
 
 
-                $query = "SELECT * FROM product WHERE id=?";
-                $stmt = mysqli_stmt_init($conn);
-                if (mysqli_stmt_prepare($stmt, $query)) {
-                    mysqli_stmt_bind_param($stmt, "i", $product_id);
-                    mysqli_stmt_execute($stmt);
-                    $resultproduct = mysqli_stmt_get_result($stmt);
-                }
-                $rowproduct = mysqli_fetch_assoc($resultproduct);
-                echo ' 
+            $query = "SELECT * FROM product WHERE id=?";
+            $stmt = mysqli_stmt_init($conn);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                mysqli_stmt_bind_param($stmt, "i", $product_id);
+                mysqli_stmt_execute($stmt);
+                $resultproduct = mysqli_stmt_get_result($stmt);
+            }
+            $rowproduct = mysqli_fetch_assoc($resultproduct);
+            echo ' 
                 <div class="ordersbox">
                 <p>' . $row['id'] . '</p>
                 <p>' . $row['order_date'] . '</p>
@@ -74,7 +97,7 @@ $id = $_SESSION['id'];
                 <p>' . $row['total_amount'] . '$</p>
             </div>
                 ';
-            }
+
 
             ?>
 

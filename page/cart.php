@@ -75,13 +75,11 @@ $cookietotalprice = $sayac = 0;
             $resultselectquantity = mysqli_query($conn, $selectquantity);
             $row = mysqli_fetch_assoc($resultselectquantity);
             $quantity = $row["quantity"];
-
             if ($quantity > 1) {
                 $queryproduct = "UPDATE cart SET quantity = quantity - 1 WHERE id = '$updateid'";
                 $queryproduct = mysqli_query($conn, $queryproduct);
 
                 if ($queryproduct) {
-
                     $product_id = $row['product_id'];
                     $selectprice = "SELECT * FROM product WHERE id = '$product_id'";
                     $resultselectprice = mysqli_query($conn, $selectprice);
@@ -101,7 +99,6 @@ $cookietotalprice = $sayac = 0;
                     $product_id = $row["product_id"];
                     $queryproduct = "SELECT * FROM product WHERE id = '$product_id'";
                     $resultproduct = mysqli_query($conn, $queryproduct);
-
                     while ($rowproduct = mysqli_fetch_assoc($resultproduct)) {
                         echo '
                     <div class="product">
@@ -130,6 +127,14 @@ $cookietotalprice = $sayac = 0;
                     </div>';
                     }
                 }
+            } else {
+                echo '
+                <div style="display:flex; flex-direction: column;" class="product">
+                        <h1 style="color: rgb(40,40,40,0.5); align-self: center;">Ürün Bulunamadı</h1>
+                        <a class="urungit" href="store.php">Ürün ekle</a>
+                    </div>
+                </div>
+                ';
             }
         } else if (isset($_COOKIE['cart'])) {
             $existing_cart = isset($_COOKIE['cart']) ? unserialize($_COOKIE['cart']) : array();
@@ -192,15 +197,6 @@ $cookietotalprice = $sayac = 0;
                     }
                 }
             }
-
-        } else {
-            echo '
-            <div style="display:flex; flex-direction: column;" class="product">
-                    <h1 style="color: rgb(40,40,40,0.5); align-self: center;">Ürün Bulunamadı</h1>
-                    <a class="urungit" href="store.php">Ürün Ekle</a>
-                </div>
-            </div>
-            ';
         }
         ?>
 
@@ -210,6 +206,7 @@ $cookietotalprice = $sayac = 0;
     <aside>
         <div class="cart">
             <?php
+
             $totalprice = 0;
             $piece = 0;
             $selectAllProducts = "SELECT * FROM cart";
@@ -252,14 +249,16 @@ $cookietotalprice = $sayac = 0;
                     }
                     $query = "SELECT * FROM cart WHERE user_id='$id'";
                     $result = mysqli_query($conn, $query);
+
                     while ($row = mysqli_fetch_assoc($result)) {
+
                         $quantity = $row['quantity'];
                         $product_id = $row['product_id'];
                         $totalamount = $row['total_amount'];
+
                         $queryinsert = "INSERT INTO orders (product_id,'user_id',quantity,total_amount,customer_name,customer_email) 
                         VALUE ('$product_id','$id','$quantity','$totalamount','$username','$email')";
                         $execute = mysqli_query($conn, $queryinsert);
-                        $querydelete = "DELETE FROM cart WHERE  ";
                     }
                 }
                 while ($row = mysqli_fetch_assoc($resultAllProducts)) {
